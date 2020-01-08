@@ -21,7 +21,7 @@ else:
 
 	os.chdir(current_path)
 	os.chdir(dir_test_path)
-	for i in (len(X_test)):
+	for i in range(len(X_test)):
 	    img = Image.fromarray(X_test[i])
 	    nom = str(i) + ".jpg"
 	    img.save(nom, quality = qualite)
