@@ -1,5 +1,6 @@
 import numpy as np
 import os, glob, time, sys
+from tqdm import trange
 
 
 def Generate_Huffman_table_DC(im, pos_1):
@@ -76,11 +77,23 @@ def Calcul_AC_size(liste_AC_max, Huffman_AC):
     Le 3eme element de sortie est la taille de l'AC.
     '''
     
+    # Curseur représentant la position de départ dans Huffman_AC/DC
+    cur = 0
+
     for i in range(2,17):
         TEMPO = liste_AC_max[0:i]
-        if (TEMPO in Huffman_AC[0]):
-            TMP = Huffman_AC[1][Huffman_AC[0].index(TEMPO)]
-            return(TMP[0],TMP[1],i)
+
+        for el_idx in range(cur, len(Huffman_AC[0])):
+            el = Huffman_AC[0][el_idx]
+
+            if len(el) > i:
+                cur = el_idx
+                break
+
+            if TEMPO == el:
+                TMP = Huffman_AC[1][el_idx]
+                return(TMP[0],TMP[1],i)
+
     print("error")
     return(0,0,0)
 
@@ -143,7 +156,7 @@ def ecriture_DC_Mnist(val):
 
 def a_faire_deux_fois_pour_train_et_test(dir_path):
     val = ''
-    for i in range(len(Tab_Document)):
+    for i in trange(len(Tab_Document)):
         Nom_de_photo = str(i) + '.jpg'
         with open(Nom_de_photo, 'rb') as f:
             #On lit l'image
