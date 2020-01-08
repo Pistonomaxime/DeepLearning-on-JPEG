@@ -46,7 +46,6 @@ def Generate_Huffman_table_AC(im, pos_2):
             codeword.append(TMP)
             codevalue +=  1
         codevalue = codevalue *2
-    test = []
     for i in range(0,len(codeword)):
         a = im[pos_2+i]
         b = a & 240
@@ -60,9 +59,10 @@ def Calcul_DC_size_modifie(liste_DC_max, Huffman_DC):
     Modification qui permet de renvoyer une visualisation du DC en cour de lecture.
     '''
     for i in range(2,10):
-        if ((liste_DC_max[0:i] in Huffman_DC[0]) == 1):
-            TMP = Huffman_DC[0].index(liste_DC_max[0:i])
-            return(liste_DC_max[0:i], i, Huffman_DC[1][TMP], TMP)
+        TEMPO = liste_DC_max[0:i]
+        if (TEMPO in Huffman_DC[0]):
+            TMP = Huffman_DC[0].index(TEMPO)
+            return(TEMPO, i, Huffman_DC[1][TMP], TMP)
     return(-1)
 
 
@@ -77,11 +77,12 @@ def Calcul_AC_size(liste_AC_max, Huffman_AC):
     '''
     
     for i in range(2,17):
-        if ((liste_AC_max[0:i] in Huffman_AC[0]) == 1):
-            return(Huffman_AC[1][Huffman_AC[0].index(liste_AC_max[0:i])][0],Huffman_AC[1][Huffman_AC[0].index(liste_AC_max[0:i])][1],i)
+        TEMPO = liste_AC_max[0:i]
+        if (TEMPO in Huffman_AC[0]):
+            TMP = Huffman_AC[1][Huffman_AC[0].index(TEMPO)]
+            return(TMP[0],TMP[1],i)
     print("error")
-    return(0,0,0) 
-
+    return(0,0,0)
 
 def trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC):
     '''
@@ -108,20 +109,20 @@ def trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC):
             liste_AC_max = im_att[cpt:cpt+17]
             Taille_AC = Calcul_AC_size(liste_AC_max, Huffman_AC)
             res = Taille_AC[0] + Taille_AC[1]
-            
-            #Si on a pas atteint l'EOB
-            if(res != 0):
-                #On rajoute un nombre de '0' égale à "run" 
-                for i in range(0, Taille_AC[0]):
-                    val_centrer_reduite += '11111111111 ' #'0 '
-                #si ZRL on ajoute un 0
-                if (Taille_AC[0] == 15 and Taille_AC[1] == 0):
-                    #attention ici je rajoute l'espace je penses que c'est ok car on ne peux pas finir par un ZRL on finiraias plutot par un EOB
-                    val_centrer_reduite += '11111111111 ' #'0 '
-                #c'est le cas si on lit ZRL
-                if (Taille_AC[1] != 0):
-                    val_centrer_reduite += str(im_att[cpt + Taille_AC[2] : cpt + Taille_AC[2] + Taille_AC[1]]) + ' '
-            cpt += Taille_AC[1] + Taille_AC[2]#Attenton changement de place du cpt!!!!!!!!
+            TEMPO = Taille_AC[1] + Taille_AC[2]
+            # #Si on a pas atteint l'EOB
+            # if(res != 0):
+            #On rajoute un nombre de '0' égale à "run" 
+            for i in range(0, Taille_AC[0]):
+                val_centrer_reduite += '11111111111 ' #'0 '
+            #si ZRL on ajoute un 0
+            if (Taille_AC[0] == 15 and Taille_AC[1] == 0):
+                #attention ici je rajoute l'espace je penses que c'est ok car on ne peux pas finir par un ZRL on finiraias plutot par un EOB
+                val_centrer_reduite += '11111111111 ' #'0 '
+            #c'est le cas si on lit ZRL
+            if (Taille_AC[1] != 0):
+                val_centrer_reduite += str(im_att[cpt + Taille_AC[2] : cpt + TEMPO]) + ' '
+            cpt += TEMPO#Attenton changement de place du cpt!!!!!!!!
             fail += Taille_AC[0] + 1
         #Si on atteint un EOB on ajoute des 0
         if (res == 0):
@@ -137,22 +138,10 @@ def trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC):
     return(val_centrer_reduite)
 
 def ecriture_DC_Mnist(val):
-    with open("data_DC_AC_pur.txt", "a") as fichier:
+    with open("data_DC_AC_pur.txt", "w") as fichier:
         fichier.write(val)
-        fichier.write("\n")
 
 def a_faire_deux_fois_pour_train_et_test(dir_path):
-    os.chdir(dir_path)
-    Tab_Document = glob.glob('*.jpg')
-    #Pour initialiser
-    Nom_de_photo = Tab_Document[0]
-    with open(Nom_de_photo, 'rb') as f:
-        im = f.read()
-        pos_1 = im.find(Huffman_table_MARKER) + 5
-        pos_2 = im.find(Huffman_table_MARKER, pos_1+1) + 5
-        Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
-        Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
-
     val = ''
     for i in range(len(Tab_Document)):
         Nom_de_photo = str(i) + '.jpg'
@@ -166,8 +155,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path):
             #On convertie l'image de l'Hexa au Binaire.
             im_att = "{:08b}".format(int(im.hex(), 16))
             #On crée le tableau vide qui contiendra les indices des EOB.
-            val += trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC)
-            val += "\n\n"
+            val += trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC) + "\n"
     ecriture_DC_Mnist(val)
 
 '''
@@ -189,14 +177,29 @@ else:
 
     #On se place dans le bon répertoire.
     current_path = os.getcwd()
-    dir_train_path = 'Mnist_{}'.format(qualite)
-    dir_test_path = 'Mnist_{}_test'.format(qualite)
+    dir_train_path = 'Cifar-10_{}'.format(qualite)
+    dir_test_path = 'Cifar-10_{}_test'.format(qualite)
+    # dir_train_path = 'Mnist_{}'.format(qualite)
+    # dir_test_path = 'Mnist_{}_test'.format(qualite)
+
+    
+    os.chdir(dir_train_path)
     start_time = time.time()
+    Tab_Document = glob.glob('*.jpg')
+    Nom_de_photo = Tab_Document[0]
+    with open(Nom_de_photo, 'rb') as f:
+        im = f.read()
+        pos_1 = im.find(Huffman_table_MARKER) + 5
+        pos_2 = im.find(Huffman_table_MARKER, pos_1+1) + 5
+        Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
+        Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
     a_faire_deux_fois_pour_train_et_test(dir_train_path)
     Temps = time.time() - start_time
     print('Time: ',Temps)
-    start_time = time.time()
     os.chdir(current_path)
+    os.chdir(dir_test_path)
+    start_time = time.time()
+    Tab_Document = glob.glob('*.jpg')
     a_faire_deux_fois_pour_train_et_test(dir_test_path)
     Temps = time.time() - start_time
     print('Time: ',Temps)
