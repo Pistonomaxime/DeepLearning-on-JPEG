@@ -4,7 +4,7 @@ import os, glob, time, sys
 
 def Generate_Huffman_table_DC(im, pos_1):
     '''
-    Gènère la table de Huffman DC associé à l'image.
+    Génère la table de Huffman DC associée à l'image.
     '''
     tab = []
     for i in range(0,16):
@@ -28,7 +28,7 @@ def Generate_Huffman_table_DC(im, pos_1):
 
 def Generate_Huffman_table_AC(im, pos_2):
     '''
-    Gènère la table de Huffman AC associé à l'image.
+    Génère la table de Huffman AC associée à l'image.
     '''
     tab = []
     
@@ -56,7 +56,7 @@ def Generate_Huffman_table_AC(im, pos_2):
 
 def Calcul_DC_size_modifie(liste_DC_max, Huffman_DC):
     '''
-    Modification qui permet de renvoyer une visualisation du DC en cour de lecture.
+    Modification qui permet de renvoyer une visualisation du DC en cours de lecture.
     '''
     # Curseur représentant la position de départ dans Huffman_AC/DC
     cur = 0
@@ -74,12 +74,12 @@ def Calcul_DC_size_modifie(liste_DC_max, Huffman_DC):
 
 def Calcul_AC_size(liste_AC_max, Huffman_AC):
     '''
-    Prend en entré une liste de 16 bit qui commence par la taille d'un AC.
+    Prend en entrée une liste de 16 bit qui commence par la taille d'un AC.
     Sort dans la première partie le nombre de bits que l'on doit passer pour arriver au prochain bloc AC ou bien 0 si on atteint EOB.
     Sort dans la deuxième partie le nombre de zeros qui correspond au AC que l'on lit.
-    Le 1er element de sortie est le 1er nibble de la catégorie (i.e. nombre de zeros).
-    Le 2eme element de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
-    Le 3eme element de sortie est la taille de l'AC.
+    Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zeros).
+    Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
+    Le 3ème élément de sortie est la taille de l'AC.
     '''
     
     # Curseur représentant la position de départ dans Huffman_AC/DC
@@ -99,7 +99,7 @@ def Calcul_AC_size(liste_AC_max, Huffman_AC):
 
 def trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC):
     '''
-    Prend en entré le flux binaire d'un JPEG ainsi que l'indice du depart de la frame (i.e. comme avec une taille de DC).
+    Prend en entrée le flux binaire d'un JPEG ainsi que l'indice du depart de la frame (i.e. comme avec une taille de DC).
     Sort dans Tab_EOB tout les indices des EOB et return le nombre de EOB.
     '''
     cpt = (pos_3f+2)*8 #Début de l'image.
@@ -177,7 +177,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path):
 '''
 Début du programme.
 On definit les différents MARKERS.
-Ici le but est d'écrire dans le fichier cible l'image compréssé au quel on a fait la table de huffman inverse.
+Ici le but est d'écrire dans le fichier cible l'image compressée à laquelle on a fait la table de huffman inverse.
 '''
 print("Caution you need to have created your MNIST or Cifar-10 data set as in Creation_Minst.py or Creation_Cifar-10.py files before doing this step. You also have to be in the same directory.\n")
 qualite = -1
