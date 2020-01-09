@@ -155,6 +155,8 @@ def ecriture_DC_Mnist(val):
         fichier.write(val)
 
 def a_faire_deux_fois_pour_train_et_test(dir_path):
+    os.chdir(dir_path + '/images')
+    Tab_Document = glob.glob('*.jpg')
     val = ''
     for i in range(len(Tab_Document)):
         Nom_de_photo = str(i) + '.jpg'
@@ -169,6 +171,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path):
             im_att = "{:08b}".format(int(im.hex(), 16))
             #On crée le tableau vide qui contiendra les indices des EOB.
             val += trouve_EOB(im_att, pos_3f, Huffman_DC, Huffman_AC) + "\n"
+    os.chdir(dir_path)
     ecriture_DC_Mnist(val)
 
 '''
@@ -176,7 +179,6 @@ Début du programme.
 On definit les différents MARKERS.
 Ici le but est d'écrire dans le fichier cible l'image compréssé au quel on a fait la table de huffman inverse.
 '''
-
 print("Caution you need to have created your MNIST or Cifar-10 data set as in Creation_Minst.py or Creation_Cifar-10.py files before doing this step. You also have to be in the same directory.\n")
 qualite = -1
 while (qualite > 100 or qualite < 0):
@@ -188,11 +190,11 @@ while (dataset != 0 and dataset != 1):
 #On se place dans le bon répertoire.
 current_path = os.getcwd()
 if (dataset == 0):
-	dir_train_path = 'Mnist_{}'.format(qualite)
-	dir_test_path = 'Mnist_{}_test'.format(qualite)
+	dir_train_path = current_path + '/Mnist_{}'.format(qualite)
+	dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
 else:
-	dir_train_path = 'Cifar-10_{}'.format(qualite)
-	dir_test_path = 'Cifar-10_{}_test'.format(qualite)
+	dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
+	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 
 start_time = time.time()
 SOS_MARKER = b'\xff\xda'
@@ -202,7 +204,7 @@ FF_MARKER = b'\xFF'
 MARKER_3F = b'\x3F'
 Huffman_table_MARKER = b'\xff\xc4'
 
-os.chdir(dir_train_path)
+os.chdir(dir_train_path + '/images')
 Tab_Document = glob.glob('*.jpg')
 Nom_de_photo = Tab_Document[0]
 with open(Nom_de_photo, 'rb') as f:
@@ -212,9 +214,6 @@ with open(Nom_de_photo, 'rb') as f:
     Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
     Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
 a_faire_deux_fois_pour_train_et_test(dir_train_path)
-os.chdir(current_path)
-os.chdir(dir_test_path)
-Tab_Document = glob.glob('*.jpg')
 a_faire_deux_fois_pour_train_et_test(dir_test_path)
 Temps_total = time.time() - start_time
 print('It took:',Temps_total, 'secondes')
