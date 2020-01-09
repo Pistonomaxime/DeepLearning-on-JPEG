@@ -46,7 +46,7 @@ else:
 	from keras.datasets import cifar10
 	(X_train, y_train), (X_test, y_test) = cifar10.load_data()
 	dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
-	dir_test_path = current_path + 'Cifar-10_{}_test'.format(qualite)
+	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 
 create_directories(current_path, dir_train_path,dir_test_path)
 convert(dir_train_path, X_train, dataset)
