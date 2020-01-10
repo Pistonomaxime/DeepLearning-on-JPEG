@@ -180,9 +180,10 @@ On definit les différents MARKERS.
 Ici le but est d'écrire dans le fichier cible l'image compréssé au quel on a fait la table de huffman inverse.
 '''
 print("Caution you need to have created your MNIST or Cifar-10 data set as in Creation_Minst.py or Creation_Cifar-10.py files before doing this step. You also have to be in the same directory.\n")
+possible_qualite = [100,90,80,70,60]
 qualite = -1
-while (qualite > 100 or qualite < 0):
-	qualite = int(input("You need to choose a JPEG quality factor. Try 100 or 90 for example. \nQuality: "))
+while ((qualite in possible_qualite) == False):
+    qualite = int(input("You need to choose a JPEG quality factor between 100, 90, 80, 70 or 60. \nQuality: "))
 dataset = -1
 while (dataset != 0 and dataset != 1):
 	dataset = int(input("You need to choose 0 for MNIST and 1 for Cifar-10 \nData set: "))

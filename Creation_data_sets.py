@@ -29,9 +29,10 @@ def create_directories(current_path, dir_train_path,dir_test_path):
 	os.mkdir(dir_test_path + '/images')
 
 #main
+possible_qualite = [100,90,80,70,60]
 qualite = -1
-while (qualite > 100 or qualite < 0):
-	qualite = int(input("You need to choose a JPEG quality factor. Try 100 or 90 for example. \nQuality: "))
+while ((qualite in possible_qualite) == False):
+	qualite = int(input("You need to choose a JPEG quality factor between 100, 90, 80, 70 or 60. \nQuality: "))
 dataset = -1
 while (dataset != 0 and dataset != 1):
 	dataset = int(input("You need to choose 0 for MNIST and 1 for Cifar-10 \nData set: "))
