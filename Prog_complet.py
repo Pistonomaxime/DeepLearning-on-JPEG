@@ -4,6 +4,30 @@ import numpy as np
 import os, glob, time
 from PIL import Image
 
+def image_extend(image, data):
+	image.extend((data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]))
+	image.extend((data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]))
+	image.extend((data[3], data[8], data[12], data[17], data[25], data[30], data[41], data[43]))
+	image.extend((data[9], data[11], data[18], data[24], data[31], data[40], data[44], data[53]))
+	image.extend((data[10], data[19], data[23], data[32], data[39], data[45], data[52], data[54]))
+	image.extend((data[20], data[22], data[33], data[38], data[46], data[51], data[55], data[60]))
+	image.extend((data[21], data[34], data[37], data[47], data[50], data[56], data[59], data[61]))
+	image.extend((data[35], data[36], data[48], data[49], data[57], data[58], data[62], data[63]))
+	return(image)
+
+def recompose(test):
+	im_recompose_l1 =[]
+	im_recompose_l2 =[]
+	im_recompose_l3 =[]
+	im_recompose_l4 =[]
+	im_recompose = []
+	im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
+	im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
+	im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
+	im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
+	im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+	return(im_recompose)
+
 def De_Huffman_avec_ZigZag(dir_path):
 	"""
 	Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag.
@@ -11,10 +35,6 @@ def De_Huffman_avec_ZigZag(dir_path):
 	os.chdir(dir_path)
 	X_perso = []
 	test = []
-	im_recompose_l1 =[]
-	im_recompose_l2 =[]
-	im_recompose_l3 =[]
-	im_recompose_l4 =[]
 	im_recompose = []
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
@@ -45,15 +65,7 @@ def De_Huffman_avec_ZigZag(dir_path):
 				#prédiction elle se fait la normalement
 				data[0] = data[0] + save
 				save = data[0]
-				image.extend((data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]))
-				image.extend((data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]))
-				image.extend((data[3], data[8], data[12], data[17], data[25], data[30], data[41], data[43]))
-				image.extend((data[9], data[11], data[18], data[24], data[31], data[40], data[44], data[53]))
-				image.extend((data[10], data[19], data[23], data[32], data[39], data[45], data[52], data[54]))
-				image.extend((data[20], data[22], data[33], data[38], data[46], data[51], data[55], data[60]))
-				image.extend((data[21], data[34], data[37], data[47], data[50], data[56], data[59], data[61]))
-				image.extend((data[35], data[36], data[48], data[49], data[57], data[58], data[62], data[63]))
-
+				image = image_extend(image, data)
 #########################################################################################
 
 				image = np.asarray(image)
@@ -63,11 +75,7 @@ def De_Huffman_avec_ZigZag(dir_path):
 				if (cpt == 16):
 					cpt = 0
 					save = 0
-					im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-					im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-					im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-					im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-					im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+					im_recompose = recompose(test)
 					X_perso.append(im_recompose)
 					test = []
 	X_perso = np.asarray(X_perso)
@@ -80,10 +88,6 @@ def De_Huffman_avec_ZigZag_sans_prediction(dir_path):
 	os.chdir(dir_path)
 	X_perso = []
 	test = []
-	im_recompose_l1 =[]
-	im_recompose_l2 =[]
-	im_recompose_l3 =[]
-	im_recompose_l4 =[]
 	im_recompose = []
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
@@ -111,15 +115,7 @@ def De_Huffman_avec_ZigZag_sans_prediction(dir_path):
 						else:
 							data[i] = int(data[i],2)
 				#prédiction elle se fait la normalement
-				image.extend((data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]))
-				image.extend((data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]))
-				image.extend((data[3], data[8], data[12], data[17], data[25], data[30], data[41], data[43]))
-				image.extend((data[9], data[11], data[18], data[24], data[31], data[40], data[44], data[53]))
-				image.extend((data[10], data[19], data[23], data[32], data[39], data[45], data[52], data[54]))
-				image.extend((data[20], data[22], data[33], data[38], data[46], data[51], data[55], data[60]))
-				image.extend((data[21], data[34], data[37], data[47], data[50], data[56], data[59], data[61]))
-				image.extend((data[35], data[36], data[48], data[49], data[57], data[58], data[62], data[63]))
-
+				image = image_extend(image, data)
 #########################################################################################
 
 				image = np.asarray(image)
@@ -128,11 +124,7 @@ def De_Huffman_avec_ZigZag_sans_prediction(dir_path):
 				cpt += 1
 				if (cpt == 16):
 					cpt = 0
-					im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-					im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-					im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-					im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-					im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+					im_recompose = recompose(test)
 					X_perso.append(im_recompose)
 					test = []
 	X_perso = np.asarray(X_perso)
@@ -145,10 +137,6 @@ def De_Huffman_sans_ZigZag_sans_Prediction(dir_path):
 	os.chdir(dir_path)
 	X_perso = []
 	test = []
-	im_recompose_l1 =[]
-	im_recompose_l2 =[]
-	im_recompose_l3 =[]
-	im_recompose_l4 =[]
 	im_recompose = []
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
@@ -185,11 +173,7 @@ def De_Huffman_sans_ZigZag_sans_Prediction(dir_path):
 				cpt += 1
 				if (cpt == 16):
 					cpt = 0
-					im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-					im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-					im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-					im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-					im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+					im_recompose = recompose(test)
 					X_perso.append(im_recompose)
 					test = []
 	X_perso = np.asarray(X_perso)
@@ -230,11 +214,7 @@ def de_compression_Centre(donnees, Quantif):
 
 				test.append(bloc_DCT)
 
-		im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-		im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-		im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-		im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-		im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+		im_recompose = recompose(test)
 		im_recompose = im_recompose.reshape(32,32,1)
 		sortie.append(im_recompose)
 	sortie = np.asarray(sortie)
@@ -262,11 +242,7 @@ def de_compression_DCT(donnees, Quantif):
 				
 				test.append(f)
 
-		im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-		im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-		im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-		im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-		im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+		im_recompose = recompose(test)
 		im_recompose = im_recompose.reshape(32,32,1)
 		sortie.append(im_recompose)
 	sortie = np.asarray(sortie)
@@ -294,11 +270,7 @@ def de_compression_Quantif(donnees, Quantif):
 				
 				test.append(f)
 
-		im_recompose_l1 = np.concatenate((test[0], test[1], test[2], test[3]), axis = 1)
-		im_recompose_l2 = np.concatenate((test[4], test[5], test[6], test[7]), axis = 1)
-		im_recompose_l3 = np.concatenate((test[8], test[9], test[10], test[11]), axis = 1)
-		im_recompose_l4 = np.concatenate((test[12], test[13], test[14], test[15]), axis = 1)
-		im_recompose = np.concatenate((im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4))
+		im_recompose = recompose(test)
 		im_recompose = im_recompose.reshape(32,32,1)
 		sortie.append(im_recompose)
 	sortie = np.asarray(sortie)
@@ -346,9 +318,9 @@ def Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif):
 	X_test_perso = standardisation(X_test_perso)
 
 	os.chdir(dir_train_path)
-	np.save("Image_NB_train", X_train_perso)
+	np.save("Image_Center_train", X_train_perso)
 	os.chdir(dir_test_path)
-	np.save("Image_NB_test", X_test_perso)
+	np.save("Image_Center_test", X_test_perso)
 
 def Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif):
 	"""
@@ -435,6 +407,9 @@ def Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
+	X_train_perso = X_train_perso.reshape(50000,32,32,1)
+	X_test_perso = X_test_perso.reshape(10000,32,32,1)
+
 	os.chdir(dir_train_path)
 	np.save("Image_LD_train", X_train_perso)
 	os.chdir(dir_test_path)
@@ -450,17 +425,12 @@ def Bonne_Taille(X):
 	trentedeux = trentedeux.astype(int)
 
 	fin = []
-	for k in range(len(X)):
-		TMP = X[k]
-		TMP = np.concatenate((TMP,vingthuit), axis=0)
-		TMP = np.concatenate((TMP,vingthuit), axis=0)
-		TMP = np.concatenate((TMP,vingthuit), axis=0)
-		TMP = np.concatenate((TMP,vingthuit), axis=0)
-
-		TMP = np.concatenate((TMP,trentedeux), axis=1)
-		TMP = np.concatenate((TMP,trentedeux), axis=1)
-		TMP = np.concatenate((TMP,trentedeux), axis=1)
-		TMP = np.concatenate((TMP,trentedeux), axis=1)
+	for i in range(len(X)):
+		TMP = X[i]
+		for j in range(4):
+			TMP = np.concatenate((TMP,vingthuit), axis=0)
+		for j in range(4):
+			TMP = np.concatenate((TMP,trentedeux), axis=1)
 
 		fin.append(TMP)
 	fin = np.asarray(fin)
@@ -594,5 +564,5 @@ else:
 Temps = time.time() - start_time
 print('Time LD: ',Temps)
 
-for i in range(6):
-	donne_temps(i, dir_train_path, dir_test_path, Quantif)
+# for i in range(6):
+# 	donne_temps(i, dir_train_path, dir_test_path, Quantif)
