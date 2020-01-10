@@ -1,14 +1,14 @@
 from PIL import Image
 import os, sys
 
-def convert_Mnist(dir_path, X):
+def convert_Mnist(dir_path, X, qualite):
 	os.chdir(dir_path + '/images')
 	for i in range(len(X)):
 	   img = Image.fromarray(X[i])
 	   nom = str(i) + ".jpg"
 	   img.save(nom, quality = qualite)
 
-def convert_Cifar(dir_path, X):
+def convert_Cifar(dir_path, X, qualite):
 	os.chdir(dir_path + '/images')
 	for i in range(len(X)):
 		img = Image.fromarray(X[i])
@@ -16,11 +16,11 @@ def convert_Cifar(dir_path, X):
 		nom = str(i) + ".jpg"
 		img.save(nom, quality = qualite)
 
-def convert(dir_path, X, dataset):
+def convert(dir_path, X, dataset, qualite):
 	if (dataset == 0):
-		convert_Mnist(dir_path, X)
+		convert_Mnist(dir_path, X, qualite)
 	else:
-		convert_Cifar(dir_path, X)
+		convert_Cifar(dir_path, X, qualite)
 
 def create_directories(current_path, dir_train_path,dir_test_path):
 	os.mkdir(dir_train_path)
@@ -50,6 +50,6 @@ else:
 	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 
 create_directories(current_path, dir_train_path,dir_test_path)
-convert(dir_train_path, X_train, dataset)
-convert(dir_test_path, X_test, dataset)
+convert(dir_train_path, X_train, dataset, qualite)
+convert(dir_test_path, X_test, dataset, qualite)
 print('Created')
