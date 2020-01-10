@@ -160,7 +160,7 @@ def Differents_noms(dir_train_dataset, dir_test_dataset, dataset):
 		return(dir_train_dataset + "/ZigZag.npy", dir_test_dataset + "/ZigZag.npy", 'Sauvegarde_ZigZag.hdf5')
 
 
-def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test):
+def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch):
 	dir_train_dataset, dir_test_dataset, Nom_Sauvegarde = Differents_noms(dir_train_path, dir_test_path, dataset)
 	X_train_perso = np.load(dir_train_dataset)
 	X_test_perso = np.load(dir_test_dataset)
@@ -193,7 +193,7 @@ def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorith
 	os.remove(Nom_Sauvegarde)
 
 
-def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test):
+def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch):
 	dir_train_dataset, dir_test_dataset, Nom_Sauvegarde = Differents_noms(dir_train_path, dir_test_path, dataset)
 	X_train_perso = np.load(dir_train_dataset)
 	X_test_perso = np.load(dir_test_dataset)
@@ -278,6 +278,6 @@ y_train = keras.utils.to_categorical(y_train, num_category)
 y_test = keras.utils.to_categorical(y_test, num_category)
 
 if (dataset == 0):
-	Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test)
+	Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch)
 else:
-	Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test)
+	Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch)
