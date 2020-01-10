@@ -145,19 +145,19 @@ def lr_scheduler(epoch, lr):
 
 def Differents_noms(dir_train_dataset, dir_test_dataset, dataset):
 	if(dataset == 0):
-		return(dir_train_path + "/LD.npy", dir_test_path + "/LD.npy", 'Sauvegarde_LD.hdf5')
+		return(dir_train_dataset + "/LD.npy", dir_test_dataset + "/LD.npy", 'Sauvegarde_LD.hdf5')
 	elif(dataset == 1):
-		return(dir_train_path + "/NB.npy", dir_test_path + "/NB.npy", 'Sauvegarde_NB.hdf5')
+		return(dir_train_dataset + "/NB.npy", dir_test_dataset + "/NB.npy", 'Sauvegarde_NB.hdf5')
 	elif(dataset == 2):
-		return(dir_train_path + "/Centre.npy", dir_test_path + "/Centre.npy", 'Sauvegarde_Centre.hdf5')
+		return(dir_train_dataset + "/Centre.npy", dir_test_dataset + "/Centre.npy", 'Sauvegarde_Centre.hdf5')
 	elif(dataset == 3):
-		return(dir_train_path + "/DCT.npy", dir_test_path + "/DCT.npy", 'Sauvegarde_DCT.hdf5')
+		return(dir_train_dataset + "/DCT.npy", dir_test_dataset + "/DCT.npy", 'Sauvegarde_DCT.hdf5')
 	elif(dataset == 4):
-		return(dir_train_path + "/Quantif.npy", dir_test_path + "/Quantif.npy", 'Sauvegarde_Quantif.hdf5')
+		return(dir_train_dataset + "/Quantif.npy", dir_test_dataset + "/Quantif.npy", 'Sauvegarde_Quantif.hdf5')
 	elif(dataset == 5):
-		return(dir_train_path + "/Pred.npy", dir_test_path + "/Pred.npy", 'Sauvegarde_Pred.hdf5')
+		return(dir_train_dataset + "/Pred.npy", dir_test_dataset + "/Pred.npy", 'Sauvegarde_Pred.hdf5')
 	else:
-		return(dir_train_path + "/ZigZag.npy", dir_test_path + "/ZigZag.npy", 'Sauvegarde_ZigZag.hdf5')
+		return(dir_train_dataset + "/ZigZag.npy", dir_test_dataset + "/ZigZag.npy", 'Sauvegarde_ZigZag.hdf5')
 
 
 def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test):
