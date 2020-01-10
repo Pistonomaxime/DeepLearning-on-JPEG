@@ -154,7 +154,7 @@ def ecriture_DC_Mnist(val):
     with open("data_DC_AC_pur.txt", "w") as fichier:
         fichier.write(val)
 
-def a_faire_deux_fois_pour_train_et_test(dir_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F):
+def a_faire_deux_fois_pour_train_et_test(dir_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC):
     os.chdir(dir_path + '/images')
     Tab_Document = glob.glob('*.jpg')
     val = ''
@@ -214,8 +214,8 @@ with open(Nom_de_photo, 'rb') as f:
     pos_2 = im.find(Huffman_table_MARKER, pos_1+1) + 5
     Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
     Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
-a_faire_deux_fois_pour_train_et_test(dir_train_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F)
-a_faire_deux_fois_pour_train_et_test(dir_test_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F)
+a_faire_deux_fois_pour_train_et_test(dir_train_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
+a_faire_deux_fois_pour_train_et_test(dir_test_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
 Temps_total = time.time() - start_time
 os.chdir(current_path)
 print('It took:',Temps_total, 'secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.')
