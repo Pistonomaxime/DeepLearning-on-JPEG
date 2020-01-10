@@ -9,7 +9,6 @@ def De_Huffman_avec_ZigZag(dir_path):
 	Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag.
 	"""
 	os.chdir(dir_path)
-	file = []
 	X_perso = []
 	test = []
 	im_recompose_l1 =[]
@@ -79,7 +78,6 @@ def De_Huffman_avec_ZigZag_sans_prediction(dir_path):
 	Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag sans prediction.
 	"""
 	os.chdir(dir_path)
-	file = []
 	X_perso = []
 	test = []
 	im_recompose_l1 =[]
@@ -145,7 +143,6 @@ def De_Huffman_sans_ZigZag_sans_Prediction(dir_path):
 	Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, dé-prédire et les mettre en forme non ZigZag sans prediction.
 	"""
 	os.chdir(dir_path)
-	file = []
 	X_perso = []
 	test = []
 	im_recompose_l1 =[]
@@ -202,7 +199,7 @@ def De_Huffman_sans_ZigZag_sans_Prediction(dir_path):
 def idct2(a):
 	return scipy.fftpack.idct( scipy.fftpack.idct( a, axis=0 , norm='ortho'), axis=1 , norm='ortho')
 
-def de_compression_Centre(donnees, qualite, Quantif):
+def de_compression_Centre(donnees, Quantif):
 	"""
 	A partir des images dé_huffman et en forme ZigZag retourne les pixels de l'image original.
 	"""
@@ -243,7 +240,7 @@ def de_compression_Centre(donnees, qualite, Quantif):
 	sortie = np.asarray(sortie)
 	return(sortie)
 
-def de_compression_DCT(donnees, qualite, Quantif):
+def de_compression_DCT(donnees, Quantif):
 	"""
 	A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
 	"""
@@ -275,7 +272,7 @@ def de_compression_DCT(donnees, qualite, Quantif):
 	sortie = np.asarray(sortie)
 	return(sortie)
 
-def de_compression_Quantif(donnees, qualite, Quantif):
+def de_compression_Quantif(donnees, Quantif):
 	"""
 	A partir des images dé_huffman et en forme ZigZag renvoie a l'étape entre DCT et Quantif.
 	"""
@@ -317,15 +314,15 @@ def standardisation(X_perso):
 	X_perso = X_perso / std
 	return(X_perso)
 
-def Renvoie_Image_NB(dir_train_path, dir_test_path, qualite, Quantif):
+def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
 	"""
 	Se débrouille tout seul pour fournir en sortie l'image décompresser noir et blanc.
 	"""
 	X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
 	X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
 
-	X_train_perso = de_compression_Centre(X_train_perso, qualite, Quantif)
-	X_test_perso = de_compression_Centre(X_test_perso, qualite, Quantif)
+	X_train_perso = de_compression_Centre(X_train_perso, Quantif)
+	X_test_perso = de_compression_Centre(X_test_perso, Quantif)
 
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
@@ -335,15 +332,15 @@ def Renvoie_Image_NB(dir_train_path, dir_test_path, qualite, Quantif):
 	os.chdir(dir_test_path)
 	np.save("Image_NB_test", X_test_perso)
 
-def Renvoie_Image_Centre(dir_train_path, dir_test_path, qualite, Quantif):
+def Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif):
 	"""
 	Se débrouille tout seul pour fournir en sortie l'image entre centre et DCT.
 	"""
 	X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
 	X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
 
-	X_train_perso = de_compression_DCT(X_train_perso, qualite, Quantif)
-	X_test_perso = de_compression_DCT(X_test_perso, qualite, Quantif)
+	X_train_perso = de_compression_DCT(X_train_perso, Quantif)
+	X_test_perso = de_compression_DCT(X_test_perso, Quantif)
 
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
@@ -353,15 +350,15 @@ def Renvoie_Image_Centre(dir_train_path, dir_test_path, qualite, Quantif):
 	os.chdir(dir_test_path)
 	np.save("Image_NB_test", X_test_perso)
 
-def Renvoie_Image_DCT(dir_train_path, dir_test_path, qualite, Quantif):
+def Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif):
 	"""
 	Se débrouille tout seul pour fournir en sortie l'image entre DCT et Quantif.
 	"""
 	X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
 	X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
 
-	X_train_perso = de_compression_Quantif(X_train_perso, qualite, Quantif)
-	X_test_perso = de_compression_Quantif(X_test_perso, qualite, Quantif)
+	X_train_perso = de_compression_Quantif(X_train_perso, Quantif)
+	X_test_perso = de_compression_Quantif(X_test_perso, Quantif)
 
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
@@ -413,9 +410,9 @@ def Renvoie_Image_ZigZag(dir_train_path, dir_test_path):
 	X_test_perso = standardisation(X_test_perso)
 
 	os.chdir(dir_train_path)
-	np.save("Image_ZigZag_vrai_train", X_train_perso)
+	np.save("Image_ZigZag_train", X_train_perso)
 	os.chdir(dir_test_path)
-	np.save("Image_ZigZag_vrai_test", X_test_perso)
+	np.save("Image_ZigZag_test", X_test_perso)
 
 
 def sous_fonction_Revoie_Image_LD(dir_path):
@@ -487,22 +484,20 @@ def Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path):
 	os.chdir(dir_test_path)
 	np.save("Image_LD_test", X_test_perso)
 
-	return(X_train_perso, X_test_perso)
-
 def donne_temps(Numero, dir_train_path, dir_test_path, Quantif):
 	start_time = time.time()
 	if (Numero == 0):
 		#Entre_NB_et_Centre
-		Renvoie_Image_NB(dir_train_path, dir_test_path, qualite, Quantif)
+		Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif)
 		print('Time NB: ', end = '')
 	elif (Numero == 1):
 		#Entre_Centre_et_DCT
-		Renvoie_Image_Centre(dir_train_path, dir_test_path, qualite, Quantif)
+		Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif)
 		print('Time Center: ', end = '')
 	elif (Numero == 2):
 		#Entre_DCT_et_Quantif
 		# if (qualite != 100): #on peux l'enlever on le fait deux fois sinon ca Quantif = 1
-		Renvoie_Image_DCT(dir_train_path, dir_test_path, qualite, Quantif)
+		Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif)
 		print('Time DCT: ', end = '')
 	elif (Numero == 3):
 		#Entre_Quantif_et_Prediction
@@ -587,17 +582,14 @@ elif (qualite == 60):
 
 #On se place au bon endroit
 current_path = os.getcwd()
+start_time = time.time()
 if (dataset == 0):
 	dir_train_path = current_path + '/Mnist_{}'.format(qualite)
 	dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
+	Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path)
 else:
 	dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
 	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
-
-start_time = time.time()
-if (dataset == 0):
-	Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path)
-else:
 	Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path)
 Temps = time.time() - start_time
 print('Time LD: ',Temps)
