@@ -52,4 +52,5 @@ else:
 create_directories(current_path, dir_train_path,dir_test_path)
 convert(dir_train_path, X_train, dataset, qualite)
 convert(dir_test_path, X_test, dataset, qualite)
+os.chdir(current_path)
 print('Created')

@@ -217,4 +217,5 @@ with open(Nom_de_photo, 'rb') as f:
 a_faire_deux_fois_pour_train_et_test(dir_train_path)
 a_faire_deux_fois_pour_train_et_test(dir_test_path)
 Temps_total = time.time() - start_time
+os.chdir(current_path)
 print('It took:',Temps_total, 'secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.')

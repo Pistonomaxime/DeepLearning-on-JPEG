@@ -281,3 +281,4 @@ if (dataset == 0):
 	Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch)
 else:
 	Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test, batch_size, num_epoch)
+os.chdir(current_path)

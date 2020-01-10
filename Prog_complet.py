@@ -553,3 +553,4 @@ print('Time LD creation: ',Temps, 'secondes')
 
 for i in range(6):
 	donne_temps(i, dir_train_path, dir_test_path, Quantif)
+os.chdir(current_path)
