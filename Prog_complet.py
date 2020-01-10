@@ -286,6 +286,10 @@ def standardisation(X_perso):
 	X_perso = X_perso / std
 	return(X_perso)
 
+def sauvegarde(dir_path, X, nom):
+	os.chdir(dir_path)
+	np.save(nom, X)
+
 def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
 	"""
 	Se débrouille tout seul pour fournir en sortie l'image décompresser noir et blanc.
@@ -299,10 +303,8 @@ def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_NB_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_NB_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "NB")
+	sauvegarde(dir_test_path, X_test_perso, "NB")
 
 def Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif):
 	"""
@@ -317,10 +319,8 @@ def Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_Center_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_Center_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "Center")
+	sauvegarde(dir_test_path, X_test_perso, "Center")
 
 def Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif):
 	"""
@@ -335,10 +335,8 @@ def Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_DCT_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_DCT_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "DCT")
+	sauvegarde(dir_test_path, X_test_perso, "DCT")
 
 def Renvoie_Image_Quantif(dir_train_path, dir_test_path):
 	"""
@@ -350,10 +348,8 @@ def Renvoie_Image_Quantif(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_Quantif_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_Quantif_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "Quantif")
+	sauvegarde(dir_test_path, X_test_perso, "Quantif")
 
 def Renvoie_Image_Pred(dir_train_path, dir_test_path):
 	"""
@@ -365,11 +361,8 @@ def Renvoie_Image_Pred(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_Pred_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_Pred_test", X_test_perso)
-
+	sauvegarde(dir_train_path, X_train_perso, "Pred")
+	sauvegarde(dir_test_path, X_test_perso, "Pred")
 
 def Renvoie_Image_ZigZag(dir_train_path, dir_test_path):
 	"""
@@ -381,10 +374,8 @@ def Renvoie_Image_ZigZag(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_ZigZag_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_ZigZag_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "ZigZag")
+	sauvegarde(dir_test_path, X_test_perso, "ZigZag")
 
 
 def sous_fonction_Revoie_Image_LD(dir_path):
@@ -410,10 +401,8 @@ def Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path):
 	X_train_perso = X_train_perso.reshape(50000,32,32,1)
 	X_test_perso = X_test_perso.reshape(10000,32,32,1)
 
-	os.chdir(dir_train_path)
-	np.save("Image_LD_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_LD_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "LD")
+	sauvegarde(dir_test_path, X_test_perso, "LD")
 
 def Bonne_Taille(X):
 	"""
@@ -449,10 +438,8 @@ def Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	os.chdir(dir_train_path)
-	np.save("Image_LD_train", X_train_perso)
-	os.chdir(dir_test_path)
-	np.save("Image_LD_test", X_test_perso)
+	sauvegarde(dir_train_path, X_train_perso, "LD")
+	sauvegarde(dir_test_path, X_test_perso, "LD")
 
 def donne_temps(Numero, dir_train_path, dir_test_path, Quantif):
 	start_time = time.time()
@@ -564,5 +551,5 @@ else:
 Temps = time.time() - start_time
 print('Time LD: ',Temps)
 
-# for i in range(6):
-# 	donne_temps(i, dir_train_path, dir_test_path, Quantif)
+for i in range(6):
+	donne_temps(i, dir_train_path, dir_test_path, Quantif)
