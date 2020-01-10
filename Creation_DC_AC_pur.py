@@ -4,7 +4,7 @@ import os, glob, time, sys
 
 def Generate_Huffman_table_DC(im, pos_1):
     '''
-    Génère la table de Huffman DC associée à l'image.
+    Génère la table de Huffman DC associé à l'image.
     '''
     tab = []
     for i in range(0,16):
@@ -28,7 +28,7 @@ def Generate_Huffman_table_DC(im, pos_1):
 
 def Generate_Huffman_table_AC(im, pos_2):
     '''
-    Génère la table de Huffman AC associée à l'image.
+    Génère la table de Huffman AC associé à l'image.
     '''
     tab = []
     
@@ -177,7 +177,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path):
 '''
 Début du programme.
 On definit les différents MARKERS.
-Ici le but est d'écrire dans le fichier cible l'image compressée à laquelle on a fait la table de huffman inverse.
+Ici le but est d'écrire dans le fichier cible l'image compréssée à laquelle on a fait la table de huffman inverse.
 '''
 print("Caution you need to have created your MNIST or Cifar-10 data set as in Creation_Minst.py or Creation_Cifar-10.py files before doing this step. You also have to be in the same directory.\n")
 possible_qualite = [100,90,80,70,60]
@@ -217,4 +217,4 @@ with open(Nom_de_photo, 'rb') as f:
 a_faire_deux_fois_pour_train_et_test(dir_train_path)
 a_faire_deux_fois_pour_train_et_test(dir_test_path)
 Temps_total = time.time() - start_time
-print('It took:',Temps_total, 'secondes')
+print('It took:',Temps_total, 'secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.')

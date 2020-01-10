@@ -186,10 +186,10 @@ def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorith
 				callbacks=callbacks,
 				validation_data=(X_test_perso, y_test))
 	Temps = time.time() - start_time
-	print('Time: ' + str(Temps) + '\t')
+	print('Time: ', str(Temps), 'secondes')
 	model.load_weights(Nom_Sauvegarde)
 	score = model.evaluate(X_test_perso, y_test, verbose=0)
-	print('Score: ', str(score) )
+	print('Score: ', str(score))
 	os.remove(Nom_Sauvegarde)
 
 
@@ -223,10 +223,10 @@ def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorith
 				callbacks=callbacks,
 				validation_data=(X_test_perso, y_test))
 	Temps = time.time() - start_time
-	print('Time: ' + str(Temps) + 'secondes')
+	print('Time: ', str(Temps), 'secondes')
 	model.load_weights(Nom_Sauvegarde)
 	score = model.evaluate(X_test_perso, y_test, verbose=0)
-	print('Score: ', str(score) )
+	print('Score: ', str(score))
 	os.remove(Nom_Sauvegarde)
 
 ################################################################################################

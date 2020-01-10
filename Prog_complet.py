@@ -446,30 +446,30 @@ def donne_temps(Numero, dir_train_path, dir_test_path, Quantif):
 	if (Numero == 0):
 		#Entre_NB_et_Centre
 		Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif)
-		print('Time NB: ', end = '')
+		print('Time NB creation: ', end = '')
 	elif (Numero == 1):
 		#Entre_Centre_et_DCT
 		Renvoie_Image_Centre(dir_train_path, dir_test_path, Quantif)
-		print('Time Center: ', end = '')
+		print('Time Center creation: ', end = '')
 	elif (Numero == 2):
 		#Entre_DCT_et_Quantif
 		# if (qualite != 100): #on peux l'enlever on le fait deux fois sinon ca Quantif = 1
 		Renvoie_Image_DCT(dir_train_path, dir_test_path, Quantif)
-		print('Time DCT: ', end = '')
+		print('Time DCT creation: ', end = '')
 	elif (Numero == 3):
 		#Entre_Quantif_et_Prediction
 		Renvoie_Image_Quantif(dir_train_path, dir_test_path)
-		print('Time Quantif: ', end = '')
+		print('Time Quantif creation: ', end = '')
 	elif (Numero == 4):
 		#Entre_Prediction_et_ZigZag
 		Renvoie_Image_Pred(dir_train_path, dir_test_path)
-		print('Time Pred: ', end = '')
+		print('Time Pred creation: ', end = '')
 	else:
 		#Entre_ZigZag_et_Huffman
 		Renvoie_Image_ZigZag(dir_train_path, dir_test_path)
-		print('Time ZigZag: ', end = '')
+		print('Time ZigZag creation: ', end = '')
 	Temps = time.time() - start_time
-	print(Temps)
+	print(Temps, 'secondes')
 
 ################################################################################################
 #Main
@@ -549,7 +549,7 @@ else:
 	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 	Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path)
 Temps = time.time() - start_time
-print('Time LD: ',Temps)
+print('Time LD creation: ',Temps, 'secondes')
 
 for i in range(6):
 	donne_temps(i, dir_train_path, dir_test_path, Quantif)
