@@ -160,7 +160,7 @@ def Differents_noms(dir_train_dataset, dir_test_dataset, dataset):
 		return(dir_train_path + "/ZigZag.npy", dir_test_path + "/ZigZag.npy", 'Sauvegarde_ZigZag.hdf5')
 
 
-def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm):
+def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test):
 	dir_train_dataset, dir_test_dataset, Nom_Sauvegarde = Differents_noms(dir_train_path, dir_test_path, dataset)
 	X_train_perso = np.load(dir_train_dataset)
 	X_test_perso = np.load(dir_test_dataset)
@@ -182,30 +182,29 @@ def Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorith
 	model_log = model.fit(X_train_perso, y_train,
 				batch_size=batch_size,
 				epochs=num_epoch,
-				verbose=1,
+				verbose=2,
 				callbacks=callbacks,
 				validation_data=(X_test_perso, y_test))
 	Temps = time.time() - start_time
-
-	print('Avancement : ' + Nom_Retour)
 	print('Time: ' + str(Temps) + '\t')
 	model.load_weights(Nom_Sauvegarde)
 	score = model.evaluate(X_test_perso, y_test, verbose=0)
-	print( str(score) )
+	print('Score: ', str(score) )
 	os.remove(Nom_Sauvegarde)
 
 
-def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm):
+def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test):
 	dir_train_dataset, dir_test_dataset, Nom_Sauvegarde = Differents_noms(dir_train_path, dir_test_path, dataset)
 	X_train_perso = np.load(dir_train_dataset)
 	X_test_perso = np.load(dir_test_dataset)
+	in_shape = X_train_perso.shape[1:]
 
 	if (algorithm == 0):
-		model = model_sans_BN(num_category)
+		model = model_sans_BN(num_category, in_shape)
 	elif (algorithm == 1):
-		model = model_avec_BN(num_category)
+		model = model_avec_BN(num_category, in_shape)
 	else:
-		model = model_Keras(num_category)
+		model = model_Keras(num_category, in_shape)
 
 	callbacks = [
 		keras.callbacks.LearningRateScheduler(lr_scheduler, verbose=0),
@@ -220,16 +219,14 @@ def Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorith
 	model_log = model.fit(X_train_perso, y_train,
 				batch_size=batch_size,
 				epochs=num_epoch,
-				verbose=1,
+				verbose=2,
 				callbacks=callbacks,
 				validation_data=(X_test_perso, y_test))
 	Temps = time.time() - start_time
-
-	print('Avancement : ' + Nom_Retour)
-	print('Time: ' + str(Temps) + '\t')
+	print('Time: ' + str(Temps) + 'secondes')
 	model.load_weights(Nom_Sauvegarde)
 	score = model.evaluate(X_test_perso, y_test, verbose=0)
-	print( str(score) )
+	print('Score: ', str(score) )
 	os.remove(Nom_Sauvegarde)
 
 ################################################################################################
@@ -281,6 +278,6 @@ y_train = keras.utils.to_categorical(y_train, num_category)
 y_test = keras.utils.to_categorical(y_test, num_category)
 
 if (dataset == 0):
-	Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm)
+	Essaies_Mnist(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test)
 else:
-	Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm)
+	Essaies_Cifar(dir_train_path, dir_test_path, dataset, num_category, algorithm, y_train, y_test)
