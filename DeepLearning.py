@@ -236,7 +236,7 @@ def main_DeepLearning(qualite, dataset, possible_steps, algorithm):
 	current_path = os.getcwd()
 	if (dataset == 0):
 		batch_size = 128
-		num_epoch = 2#200
+		num_epoch = 200
 		dir_train_path = current_path + '/Mnist_{}'.format(qualite)
 		dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
 		Nom_Resultats = 'Resultats_Mnist_{}_error.txt'.format(qualite)
@@ -245,7 +245,7 @@ def main_DeepLearning(qualite, dataset, possible_steps, algorithm):
 		(X_train, y_train), (X_test, y_test) = mnist.load_data()
 	else:
 		batch_size = 256
-		num_epoch = 2#300
+		num_epoch = 300
 		dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
 		dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 		Nom_Resultats = 'Resultats_Cifar_{}_error.txt'.format(qualite)
