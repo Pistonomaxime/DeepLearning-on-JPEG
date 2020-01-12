@@ -179,43 +179,34 @@ Début du programme.
 On definit les différents MARKERS.
 Ici le but est d'écrire dans le fichier cible l'image compréssée à laquelle on a fait la table de huffman inverse.
 '''
-print("Caution you need to have created your MNIST or Cifar-10 data set as in Creation_Minst.py or Creation_Cifar-10.py files before doing this step. You also have to be in the same directory.\n")
-possible_qualite = [100,90,80,70,60]
-qualite = -1
-while ((qualite in possible_qualite) == False):
-    qualite = int(input("You need to choose a JPEG quality factor between 100, 90, 80, 70 or 60. \nQuality: "))
-dataset = -1
-while (dataset != 0 and dataset != 1):
-	dataset = int(input("You need to choose 0 for MNIST and 1 for Cifar-10 \nData set: "))
+def main_Creation_DC_AC_pur(qualite, dataset):
+	current_path = os.getcwd()
+	if (dataset == 0):
+		dir_train_path = current_path + '/Mnist_{}'.format(qualite)
+		dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
+	else:
+		dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
+		dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
 
-#On se place dans le bon répertoire.
-current_path = os.getcwd()
-if (dataset == 0):
-	dir_train_path = current_path + '/Mnist_{}'.format(qualite)
-	dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
-else:
-	dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
-	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
+	start_time = time.time()
+	SOS_MARKER = b'\xff\xda'
+	# END_MARKER = b'\xff\xd9'
+	FF_00_MARKER = b'\xFF\x00'
+	FF_MARKER = b'\xFF'
+	MARKER_3F = b'\x3F'
+	Huffman_table_MARKER = b'\xff\xc4'
 
-start_time = time.time()
-SOS_MARKER = b'\xff\xda'
-# END_MARKER = b'\xff\xd9'
-FF_00_MARKER = b'\xFF\x00'
-FF_MARKER = b'\xFF'
-MARKER_3F = b'\x3F'
-Huffman_table_MARKER = b'\xff\xc4'
-
-os.chdir(dir_train_path + '/images')
-Tab_Document = glob.glob('*.jpg')
-Nom_de_photo = Tab_Document[0]
-with open(Nom_de_photo, 'rb') as f:
-    im = f.read()
-    pos_1 = im.find(Huffman_table_MARKER) + 5
-    pos_2 = im.find(Huffman_table_MARKER, pos_1+1) + 5
-    Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
-    Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
-a_faire_deux_fois_pour_train_et_test(dir_train_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
-a_faire_deux_fois_pour_train_et_test(dir_test_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
-Temps_total = time.time() - start_time
-os.chdir(current_path)
-print('It took:',Temps_total, 'secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.')
+	os.chdir(dir_train_path + '/images')
+	Tab_Document = glob.glob('*.jpg')
+	Nom_de_photo = Tab_Document[0]
+	with open(Nom_de_photo, 'rb') as f:
+	    im = f.read()
+	    pos_1 = im.find(Huffman_table_MARKER) + 5
+	    pos_2 = im.find(Huffman_table_MARKER, pos_1+1) + 5
+	    Huffman_DC = Generate_Huffman_table_DC(im, pos_1)
+	    Huffman_AC = Generate_Huffman_table_AC(im, pos_2)
+	a_faire_deux_fois_pour_train_et_test(dir_train_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
+	a_faire_deux_fois_pour_train_et_test(dir_test_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, Huffman_DC, Huffman_AC)
+	Temps_total = time.time() - start_time
+	print('It took:',Temps_total, 'secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.')
+	os.chdir(current_path)

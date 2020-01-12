@@ -473,84 +473,77 @@ def donne_temps(Numero, dir_train_path, dir_test_path, Quantif):
 
 ################################################################################################
 #Main
-possible_qualite = [100,90,80,70,60]
-qualite = -1
-while ((qualite in possible_qualite) == False):
-	qualite = int(input("You need to choose a JPEG quality factor between 100, 90, 80, 70 or 60. \nQuality: "))
-dataset = -1
-while (dataset != 0 and dataset != 1):
-	dataset = int(input("You need to choose 0 for MNIST and 1 for Cifar-10 \nData set: "))
+def main_Prog_complet(qualite, dataset):
+	if (qualite == 100):
+		Quantif =	[
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1],
+					[1, 1, 1, 1, 1, 1, 1, 1]
+					]
+	elif (qualite == 90):
+		Quantif =	[
+					[3, 2, 2, 3, 5, 8, 10, 12],
+					[2, 2, 3, 4, 5, 12, 12, 11],
+					[3, 3, 3, 5, 8, 11, 14, 11],
+					[3, 3, 4, 6, 10, 17, 16, 12],
+					[4, 4, 7, 11, 14, 22, 21, 15],
+					[5, 7, 11, 13, 16, 21, 23, 18],
+					[10, 13, 16, 17, 21, 24, 24, 20],
+					[14, 18, 19, 20, 22, 20, 21, 20]
+					]
+	elif (qualite == 80):
+		Quantif =	[
+					[6, 4, 4, 6, 10, 16, 20, 24],
+					[5, 5, 6, 8, 10, 23, 24, 22],
+					[6, 5, 6, 10, 16, 23, 28, 22],
+					[6, 7, 9, 12, 20, 35, 32, 25],
+					[7, 9, 15, 22, 27, 44, 41, 31],
+					[10, 14, 22, 26, 32, 42, 45, 37],
+					[20, 26, 31, 35, 41, 48, 48, 40],
+					[29, 37, 38, 39, 45, 40, 41, 40]
+					]
+	elif (qualite == 70):
+		Quantif =	[
+					[10, 7, 6, 10, 14, 24, 31, 37],
+					[7, 7, 8, 11, 16, 35, 36, 33],
+					[8, 8, 10, 14, 24, 34, 41, 34],
+					[8, 10, 13, 17, 31, 52, 48, 37],
+					[11, 13, 22, 34, 41, 65, 62, 46],
+					[14, 21, 33, 38, 49, 62, 68, 55],
+					[29, 38, 47, 52, 62, 73, 72, 61],
+					[43, 55, 57, 59, 67, 60, 62, 59]
+					]
+	elif (qualite == 60):
+		Quantif =	[
+					[13, 9, 8, 13, 19, 32, 41, 49],
+					[10, 10, 11, 15, 21, 46, 48, 44],
+					[11, 10, 13, 19, 32, 46, 55, 45],
+					[11, 14, 18, 23, 41, 70, 64, 50],
+					[14, 18, 30, 45, 54, 87, 82, 62],
+					[19, 28, 44, 51, 65, 83, 90, 74],
+					[39, 51, 62, 70, 82, 97, 96, 81],
+					[58, 74, 76, 78, 90, 80, 82, 79]
+					]
 
-if (qualite == 100):
-	Quantif =	[
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1],
-				[1, 1, 1, 1, 1, 1, 1, 1]
-				]
-elif (qualite == 90):
-	Quantif =	[
-				[3, 2, 2, 3, 5, 8, 10, 12],
-				[2, 2, 3, 4, 5, 12, 12, 11],
-				[3, 3, 3, 5, 8, 11, 14, 11],
-				[3, 3, 4, 6, 10, 17, 16, 12],
-				[4, 4, 7, 11, 14, 22, 21, 15],
-				[5, 7, 11, 13, 16, 21, 23, 18],
-				[10, 13, 16, 17, 21, 24, 24, 20],
-				[14, 18, 19, 20, 22, 20, 21, 20]
-				]
-elif (qualite == 80):
-	Quantif =	[
-				[6, 4, 4, 6, 10, 16, 20, 24],
-				[5, 5, 6, 8, 10, 23, 24, 22],
-				[6, 5, 6, 10, 16, 23, 28, 22],
-				[6, 7, 9, 12, 20, 35, 32, 25],
-				[7, 9, 15, 22, 27, 44, 41, 31],
-				[10, 14, 22, 26, 32, 42, 45, 37],
-				[20, 26, 31, 35, 41, 48, 48, 40],
-				[29, 37, 38, 39, 45, 40, 41, 40]
-				]
-elif (qualite == 70):
-	Quantif =	[
-				[10, 7, 6, 10, 14, 24, 31, 37],
-				[7, 7, 8, 11, 16, 35, 36, 33],
-				[8, 8, 10, 14, 24, 34, 41, 34],
-				[8, 10, 13, 17, 31, 52, 48, 37],
-				[11, 13, 22, 34, 41, 65, 62, 46],
-				[14, 21, 33, 38, 49, 62, 68, 55],
-				[29, 38, 47, 52, 62, 73, 72, 61],
-				[43, 55, 57, 59, 67, 60, 62, 59]
-				]
-elif (qualite == 60):
-	Quantif =	[
-				[13, 9, 8, 13, 19, 32, 41, 49],
-				[10, 10, 11, 15, 21, 46, 48, 44],
-				[11, 10, 13, 19, 32, 46, 55, 45],
-				[11, 14, 18, 23, 41, 70, 64, 50],
-				[14, 18, 30, 45, 54, 87, 82, 62],
-				[19, 28, 44, 51, 65, 83, 90, 74],
-				[39, 51, 62, 70, 82, 97, 96, 81],
-				[58, 74, 76, 78, 90, 80, 82, 79]
-				]
+	#On se place au bon endroit
+	current_path = os.getcwd()
+	start_time = time.time()
+	if (dataset == 0):
+		dir_train_path = current_path + '/Mnist_{}'.format(qualite)
+		dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
+		Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path)
+	else:
+		dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
+		dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
+		Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path)
+	Temps = time.time() - start_time
+	print('Time LD creation: ',Temps, 'secondes')
 
-#On se place au bon endroit
-current_path = os.getcwd()
-start_time = time.time()
-if (dataset == 0):
-	dir_train_path = current_path + '/Mnist_{}'.format(qualite)
-	dir_test_path = current_path + '/Mnist_{}_test'.format(qualite)
-	Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path)
-else:
-	dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
-	dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
-	Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path)
-Temps = time.time() - start_time
-print('Time LD creation: ',Temps, 'secondes')
-
-for i in range(6):
-	donne_temps(i, dir_train_path, dir_test_path, Quantif)
-os.chdir(current_path)
+	for i in range(6):
+		donne_temps(i, dir_train_path, dir_test_path, Quantif)
+	os.chdir(current_path)
