@@ -1,0 +1,219 @@
+Part I
+
+find Mnist_100/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+e6ec06454b7ad172ebf8784c0e5f884c1de462d138338baf44eb5990681d69c0  -
+find Mnist_90/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+b3f2515f9d2f8757595bf12533ae3a13e950729d2b78fb3967065a8922401c08  -
+find Mnist_80/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+9d7d5b6455f629aac1c7355f95a9017599aa8fd9f410a97d6f27f9ce9ce4df3d  -
+find Mnist_70/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+244fa19de72ff2db9962ecabad571f03f7302aac5f2f15d46541fb76744c4302  -
+find Mnist_60/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+831f073cf95c7caf8b3d862b2aae4796587ac33a76bfea332eda974f56750c0c  -
+
+find Mnist_100_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+deaa93b0c9dec1120c8e021f726c0c4350a95d32b2cc4407101631e04d87d7d3  -
+find Mnist_90_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+dd23935154f33a4708e4f19777ea4e3fd4a8c5853e30faa58e63285e15ebddad  -
+find Mnist_80_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+e73c98df91f643029d38a1068f913edb2df4376eda50a6f522f2a14b80ed6478  -
+find Mnist_70_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+ea70d47210bc270d38f1b446b06d752652f84df1398a7e2c013f9b9b007d2ba8  -
+find Mnist_60_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+7cd619d38042ed40b6ab33113c184150dad5c3f52cc84ed2c417d06ed61514fc  -
+
+find Cifar-10_100/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+0707f9eee04c27df7bc34466e8ac10a4baec434ba3e413844148a3e960914afa  -
+find Cifar-10_90/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+d929580b6fe52684dea96f306fc305d53fe0e334136097018672c154a6d0d1f5  -
+find Cifar-10_80/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+a7f32027ac85cb60f4dc2105e08205b79d1b60340657ad07f8d855291a4841d2  -
+find Cifar-10_70/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+66bf54f753eeba6d75f5d70425b1e086d85ebe1d3054a92413a3e699df7cf991  -
+find Cifar-10_60/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+cd6c69572f86a5609212e44ad71c7c6ef91bd41fdf2703df3f34c8e72b2b8960  -
+
+find Cifar-10_100_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+8124717d4fc8a4300fcea988ec9df02d8e4760807602381d1c5854bb355bafa1  -
+find Cifar-10_90_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+9064344e9527b076d6fb6caa0c836b8a59d7fb921949708009d68cd5f5d649c5  -
+find Cifar-10_80_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+b0adc0c5eeca7c989911b1b28aedad4b79a94edbb2b352baf22bc15a95bec1e5  -
+find Cifar-10_70_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+d923ebac8b719422be76191e1ada0942d884d3fbb8709845483a5f506003053f  -
+find Cifar-10_60_test/images/ -name '*.jpg' | sort | xargs sha256sum | cut -d ' ' -f 1 | sha256sum
+7d93c770b2fa578f31994ccfb5d785b68cedc2ed5a33e6e11f7cd66638b8da08  -
+
+
+Part II
+
+sha256sum Mnist_*/data_DC_AC_pur.txt 
+658f6887b29f196da186f3fac326aae4596928299515318c82eb809653d5a38b  Mnist_100/data_DC_AC_pur.txt
+c4e7ca7bd74883ebb8a0b9a3d075ca4a8997bc786e2228111b5d2fc64f2d791e  Mnist_100_test/data_DC_AC_pur.txt
+d59dddea29fffb647af98882f03419c32e9f8b48a0360a046c523d48324ad563  Mnist_60/data_DC_AC_pur.txt
+9820ee462e5175f0788bcea3f19f4d6918db19bf68bbf2996fa1602f60c4aa6f  Mnist_60_test/data_DC_AC_pur.txt
+684c8abfc67ce8de559061e21359e0c670a1bf7f4d3cf76dcbb4915457bee7e2  Mnist_70/data_DC_AC_pur.txt
+59492b7a73debbb753f69359f15941bb5436a81e12d1c9dc5168b8cee9228fa5  Mnist_70_test/data_DC_AC_pur.txt
+2dbe8a3662634945748553a07bd2598b299007d3c6759028dd4142ad3b71e8ba  Mnist_80/data_DC_AC_pur.txt
+b85b9b6dfc77d44560a7495510dae9d665b86bc61e2049ca9ac1f7fe537f7710  Mnist_80_test/data_DC_AC_pur.txt
+add8439ce15c200589f797c3b1d3c2568268891eaadda6f0ed18db739e1da285  Mnist_90/data_DC_AC_pur.txt
+628023a58d7dca246165ca224fe082a5e9c32513d648f86ec5459fb2e0ea613c  Mnist_90_test/data_DC_AC_pur.txt
+
+sha256sum Cifar-10_*/data_DC_AC_pur.txt 
+ecdbfe68c4f5a8e38e9bf4249c95e91afbdf78ae2b82c7b66f334737f0f7fe65  Cifar-10_100/data_DC_AC_pur.txt
+f555b1ab137ef3c7f1051fca9fd80efa1eea8e8db6b6ecaa22e2cd1b668b8112  Cifar-10_100_test/data_DC_AC_pur.txt
+b9b9afe5072c46017ae068d41c741d7aea39d62cbdb7867cc628996fe47ceb78  Cifar-10_60/data_DC_AC_pur.txt
+123ad430db5be8356071307ff13260912f00d3bc31cf28c1ff758ef2e2aba80c  Cifar-10_60_test/data_DC_AC_pur.txt
+c45cf870e9cdf6ee3e9a9c5cab06b3a87afae40c88b8cd5a013167ff1256e1c1  Cifar-10_70/data_DC_AC_pur.txt
+a48d4b6b911baa35f4decacd5bd27c5aa38feab99d358572fe4577a4fd5b680f  Cifar-10_70_test/data_DC_AC_pur.txt
+130d8cb41c2bf417bf4803ba38d546cbbe0a20da5725d86287edc2531bbdfb4a  Cifar-10_80/data_DC_AC_pur.txt
+5158d1440d60fa65d036e0367fe680c0d889d92f964634c91faa74d9f5d97c19  Cifar-10_80_test/data_DC_AC_pur.txt
+60a3c64390e8d7ae8c72c21e408c1ce1bbee513e95eef983ebec8b096722bda3  Cifar-10_90/data_DC_AC_pur.txt
+e4093cbc1dde0abe710e66b5bb590e986e76170d88cf1e9bb9f7abd24f26a395  Cifar-10_90_test/data_DC_AC_pur.txt
+
+
+Part III
+
+sha256sum Mnist_*/*.npy
+d85d15038940d11c53a9526c3e6db2e9d1ce35e14358031e66ba9072c3275bca  Mnist_100/Center.npy
+248b67e87d9ede7a9bf1367ebe7954c0ddba96866eb3fee0545e7e6f5708c1e2  Mnist_100/DCT.npy
+66465825e80aeb8e6aa6ab5028e9b04d3ccb2501a9061e53120464fdd73e294c  Mnist_100/LD.npy
+ffb74e11f47e3850102e94cee6021f64690b718cfdd82631826577be920cd774  Mnist_100/NB.npy
+df60372500e7b2c94f43d70568803ee63d91f52ec8909b4e8f78fd2bdd6d8166  Mnist_100/Pred.npy
+248b67e87d9ede7a9bf1367ebe7954c0ddba96866eb3fee0545e7e6f5708c1e2  Mnist_100/Quantif.npy
+ea8dcebf75fbf0ed5d0a96cf548805f87f6bc425bc548f0470e1982f67db9f4b  Mnist_100_test/Center.npy
+bc8b2615ef0b971434d4f0de9746c56e534bac9293350b43d72405254e9c9fda  Mnist_100_test/DCT.npy
+f95d833212a9e4ba9b8941e24ae802a06a80b4b01a21dca2b87ec3a340380613  Mnist_100_test/LD.npy
+a3fd3f996c0f8faa77811e0f6a70f58ffcb34c940ce78eaef6423c8a40f0685e  Mnist_100_test/NB.npy
+bca1bf1772e267f8f89b37108b2325392747c77f8dbc574b24afbd905031b939  Mnist_100_test/Pred.npy
+bc8b2615ef0b971434d4f0de9746c56e534bac9293350b43d72405254e9c9fda  Mnist_100_test/Quantif.npy
+6e0af1de996be9ce9ebc7104ba2d68f0f1d240653d5d06195fe33fe683889c55  Mnist_100_test/ZigZag.npy
+20d84d44782c6ff7845df1636a0844e5434660b2823e0ffffbefae72b7200711  Mnist_100/ZigZag.npy
+ee04c06f0263f512e9934fd25a56053638b5bba63b9fc2d2c3b799e3654178af  Mnist_60/Center.npy
+9ae5c6547609586b0ea909c61894ad531847645d48bdee8e2e8e92a53957eba1  Mnist_60/DCT.npy
+a979545ce935003ec4ed65a164046eec1d32f330db6c0d0d01329185c57c3189  Mnist_60/LD.npy
+ae93ee8a52d54ea5be86add046a4283de1efd7a0626c935361f1935f1227cacd  Mnist_60/NB.npy
+f83cecf24b1a1b8d437ddeb57a5945165bfa10a9a5be7b2feb4d94379e3b5598  Mnist_60/Pred.npy
+316ebdac4ffc2340418986734a2ecec09ab985ef29adb1f31a7e65016d15efc9  Mnist_60/Quantif.npy
+7d589ad7a1a47b6b4b4550a6ecffc95f0f48322e63adff8d6fbbca207fa1c406  Mnist_60_test/Center.npy
+55b77dd06f7901ae36d0d33a89af4ed875a97525c7fc7c9554bb35dc14e05e5b  Mnist_60_test/DCT.npy
+510d9abaca4d369b9d2d3bea902eb94e4f4fdf9fa3a66c3b4b8b471f69e77f9d  Mnist_60_test/LD.npy
+29709166e4d5887ac7db22fee3764f5d5b37834a372d5810a76857f20393b2b5  Mnist_60_test/NB.npy
+3a7fc973f41b0d0bca3bc50e707d8ba3699f1cd3266bd2b58fd37164e89271da  Mnist_60_test/Pred.npy
+61f413de02fd0460e3d5326652b65807eb76a2e7da2d7a12ba932910dd96bbf6  Mnist_60_test/Quantif.npy
+cd60cbf035936d3e0c069329fc5ffc2a844db007023eb474d93b6e974f9bc25a  Mnist_60_test/ZigZag.npy
+3f9ad755f8b4923ec665210bcad223ae4f8ea3c2da2904169be278fe0d68b445  Mnist_60/ZigZag.npy
+9935bed7657a84e0902b04fd0ffc2cc4c5ccb212d1ff26bfe50cc634dd5bb592  Mnist_70/Center.npy
+dcd221946650ad6a5854481727c1d9112e909d26f226a5ac9088041be6434b4c  Mnist_70/DCT.npy
+c579046fc07e4b4dfa13428630216e9f411987a761ac162233da173a9d009212  Mnist_70/LD.npy
+98e17d219b00250e8cf9427e4ebf18fd59209d30b1ca0fa26cf33ea8fd532433  Mnist_70/NB.npy
+b8d7871746d02523a97de7aa378a44247c82a38480ca704793e9a03f5cd32974  Mnist_70/Pred.npy
+559023dfda4daba91301817cf87dff93ad30d945d80940497b3c072a2fe0f03e  Mnist_70/Quantif.npy
+c0096c6943becf66f0b94eb0a57399f324f1180f466581fa805fd0994c421a0f  Mnist_70_test/Center.npy
+40d72cb88f38e309d2557b1fa9b8049ad7974f5288bcdb01e69f203b75da3245  Mnist_70_test/DCT.npy
+84ebfb000b21ec29e2dd494e5876b7efa8b60134a810f2702b0e9926b46f5ed4  Mnist_70_test/LD.npy
+1355d11c3c02e217ad533406277feac9d214a3dfda392a7fe525efd96f16284a  Mnist_70_test/NB.npy
+54fcb4d244b075c4ff7b4fa6b0a95144ab46d98ddb5ea66d30db71fc6c29464e  Mnist_70_test/Pred.npy
+26db556dc43823d92461e7131e3eef42b48633791f886b80c46ff9a9a2d7011f  Mnist_70_test/Quantif.npy
+d465a708f18555f625e2760912e877b156ac8199f5da7f3e7e1b0abbc1537b71  Mnist_70_test/ZigZag.npy
+582d5ad77788412b357c483f8eb00b40d38b47185b9b6e1b74da26905b90e009  Mnist_70/ZigZag.npy
+7d5f1db75cc5d18ba65b0a6b06fce11ddcb67b67570c28079a4b007ce3c0aeed  Mnist_80/Center.npy
+38ec480101b73f80ca1830402e4cd0dc05d489b546259f58e9685289aacca898  Mnist_80/DCT.npy
+19d0efe798c1a9f3238c7bc356e7cf2670155b8c02559333e1ccb6fdb6693109  Mnist_80/LD.npy
+87cf390773d65a8ea476dbf78080321b9d98488a3df2166a1a054107e33d3fd4  Mnist_80/NB.npy
+0bf146b4fe5febf33c150d4df45ce9f1a47fda6b0fcde5355d2f67d198c226ec  Mnist_80/Pred.npy
+5460809b325cb59b39932a6a0e391c9fa2da1d86c7e859c122c8e7904c61b3a5  Mnist_80/Quantif.npy
+d6645ebae3285200372bf1be7041a6f1324137f2d932b4bbc2182bab73c5fb3a  Mnist_80_test/Center.npy
+50f3a99fd2d7de14b55b997c5e3bc577f0c7ccd502da9f8abaeb387eedf676c3  Mnist_80_test/DCT.npy
+1834b3e0d586a301299bc25fdb60ec91b4cf39dac470c2362c1aff84b90e3a80  Mnist_80_test/LD.npy
+8275845d4b37a0301fd32cd0c855818b75d8974d65ede28f174fde1d859ab74d  Mnist_80_test/NB.npy
+6942e5e7e4d6844f53430f6667f841117f89790e605a937c02bcee68006b7485  Mnist_80_test/Pred.npy
+7f2a27d2c64ee0194ea24913d00ed11909299c1003dc3fd70bdb3ad90757d776  Mnist_80_test/Quantif.npy
+069f17743c152cdb815f3bf0d2be9f992cffaa97b6e7b234f71edf75883ecff4  Mnist_80_test/ZigZag.npy
+05647f56a154225ef168ff5f56b8d3b818dc09251e3c15f1888c1fe27236b527  Mnist_80/ZigZag.npy
+01f0f2b49347e0c14733e226fb8ad635b254ce6b676cd3209fc040f76b996923  Mnist_90/Center.npy
+7e2e748689027c631e552e55413473cc5fa440f22a88cfb183e1f1e3169b96bc  Mnist_90/DCT.npy
+6116ee350ffe1f913c4d8ca90005336693263680b23e037adfe9198b6801ddc9  Mnist_90/LD.npy
+a6e6b423b3a0a9a32f0b32208dc9caa9cd8a9a82f7e11a842d7274ffca30f01b  Mnist_90/NB.npy
+6d50cc7a88ead0846c061cf74286fedbdc3d85638e93cbc6c7b9894128ea7472  Mnist_90/Pred.npy
+dc95dc8af2386f341f15496500f2cb4056f367411f456d2aa4683f4e0f836892  Mnist_90/Quantif.npy
+5984eef36fd2984293f3c732f9641fca74b986e79dd93e6666ffd6a00f212a32  Mnist_90_test/Center.npy
+51b7ea563dcd7207494c3cba1304542a78a4f4891cd88b9c470b1a23ef1a0bf4  Mnist_90_test/DCT.npy
+a641276a1557228af0f28bcb68d281fc203eec4ee2ecc4aab4b1ffcb9a96272b  Mnist_90_test/LD.npy
+95d6993c4ff95989d00d71a06749ccf3e093a8a38fc5f221a11c9e688d743af7  Mnist_90_test/NB.npy
+698e0fbd14c5b9ebf38d9f63a8f42d25993f8f6f037a1afb10b74c19e2481f41  Mnist_90_test/Pred.npy
+1a8a4c5be6a25fc4e3b327301e98fd1405c3ce73bf44e75b4348ccfe759e4aea  Mnist_90_test/Quantif.npy
+4034ecf1f47c44f0050ad3df53199bdcf50fe5ef3f46168f3ef30a1ded0a9c98  Mnist_90_test/ZigZag.npy
+a053df5f3154c25981a9db37130ece06df02bd383bf52b2b767a93a1ca42e0b9  Mnist_90/ZigZag.npy
+
+sha256sum Cifar-10_*/*.npy
+c56d09e972e6c52eaa6fbea5bcc1027465ee31f8b2c04755886cab6b5a749da0  Cifar-10_100/Center.npy
+8a21ea70f81d92ab95c548984f094bedeb709cdb2f329d29a92b4d58cce787bd  Cifar-10_100/DCT.npy
+e9ccebcbe4de099659822e5d934c8c4ec07d3a93eb309b69db4e48346b5209f5  Cifar-10_100/LD.npy
+d9b76ddcfdcca97e12139307ffce1ac0c8807badc66b936ab4364ccb5463cd92  Cifar-10_100/NB.npy
+de583faa2dfbec6c603fdc49cf32833434a444131a8499f05a6d342092288287  Cifar-10_100/Pred.npy
+8a21ea70f81d92ab95c548984f094bedeb709cdb2f329d29a92b4d58cce787bd  Cifar-10_100/Quantif.npy
+d88f1a2bf058b260eb13d985333932315825dcf17bd34910127fe08eaf53dc10  Cifar-10_100_test/Center.npy
+80da744e77447570ce893456a6c7c64d404a117450b5caca35d783e8f2a91ddf  Cifar-10_100_test/DCT.npy
+166d6e6a0a74a32e84f4b0eaf96fa3682a5f456abebfd3a885367fbb1e073d10  Cifar-10_100_test/LD.npy
+c1ca505fd61e8fad74ae1e370c2c55ae99be68cc46ca9d19b811d3aca8b4c372  Cifar-10_100_test/NB.npy
+8d42c18370739eca07b33b5b9e84786b4b0e14e64305f09bcfc4d8975f30c655  Cifar-10_100_test/Pred.npy
+80da744e77447570ce893456a6c7c64d404a117450b5caca35d783e8f2a91ddf  Cifar-10_100_test/Quantif.npy
+a1a5ba1e70aa1f20271bfbf5484a52a5d135f6fe21372c3b644b1429db599f50  Cifar-10_100_test/ZigZag.npy
+b9a96cef730940bb50f402b51d6406097ded4acc1dbc9cb695614bfbd7d00577  Cifar-10_100/ZigZag.npy
+529d4944ab04827bb7c991635a3fdda6886aa7155c1935c834ce48788138c92d  Cifar-10_60/Center.npy
+f03e4f479356117a25c714759233f83b39aea6f51a428ff23769ab783c137e8c  Cifar-10_60/DCT.npy
+1ed9ab269eef69e849a335487b44e956324b9ee4161f5b3601cd4e00287f14fd  Cifar-10_60/LD.npy
+7e8357a2b2c6faf8af878f56adb086755722682d05965ba5bc6d222208ef6e4d  Cifar-10_60/NB.npy
+0e2cfb770810549f8712c03543f41185a8c53f46b6ab6f741001a647d5ac2d29  Cifar-10_60/Pred.npy
+42aa9648540b88aba6939e520579030ff6e81686b47a56ecdc348783b9d53e94  Cifar-10_60/Quantif.npy
+82e6d0647a7e5cc916eaff4d80ae241b8919791c591211a451be2840f33dcd92  Cifar-10_60_test/Center.npy
+3fb031e32ac9f8a157b7ba64f4be804764f52879518e822d4a32be52b2636cb5  Cifar-10_60_test/DCT.npy
+c38eca3d8b6ba086a91a49bbbd718e88856b1ed734f808d8c20959ff129d568e  Cifar-10_60_test/LD.npy
+cc66d49d4d9005046f499860a8b2ab2de53b25729343fd8bc2da55c6c8c120ed  Cifar-10_60_test/NB.npy
+35142706c31a01b99375df9e2f99273003691e536db978fba2d05acdbe387715  Cifar-10_60_test/Pred.npy
+847ddc3c4fe9d6ec73c8b519651c1c4058505d25315d2571a48c7a05c7575630  Cifar-10_60_test/Quantif.npy
+ff3705e7cd4bc6e390354b19e1a2f0989b2a595254ee389166ae52620ee501f5  Cifar-10_60_test/ZigZag.npy
+2582762e360ea6474b0a33beb92e4523fd8b266f3545a1b93051dbc5367aa99f  Cifar-10_60/ZigZag.npy
+1eb98f77158ae576f9a41b1937334532dff3aa083bbb7b63ddbae5be2c21c00c  Cifar-10_70/Center.npy
+dbe94c31f62ff974c8c1e26dea61e8be53090f74ecd2baeb7f2a924431eb138f  Cifar-10_70/DCT.npy
+1a822b83973d77e8ef2c6722c3158b3b3b9549801fe48a1d9a896f47d868fa0e  Cifar-10_70/LD.npy
+f542b8e04cbb281635e687e501d48201aab55d47941b07f863ddeaa85fda46d8  Cifar-10_70/NB.npy
+44e93e2d99a5a6ba53346d7cdb7b17b75cb1e8b2f1c483420dfdaf77894da954  Cifar-10_70/Pred.npy
+4c492a686c75b71eddb3ad7478191cdcbcee8598045b26d429bcaf15e82d62bf  Cifar-10_70/Quantif.npy
+875d8788c00aa499aec660d1e4873bf42c2b4f666b147fa9903f15150452fd6a  Cifar-10_70_test/Center.npy
+7f778e71ac667e1718cc94b0b05c7305ed48d1f3f65f4335a9a63074e3a26397  Cifar-10_70_test/DCT.npy
+2a320c386ca6109c71b0f784183843920380ac95068a4a6fc15605893f35c984  Cifar-10_70_test/LD.npy
+cd8e4d367276cb24737b30406827dd0ed6f8b7ad0401205818fbef6f1006fe72  Cifar-10_70_test/NB.npy
+d06c0ab333cb075ab2ea51369795096b949c8d5190afce0e0c73698caba93cd8  Cifar-10_70_test/Pred.npy
+d4617da89ee26d1f25acb95b6605ab626848c6cfd49a263a2dbd5ae9680966b5  Cifar-10_70_test/Quantif.npy
+c5dbfe3b9d6710931600910feb6a24ca8e3c39418e23e19d5fd1291d58a78fd4  Cifar-10_70_test/ZigZag.npy
+1431986c9993f9e29d9fddd54b98f476a93a55852ec737a681d275b491b471f4  Cifar-10_70/ZigZag.npy
+bdf25cf06f1ed202210f06cad192ec89d9cca89a7937745307423a7a15280213  Cifar-10_80/Center.npy
+7845c391fd28f0ee333028c2896c10fb474425bdff5abc55bce6f36be87a4aeb  Cifar-10_80/DCT.npy
+964c6742ee6c38c47cae7f4598738f658d2385c520ae157a3d9e2fc40c579b5a  Cifar-10_80/LD.npy
+55a29ab669fed623dd867d66fcb73e14d156f59d0a600e2237c1d14c78c22668  Cifar-10_80/NB.npy
+06cfd6dd31f24ca5dbc4aa7c6aa0078973a70289f15d33d837099be1fb0c528c  Cifar-10_80/Pred.npy
+bce86ef7b146030b1f7963ad8d5697457749c62ed90c5239c10edd54b4507355  Cifar-10_80/Quantif.npy
+b2d16d6f6576d8a576b49011b2f22d8aaa38278a7ef8079493121c46f9a4676d  Cifar-10_80_test/Center.npy
+137388b1fb15ac2012aa96d987274ce006dd322c862d6757980849144ea6a858  Cifar-10_80_test/DCT.npy
+1d0c63e2a58b6eec28c539f69aa5c051c73161b73f745af1dba7de9dbd7b47c5  Cifar-10_80_test/LD.npy
+d511a3e7fca46af427b90bb1c47f34e1fa6a48d700a4a52427fc0dd4aa7aff0e  Cifar-10_80_test/NB.npy
+3ea3733921bb3ce39311bacc0127c66c9324b3b16423763f73726bf0e1229893  Cifar-10_80_test/Pred.npy
+2fb6cc2d05357280fe83b004895e42dfb0c1c8f92a085b30536a7f8d82dfc964  Cifar-10_80_test/Quantif.npy
+66eb9a1deee54a1108c5e6c403d5b746889add921d01a70261f39124ce10456c  Cifar-10_80_test/ZigZag.npy
+8f839529c2f01f87c389ad3c7d3f0251f03b4c25bcb3887f41cebcd03cb43180  Cifar-10_80/ZigZag.npy
+bb98ebd38ae189b5beb2143f7147c5ef4b1315d22c22db49e64431491e63943d  Cifar-10_90/Center.npy
+c9ad9d766be8d37dae47e1e7137348442e631dfe88dcffac9594c4c7922ee7ff  Cifar-10_90/DCT.npy
+fe469ebbd0a3288488b7bf9e4e2cfb34dc5954d310143df28a65ccc90a5dc7c2  Cifar-10_90/LD.npy
+cac36dae030a21fe3fb776ec7d4efbe02316b19883cfd6db80a2671f6a9ccfa4  Cifar-10_90/NB.npy
+62dab4b101e4f6a7dafaf4c92f4f0fe45b0e29ae1f48e2d862541a516f896969  Cifar-10_90/Pred.npy
+4c69788b12bc77e18c970eab53051ebabc7bf4c3355ca7702a4ba6eb28c26827  Cifar-10_90/Quantif.npy
+b00582790e686ee0fa76c3d0d8b76f2ea0441ac1c9a4d030958d7335719b4700  Cifar-10_90_test/Center.npy
+c9e6eff0e27c4216355a777b375d0207e38affe0ca6f129e632f4ff69312bd67  Cifar-10_90_test/DCT.npy
+c5d9785d884c2a466bdc6f9772d9a508f4f6acd501386034abb4da1d86b7e298  Cifar-10_90_test/LD.npy
+d94500158b6d80e6c1ab4a1848a2839c4031f6b5cd97356edfa95958bd3dd85f  Cifar-10_90_test/NB.npy
+1aea40b9b333174c95cc4e25dabe6b66f03ca5814149e8c375c2b744e4fefe18  Cifar-10_90_test/Pred.npy
+09eaa02e09a7eafe20cd170f14985a7a291f3a8be04316e2643b4fbe105372a5  Cifar-10_90_test/Quantif.npy
+3edccbc427910c7f2c7498d6e51cd4d5655d2ac03b698c1226d8663becb453cf  Cifar-10_90_test/ZigZag.npy
+2583918872ac507b440605f46b91faa5c416051485db99634493a49ac222dc1d  Cifar-10_90/ZigZag.npy
