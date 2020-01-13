@@ -3,12 +3,11 @@ Necessary code to rebuild DCC article results.
 
 You need at least:
 
--Keras 2.2.4
+- Keras 2.2.4
+- Pillow 7.0.0
+- tqdm 4.40.2
 
--Pillow 7.0.0
-
--tqdm 4.40.2
-
+You can install these dependencies with `pip install -r requirements.txt`.
 
 Creation_data_sets.py file, create train and test directories, in which MNIST or CIFAR-10 JPEG compresed images are stored (you need to choose). This program needs as input the desired JPEG quality. Caution, those direcories will be created in the current directory.
 
