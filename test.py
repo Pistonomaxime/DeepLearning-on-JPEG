@@ -1,6 +1,43 @@
 import hashlib
 import os, glob
 
+SHA_MNIST_PARTIAL = {
+    'train': {
+        100: '7c32810aac34b57cb9f45b5e9e36eff8b440efacec6064f7100332660bf32d2b',
+        90: '06dd58b3787814cd04831d7949e3fb1e59bb266b7e6c48e32746d10a8c92bf21',
+        80: '10c7d4947608c70e5798d398ba0df281bd2893c293d2539e175b112f9aa77946',
+        70: 'f50be650883befb3402bcab18cb7187fc5194761036f65705759ca54e77e7b18',
+        60: '863e24f644e79c67b0ba2c376e75f14ccbb2d98059680887968956de8c65f9f6'
+    },
+    'test': {
+        100: '09af6548c8dbbd398056b26f58a0d90c757cd4fe0f87b0c7f1cc67b690b1d737',
+        90: 'a732098654af441f9dacf2dbb5b8c6cb5afbd1c585f126f184dbeaa0055c1f61',
+        80: '61db475b118464655ace5ddb3112820f3549eea8907dcfc968ed3d446a3aed26',
+        70: 'd5ca91d3b6d50fd361a7dae9c011404f908e140cae1579211becf4e28cb6699b',
+        60: '5238a02e080fc843dac679fccf8cf94b1807da7fe8b81f731ecf5f32f6230677'
+    }
+}
+
+SHA_CIFAR_PARTIAL = {
+    'train': {
+        100: 'f07391d25f416b1c0feecb6738de6034318d0a619ada25d643e1ffba53d0cc41',
+        90: '109868e094d45df81cd373da5132e59071cee41d2ef8e49208cb34bb547c1616',
+        80: 'f9c4858504cb0e56b475b1b64e0056f9ba86699af1c3e8b48142f466b8c20047',
+        70: 'e57a7d43e7ac3c36f3011764cd3a156126fd7db1f56c40540564b52f9a2689d9',
+        60: '7077e9cf427573c27536eed378002ab9fdeba253fc680c32f7f5491eae156315'
+    },
+    'test': {
+        100: 'fd8253bdf4cf3a37064a681acd88274e2265c3b4ea0b7147f8883948bc478939',
+        90: '043805635c7008b5c6dae5e1121a5dc982e69c37a3a9d9ffd0def00090ba1bc9',
+        80: 'a1d113344d3ac9c6030477b346ba0dc33aa168a38c8043bbf4d4f2ce6a3ccb00',
+        70: '0dddccb05bb3398b4a61118fc8b663faae1d17e6c9e2c91ba4b489e755ac153e',
+        60: 'ca0f6a430c583b14800dfaf26dc2766fec11de194fd5b647d5473980b53ac8e3'
+    }
+}
+
+SHA_PARTIAL = {0: SHA_MNIST_PARTIAL, 1: SHA_CIFAR_PARTIAL}
+
+
 def sha_images(dir_path):
     m = hashlib.sha256()
     os.chdir(dir_path + '/images')
@@ -20,51 +57,11 @@ def display_result(sha_result, sha_expected, name):
 
 def image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train_images = sha_images(dir_train_path) #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
-    if (dataset == 0):
-        if(qualite == 100):
-            display_result(sha_train_images, '7c32810aac34b57cb9f45b5e9e36eff8b440efacec6064f7100332660bf32d2b', "train")
-        elif(qualite == 90):
-            display_result(sha_train_images, '06dd58b3787814cd04831d7949e3fb1e59bb266b7e6c48e32746d10a8c92bf21', "train")
-        elif(qualite == 80):
-            display_result(sha_train_images, '10c7d4947608c70e5798d398ba0df281bd2893c293d2539e175b112f9aa77946', "train")
-        elif(qualite == 70):
-            display_result(sha_train_images, 'f50be650883befb3402bcab18cb7187fc5194761036f65705759ca54e77e7b18', "train")
-        else:
-            display_result(sha_train_images, '863e24f644e79c67b0ba2c376e75f14ccbb2d98059680887968956de8c65f9f6', "train")
-    else:
-        if(qualite == 100):
-            display_result(sha_train_images, 'f07391d25f416b1c0feecb6738de6034318d0a619ada25d643e1ffba53d0cc41', "train")
-        elif(qualite == 90):
-            display_result(sha_train_images, '109868e094d45df81cd373da5132e59071cee41d2ef8e49208cb34bb547c1616', "train")
-        elif(qualite == 80):
-            display_result(sha_train_images, 'f9c4858504cb0e56b475b1b64e0056f9ba86699af1c3e8b48142f466b8c20047', "train")
-        elif(qualite == 70):
-            display_result(sha_train_images, 'e57a7d43e7ac3c36f3011764cd3a156126fd7db1f56c40540564b52f9a2689d9', "train")
-        else:
-            display_result(sha_train_images, '7077e9cf427573c27536eed378002ab9fdeba253fc680c32f7f5491eae156315', "train")
+    display_result(sha_train_images, SHA_PARTIAL[dataset]["train"][qualite])
+
     sha_test_images = sha_images(dir_test_path)
-    if (dataset == 0):
-        if(qualite == 100):
-            display_result(sha_test_images, '09af6548c8dbbd398056b26f58a0d90c757cd4fe0f87b0c7f1cc67b690b1d737', "test")
-        elif(qualite == 90):
-            display_result(sha_test_images, 'a732098654af441f9dacf2dbb5b8c6cb5afbd1c585f126f184dbeaa0055c1f61', "test")
-        elif(qualite == 80):
-            display_result(sha_test_images, '61db475b118464655ace5ddb3112820f3549eea8907dcfc968ed3d446a3aed26', "test")
-        elif(qualite == 70):
-            display_result(sha_test_images, 'd5ca91d3b6d50fd361a7dae9c011404f908e140cae1579211becf4e28cb6699b', "test")
-        else:
-            display_result(sha_test_images, '5238a02e080fc843dac679fccf8cf94b1807da7fe8b81f731ecf5f32f6230677', "test")
-    else:
-        if(qualite == 100):
-            display_result(sha_test_images, 'fd8253bdf4cf3a37064a681acd88274e2265c3b4ea0b7147f8883948bc478939', "test")
-        elif(qualite == 90):
-            display_result(sha_test_images, '043805635c7008b5c6dae5e1121a5dc982e69c37a3a9d9ffd0def00090ba1bc9', "test")
-        elif(qualite == 80):
-            display_result(sha_test_images, 'a1d113344d3ac9c6030477b346ba0dc33aa168a38c8043bbf4d4f2ce6a3ccb00', "test")
-        elif(qualite == 70):
-            display_result(sha_test_images, '0dddccb05bb3398b4a61118fc8b663faae1d17e6c9e2c91ba4b489e755ac153e', "test")
-        else:
-            display_result(sha_test_images, 'ca0f6a430c583b14800dfaf26dc2766fec11de194fd5b647d5473980b53ac8e3', "test")
+    display_result(sha_test_images, SHA_PARTIAL[dataset]["test"][qualite])
+
     os.chdir(current_path)
 
 def image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
