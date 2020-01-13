@@ -325,7 +325,11 @@ def main_test(qualite, dataset, partial = True):
         dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
         dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
     if (partial):
+        main_Creation_data_sets(quality, dataset, True)
+        main_Creation_DC_AC_pur(quality, dataset)
+        main_Prog_complet(quality, dataset)
         partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+
     else:
         full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     os.chdir(current_path)

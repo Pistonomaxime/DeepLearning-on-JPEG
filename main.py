@@ -6,7 +6,6 @@ from DeepLearning import main_DeepLearning
 # https://www.python.org/dev/peps/pep-0008/
 # => Voir "Tabs or Spaces"
 # => Voir "Naming Conventions"
-
 def ask_int(msg, valid):
     while True:
         try:
