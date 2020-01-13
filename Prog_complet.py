@@ -399,8 +399,8 @@ def Renvoie_Image_LD_Cifar(dir_train_path, dir_test_path):
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
 
-	X_train_perso = X_train_perso.reshape(50000,32,32,1)
-	X_test_perso = X_test_perso.reshape(10000,32,32,1)
+	X_train_perso = X_train_perso.reshape(len(X_train_perso),32,32,1)
+	X_test_perso = X_test_perso.reshape(len(X_test_perso),32,32,1)
 
 	sauvegarde(dir_train_path, X_train_perso, "LD")
 	sauvegarde(dir_test_path, X_test_perso, "LD")
@@ -432,9 +432,9 @@ def Renvoie_Image_LD_Mnist(dir_train_path, dir_test_path):
 
 	X_train_perso = Bonne_Taille(X_train_perso)
 	X_test_perso = Bonne_Taille(X_test_perso)
-    
-	X_train_perso = X_train_perso.reshape(60000,32,32,1)
-	X_test_perso = X_test_perso.reshape(10000,32,32,1)
+
+	X_train_perso = X_train_perso.reshape(len(X_train_perso),32,32,1)
+	X_test_perso = X_test_perso.reshape(len(X_test_perso),32,32,1)
 
 	X_train_perso = standardisation(X_train_perso)
 	X_test_perso = standardisation(X_test_perso)
