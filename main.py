@@ -2,6 +2,7 @@ from Creation_data_sets import main_Creation_data_sets
 from Creation_DC_AC_pur import main_Creation_DC_AC_pur
 from Prog_complet import main_Prog_complet
 from DeepLearning import main_DeepLearning
+from Test import main_test
 # Style Guide for Python Code
 # https://www.python.org/dev/peps/pep-0008/
 # => Voir "Tabs or Spaces"
@@ -33,7 +34,8 @@ if not should_create:
         main_Creation_DC_AC_pur(quality, dataset)
         print("End DC AC pur creation")
         main_Prog_complet(quality, dataset)
-        print("Data sets were successfully created!")
+        # print("Data sets were successfully created!")
+        main_test(qualite, dataset)
 
     steps = [0,1,2,3,4,5,6]
     step = ask_int("You need to choose the JPEG compression step for feeding Machine learning. \n0 for LB\n1 for NB\n2 for centre\n3 for DCT\n4 for Quantif\n5 for Pred\n6 for ZigZag\nStep: ", steps)
