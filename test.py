@@ -20,7 +20,7 @@ def display_result(sha_images, sha_expected, name):
         print("Error during Images creation of ", name, "!!!")
 
 def partial_test(qualite, dataset, dir_train_path, dir_test_path):
-    sha_train_images = sha_images(dir_train_path + "_2") #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
+    sha_train_images = sha_images(dir_train_path) #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
     if (dataset == 0):
         if(qualite == 100):
             display_result(sha_train_images, '7c32810aac34b57cb9f45b5e9e36eff8b440efacec6064f7100332660bf32d2b', "train")
