@@ -1,5 +1,8 @@
 import hashlib
 import os, glob
+import numpy as np
+
+TAB_NAME = ['LD', 'NB', 'Center', 'DCT', 'Quantif', 'Pred', 'ZigZag']
 
 SHA_MNIST_PARTIAL_IMAGES = {
     'train': {
@@ -73,7 +76,6 @@ SHA_CIFAR_FULL_IMAGES = {
 
 SHA_FULL_IMAGES = {0: SHA_MNIST_FULL_IMAGES, 1: SHA_CIFAR_FULL_IMAGES}
 
-
 SHA_MNIST_PARTIAL_DC_AC = {
     'train': {
         100: 'cafee14bdd3bd85bcdf995c8e43c188fde7bcc516e8b6feb0f82f97f9799198c',
@@ -146,6 +148,76 @@ SHA_CIFAR_FULL_DC_AC = {
 
 SHA_FULL_DC_AC = {0: SHA_MNIST_FULL_DC_AC, 1: SHA_CIFAR_FULL_DC_AC}
 
+SHA_MNIST_PARTIAL_COMPLET = {
+    'train': {
+        100: '3843a72bb2de57b5141e8d50c024de0fd18cf11438db149560672d741a2a363d',
+        90: 'f770e534f3b56f1c64ce8a5e2cfdd2b8e9d1d0117014aef61e7b0212f01851ac',
+        80: 'b7b8325c617e3b1615f09e43f4e54c2c024176412366910c5ab87167c0f2b1ec',
+        70: 'c4c88e428613a79769e8f8828d24164182eaa0743376a3e026164065442ea36a',
+        60: '3117d69cc1e7ada63e2d970fa50d3e40eaf57d0a39d1a7754c0f0adaa8622ad2'
+    },
+    'test': {
+        100: '355cf201236c57e4555edd837f4213124836e1dc172068f9d28494a200ef3819',
+        90: '41cf749ad74d764e0d585e16ff2a0f293d9414aa4661b66ff1099612c38e34bd',
+        80: 'd46761b65ac710a55027bcdb2aa0b6d45c8a9560b35375c7d81ca9e06b914f76',
+        70: '9c967dd089e08e6f95354541a54fcb042817e9678c683691b17bef26086edab5',
+        60: '3baa51c13a4b1c18af7730ff197045eb587db14ad6f21f3f68acf973fae2476c'
+    }
+}
+
+SHA_CIFAR_PARTIAL_COMPLET = {
+    'train': {
+        100: '25858d2605629d7f099c3e2a1738c3dbf2481d81203e4f01c0ca96c29cf6df33',
+        90: '1261272f1fcca41cc17e89630f099afb50a0aece841cf08000f8495fb2f3406d',
+        80: '417bbf1b12c0d9f4762a75ca3fc05e7df15224e7f1734e9c3e47cc051a3dafb8',
+        70: '47b791cb60b5043c7e2d1b970b304de82736411318988383197f6cec296a8fec',
+        60: '02c3ed4edb96a85bcaeada8260c864ddd029ab6f589092aa24e8df0aba495953'
+    },
+    'test': {
+        100: '99c0409542a6ae22fe3209992bc34d3b2716a2d67181b7814f25eea59e3937c6',
+        90: 'c591fdb7a9b8a87d7d9c112604637e4c94514d4656b8cb3fb525efbb9cc2c887',
+        80: '6eaf42fe719da8b09f860c620245ca4dfc7ad6cd8eaea21ba85bc1ee580457b8',
+        70: '485fd50f363c41d5be9100b5d590a2baf7cf01c1a7a156bc81cdcf1d82245032',
+        60: '431addccf2903fa96bff8bdae6e84bfcc22b0c92f19857d33af8c60c49604ef7'
+    }
+}
+
+SHA_PARTIAL_COMPLET = {0: SHA_MNIST_PARTIAL_COMPLET, 1: SHA_CIFAR_PARTIAL_COMPLET}
+SHA_MNIST_FULL_COMPLET = {
+    'train': {
+        100: '6c1d203e0bbc4e2130d250103180812c0569b74d9b35baccf0dbfec24e2eaa4a',
+        90: '303b5ef1294d173fc25d1094b0cceb2891b47be14cdda23376418b6179cf8109',
+        80: 'ca77fe3b5c0dbc9bf8996cb2967eb8c3a24ea6ddc2d2c7681429d8a783a247c3',
+        70: 'f64a533688865ef3ff11e44cd45f35d3e9c2426ca56cd39cb950d67d4cc9e7b5',
+        60: '417bac79dc6b95cda972832a2d517b6e86eb089efe706c013be60a3b36775c29'
+    },
+    'test': {
+        100: 'a73c85c7d8375fece9199f0cfe7f7287e8603de93e69083d6936b17c327b1aef',
+        90: '3c92e68d008255be43615f31ede9f57eaa4d4b84dbe77d75d7fd95e1835a60bd',
+        80: 'b763a6a5f6bc603116301271de4aa0a826e8e49aebfa4e18c1d89bbc3253214d',
+        70: 'e28f73c2febfa9d45a9cf077756584e9d351260ae65bea49aa7aeef72dcf69fc',
+        60: '301b2274286955eed35034b701d947d7b003d3970935121381c59e7b7cd6e34f'
+    }
+}
+
+SHA_CIFAR_FULL_COMPLET = {
+    'train': {
+        100: '33a726a8126e9cd0a01fd2158ca670f81b06458dce85fe04d85c232d0de0b1d0',
+        90: '98a5cafd0f65354ff9919a6aeb18b89a39bfcd79c2ec8b7b515ace462953b969',
+        80: '08b2cddb6c183efdde931adbea7c87fa681b88af24356fdecf1b9ea305ca6204',
+        70: 'f4f72db91e160b38163a581b79dbb061919824513aad607cbf82c07b5a74768a',
+        60: 'e78c79e94de948666d60e806a901bec8d1b7e72992c76d16bcf0a07270d8c1d4'
+    },
+    'test': {
+        100: '9461549a3d106d7d27395c708745089ad4c465c38baca37b66b671a68bc2ec2f',
+        90: '92e23550205e3af679478ea7801e099fbb1250f3330bbb31eaa7ba84065b40ca',
+        80: 'a4cb2f5e91b5b2ee5b800dcbd6f02946eb129df525881b288c51a065e2f687d4',
+        70: '1e28834d7e27fb51b549113c081af56715f3b5610302204ca5319041a1699f3f',
+        60: '2a171bbbba75b43299769e581df3128ab1195150b5900998d76f48ec4f430d70'
+    }
+}
+
+SHA_FULL_COMPLET = {0: SHA_MNIST_FULL_COMPLET, 1: SHA_CIFAR_FULL_COMPLET}
 
 def sha_images(dir_path):
     m = hashlib.sha256()
@@ -158,77 +230,91 @@ def sha_images(dir_path):
             m.update(im)
     return(m.hexdigest())
 
-def display_result_images(sha_result, sha_expected, name):
+def sha_DC_AC(dir_path):
+    os.chdir(dir_path)
+    m = hashlib.sha256()
+    with open("data_DC_AC_pur.txt", 'rb') as f:
+        file = f.read()
+        m.update(file)
+    return(m.hexdigest())
+
+def sha_complet(dir_path):
+    os.chdir(dir_path)
+    m = hashlib.sha256()
+    for el in TAB_NAME:
+        table = np.load(el + ".npy")
+        m.update(table)
+    return(m.hexdigest())
+
+def display_result(sha_result, sha_expected, name):
     if (sha_result == sha_expected):
         print("Creation of", name, "is Ok !")
     else:
-        print("Error during Images creation of ", name, "!!!")
-
-def display_result_DC_AC(sha_result, sha_expected, name):
-    if (sha_result == sha_expected):
-        print("Creation of", name, "data_DC_AC_pur is Ok !")
-    else:
-        print("Error during Images creation of", name, "data_DC_AC_pur!!!")        
+        print("Error during Images creation of", name, "!!!")      
 
 def image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    sha_train_images = sha_images(dir_train_path) #pour moi rajouter pour avoir les datasets avec 20 images
-    display_result_images(sha_train_images, SHA_PARTIAL_IMAGES[dataset]["train"][qualite], "train")
+    sha_train = sha_images(dir_train_path + '_2') #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
+    display_result(sha_train, SHA_PARTIAL_IMAGES[dataset]["train"][qualite], "train Images")
 
-    sha_test_images = sha_images(dir_test_path)
-    display_result_images(sha_test_images, SHA_PARTIAL_IMAGES[dataset]["test"][qualite], "test")
+    sha_test = sha_images(dir_test_path + '_2')
+    display_result(sha_test, SHA_PARTIAL_IMAGES[dataset]["test"][qualite], "test Images")
 
     os.chdir(current_path)
-
+    
 def image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    sha_train_images = sha_images(dir_train_path)
-    display_result_images(sha_train_images, SHA_FULL_IMAGES[dataset]["train"][qualite], "train")
-    
-    sha_test_images = sha_images(dir_test_path)
-    display_result_images(sha_test_images, SHA_FULL_IMAGES[dataset]["test"][qualite], "test")
-    
+    sha_train = sha_images(dir_train_path)
+    display_result(sha_train, SHA_FULL_IMAGES[dataset]["train"][qualite], "train Images")
+
+    sha_test = sha_images(dir_test_path)
+    display_result(sha_test, SHA_FULL_IMAGES[dataset]["test"][qualite], "test Images")
+
     os.chdir(current_path)
 
 def data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    os.chdir(dir_train_path)
-    m = hashlib.sha256()
-    with open("data_DC_AC_pur.txt", 'rb') as f:
-        file = f.read()
-        m.update(file)
-    display_result_DC_AC(m.hexdigest(), SHA_PARTIAL_DC_AC[dataset]["train"][qualite], "train")
-    
-    os.chdir(dir_test_path)
-    m = hashlib.sha256()
-    with open("data_DC_AC_pur.txt", 'rb') as f:
-        file = f.read()
-        m.update(file)
-    display_result_DC_AC(m.hexdigest(), SHA_PARTIAL_DC_AC[dataset]["test"][qualite], "test")
+    sha_train = sha_DC_AC(dir_train_path + '_2')
+    display_result(sha_train, SHA_PARTIAL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+
+    sha_test = sha_DC_AC(dir_test_path + '_2')
+    display_result(sha_test, SHA_PARTIAL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
 
     os.chdir(current_path)
     
 def data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    os.chdir(dir_train_path)
-    m = hashlib.sha256()
-    with open("data_DC_AC_pur.txt", 'rb') as f:
-        file = f.read()
-        m.update(file)
-    display_result_DC_AC(m.hexdigest(), SHA_FULL_DC_AC[dataset]["train"][qualite], "train")
-    
-    os.chdir(dir_test_path)
-    m = hashlib.sha256()
-    with open("data_DC_AC_pur.txt", 'rb') as f:
-        file = f.read()
-        m.update(file)
-    display_result_DC_AC(m.hexdigest(), SHA_FULL_DC_AC[dataset]["test"][qualite], "test")
+    sha_train = sha_DC_AC(dir_train_path)
+    display_result(sha_train, SHA_FULL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+
+    sha_test = sha_DC_AC(dir_test_path)
+    display_result(sha_test, SHA_FULL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
 
     os.chdir(current_path)
 
+def complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
+    sha_train = sha_complet(dir_train_path + '_2')
+    display_result(sha_train, SHA_PARTIAL_COMPLET[dataset]["train"][qualite], "train complet")
+
+    sha_test = sha_complet(dir_test_path + '_2')
+    display_result(sha_test, SHA_PARTIAL_COMPLET[dataset]["test"][qualite], "test complet")
+
+    os.chdir(current_path)
+    
+def complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
+    sha_train = sha_complet(dir_train_path)
+    display_result(sha_train, SHA_FULL_COMPLET[dataset]["train"][qualite], "train complet")
+
+    sha_test = sha_complet(dir_test_path)
+    display_result(sha_test, SHA_FULL_COMPLET[dataset]["test"][qualite], "test complet")
+
+    os.chdir(current_path)
+    
 def partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
 
 def full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     
 def main_test(qualite, dataset, partial = True):
     current_path = os.getcwd()
