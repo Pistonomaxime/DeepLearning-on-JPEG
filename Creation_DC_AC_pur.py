@@ -1,6 +1,6 @@
 import numpy as np
 import os, glob, time, sys
-
+from tqdm import tqdm
 
 def Generate_Huffman_table_DC(im, pos_1):
     '''
@@ -158,7 +158,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, SOS_MARKER, FF_00_MARKER, FF_
     os.chdir(dir_path + '/images')
     Tab_Document = glob.glob('*.jpg')
     val = ''
-    for i in range(len(Tab_Document)):
+    for i in tqdm(range(len(Tab_Document))):
         Nom_de_photo = str(i) + '.jpg'
         with open(Nom_de_photo, 'rb') as f:
             #On lit l'image

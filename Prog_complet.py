@@ -3,6 +3,7 @@ from scipy.fftpack import fft, dct
 import numpy as np
 import os, glob, time
 from PIL import Image
+from tqdm import tqdm
 
 def image_extend(image, data):
 	image.extend((data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]))
@@ -39,7 +40,7 @@ def De_Huffman_avec_ZigZag(dir_path):
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
 		save = 0
-		for line in fichier:
+		for line in tqdm(fichier):
 			if(line != '\n'):
 				data = list(line.split(' '))
 				image = []
@@ -91,7 +92,7 @@ def De_Huffman_avec_ZigZag_sans_prediction(dir_path):
 	im_recompose = []
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
-		for line in fichier:
+		for line in tqdm(fichier):
 			if(line != '\n'):
 				data = list(line.split(' '))
 				image = []
@@ -140,7 +141,7 @@ def De_Huffman_sans_ZigZag_sans_Prediction(dir_path):
 	im_recompose = []
 	with open("data_DC_AC_pur.txt", "r") as fichier:
 		cpt = 0
-		for line in fichier :
+		for line in tqdm(fichier):
 			if(line != '\n'):
 				data = list(line.split(' '))
 				image = []
@@ -188,7 +189,7 @@ def de_compression_Centre(donnees, Quantif):
 	A partir des images dé_huffman et en forme ZigZag retourne les pixels de l'image original.
 	"""
 	sortie = []
-	for k in range(0,len(donnees)):
+	for k in tqdm(range(0,len(donnees))):
 		TMP = donnees[k].reshape(32,32)
 		test = []
 		save = 0
@@ -225,7 +226,7 @@ def de_compression_DCT(donnees, Quantif):
 	A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
 	"""
 	sortie = []
-	for k in range(0,len(donnees)):
+	for k in tqdm(range(0,len(donnees))):
 		TMP = donnees[k].reshape(32,32)
 		test = []
 		save = 0
@@ -253,7 +254,7 @@ def de_compression_Quantif(donnees, Quantif):
 	A partir des images dé_huffman et en forme ZigZag renvoie a l'étape entre DCT et Quantif.
 	"""
 	sortie = []
-	for k in range(0,len(donnees)):
+	for k in tqdm(range(0,len(donnees))):
 		TMP = donnees[k].reshape(32,32)
 		test = []
 		save = 0
@@ -382,7 +383,7 @@ def sous_fonction_Revoie_Image_LD(dir_path):
 	os.chdir(dir_path + '/images')
 	Tab_Document = glob.glob('*.jpg')
 	X_perso = []
-	for i in range(0,len(Tab_Document)):
+	for i in tqdm(range(0,len(Tab_Document))):
 		Nom_de_photo = str(i) + '.jpg'
 		im = Image.open(Nom_de_photo)
 		X_perso.append(np.array(im))

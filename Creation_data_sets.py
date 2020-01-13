@@ -1,16 +1,17 @@
 from PIL import Image
 import os, sys
+from tqdm import tqdm
 
 def convert_Mnist(dir_path, X, qualite):
 	os.chdir(dir_path + '/images')
-	for i in range(len(X)):
+	for i in tqdm(range(len(X))):
 	   img = Image.fromarray(X[i])
 	   nom = str(i) + ".jpg"
 	   img.save(nom, quality = qualite)
 
 def convert_Cifar(dir_path, X, qualite):
 	os.chdir(dir_path + '/images')
-	for i in range(len(X)):
+	for i in tqdm(range(len(X))):
 		img = Image.fromarray(X[i])
 		img = img.convert("L")
 		nom = str(i) + ".jpg"

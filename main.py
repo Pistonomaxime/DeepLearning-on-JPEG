@@ -17,11 +17,11 @@ def ask_int(msg, valid):
         except ValueError:
             print("Invalid integer")
 
-already_created = ask_int("Did you have already created Data sets? 0 for no 1 for yes\nAlready_created: ", [0,1])
+already_created = ask_int("Did you have already created Data sets? 0 for no 1 for yes.\nAlready_created: ", [0,1])
 
 should_create = False
 if not already_created:
-    should_create = ask_int("Caution data sets will be created in your current directory. If you want to change directory please tape 1 then relanch program in the good directory else press 0\nBegin data set creation: ", [0,1])
+    should_create = ask_int("Caution data sets will be created in your current directory. If you want to change directory please tape 1 then relaunch the program in the good directory, else press 0\nBegin data set creation: ", [0,1])
 
 if not should_create:
     qualities = [100,90,80,70,60]
