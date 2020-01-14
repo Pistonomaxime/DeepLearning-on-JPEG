@@ -246,12 +246,12 @@ def sha_complet(dir_path):
     os.chdir(dir_path)
     m_hash = hashlib.sha256()
     for element in TAB_NAME:
-        n_hash = hashlib.sha256()
+        # n_hash = hashlib.sha256()
         table = np.load(element + ".npy")
         m_hash.update(table)
-        n_hash.update(table)
-        print("n\n", n_hash.hexdigest(), "\n", end="")
-    print("\ndebug\n", m_hash.hexdigest(), "\n", end="")
+        # n_hash.update(table)
+        # print("n\n", n_hash.hexdigest(), "\n", end="")
+    # print("\ndebug\n", m_hash.hexdigest(), "\n", end="")
     return m_hash.hexdigest()
 
 
