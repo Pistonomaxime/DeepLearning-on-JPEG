@@ -24,3 +24,4 @@ jobs:
       run: |
         python -c 'from Test import main_test; main_test(100, 0, True)'
         python -c 'from Test import main_test; main_test(90, 0, True)'
+        python -c 'from Test import main_test; main_test(100, 1, True)'
