@@ -255,12 +255,12 @@ def display_result(sha_result, sha_expected, name):
         return(False) #Error    
 
 def image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    sha_train = sha_images(dir_train_path + '_2') #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
+    sha_train = sha_images(dir_train_path) #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
     error_res = display_result(sha_train, SHA_PARTIAL_IMAGES[dataset]["train"][qualite], "train Images")
     if(not error_res):
         return(False) #Error
 
-    sha_test = sha_images(dir_test_path + '_2')
+    sha_test = sha_images(dir_test_path)
     error_res = display_result(sha_test, SHA_PARTIAL_IMAGES[dataset]["test"][qualite], "test Images")
     if(not error_res):
         return(False) #Error
@@ -283,12 +283,12 @@ def image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_pat
     return(True) #No error
 
 def data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    sha_train = sha_DC_AC(dir_train_path + '_2')
+    sha_train = sha_DC_AC(dir_train_path)
     error_res = display_result(sha_train, SHA_PARTIAL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
     if(not error_res):
         return(False) #Error
 
-    sha_test = sha_DC_AC(dir_test_path + '_2')
+    sha_test = sha_DC_AC(dir_test_path)
     error_res = display_result(sha_test, SHA_PARTIAL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
     if(not error_res):
         return(False) #Error
@@ -311,12 +311,12 @@ def data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, curren
     return(True) #No error
 
 def complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    sha_train = sha_complet(dir_train_path + '_2')
+    sha_train = sha_complet(dir_train_path)
     error_res = display_result(sha_train, SHA_PARTIAL_COMPLET[dataset]["train"][qualite], "train complet")
     if(not error_res):
         return(False) #Error
 
-    sha_test = sha_complet(dir_test_path + '_2')
+    sha_test = sha_complet(dir_test_path)
     error_res = display_result(sha_test, SHA_PARTIAL_COMPLET[dataset]["test"][qualite], "test complet")
     if(not error_res):
         return(False) #Error
