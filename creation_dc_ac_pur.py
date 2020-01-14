@@ -187,7 +187,7 @@ def a_faire_deux_fois_pour_train_et_test(
     ecriture_dc_mnist(val)
 
 
-def main_creation_dc_ac_pur(qualite, dataset):
+def main_creation_dc_ac_pur(quality, dataset):
     """
     Début du programme.
     On definit les différents MARKERS.
@@ -195,11 +195,11 @@ def main_creation_dc_ac_pur(qualite, dataset):
     """
     current_path = os.getcwd()
     if dataset == 0:
-        dir_train_path = current_path + "/Mnist_{}".format(qualite)
-        dir_test_path = current_path + "/Mnist_{}_test".format(qualite)
+        dir_train_path = current_path + "/Mnist_{}".format(quality)
+        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
     else:
-        dir_train_path = current_path + "/Cifar-10_{}".format(qualite)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(qualite)
+        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
+        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
 
     start_time = time.time()
     SOS_MARKER = b"\xff\xda"

@@ -355,22 +355,22 @@ def essaies_cifar(
 
 ################################################################################################
 # Main
-def main_deeplearning(qualite, dataset, possible_steps, algorithm):
+def main_deeplearning(quality, dataset, possible_steps, algorithm):
     num_category = 10
     current_path = os.getcwd()
     if dataset == 0:
         batch_size = 128
         num_epoch = 200
-        dir_train_path = current_path + "/Mnist_{}".format(qualite)
-        dir_test_path = current_path + "/Mnist_{}_test".format(qualite)
+        dir_train_path = current_path + "/Mnist_{}".format(quality)
+        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
         from keras.datasets import mnist
 
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
     else:
         batch_size = 256
         num_epoch = 300
-        dir_train_path = current_path + "/Cifar-10_{}".format(qualite)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(qualite)
+        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
+        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
         from keras.datasets import cifar10
 
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()

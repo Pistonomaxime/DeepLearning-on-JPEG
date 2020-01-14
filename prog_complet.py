@@ -528,8 +528,8 @@ def donne_temps(numero, dir_train_path, dir_test_path, quantif):
 
 ################################################################################################
 # Main
-def main_prog_complet(qualite, dataset):
-    if qualite == 100:
+def main_prog_complet(quality, dataset):
+    if quality == 100:
         quantif = [
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1],
@@ -540,7 +540,7 @@ def main_prog_complet(qualite, dataset):
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 1, 1, 1],
         ]
-    elif qualite == 90:
+    elif quality == 90:
         quantif = [
             [3, 2, 2, 3, 5, 8, 10, 12],
             [2, 2, 3, 4, 5, 12, 12, 11],
@@ -551,7 +551,7 @@ def main_prog_complet(qualite, dataset):
             [10, 13, 16, 17, 21, 24, 24, 20],
             [14, 18, 19, 20, 22, 20, 21, 20],
         ]
-    elif qualite == 80:
+    elif quality == 80:
         quantif = [
             [6, 4, 4, 6, 10, 16, 20, 24],
             [5, 5, 6, 8, 10, 23, 24, 22],
@@ -562,7 +562,7 @@ def main_prog_complet(qualite, dataset):
             [20, 26, 31, 35, 41, 48, 48, 40],
             [29, 37, 38, 39, 45, 40, 41, 40],
         ]
-    elif qualite == 70:
+    elif quality == 70:
         quantif = [
             [10, 7, 6, 10, 14, 24, 31, 37],
             [7, 7, 8, 11, 16, 35, 36, 33],
@@ -573,7 +573,7 @@ def main_prog_complet(qualite, dataset):
             [29, 38, 47, 52, 62, 73, 72, 61],
             [43, 55, 57, 59, 67, 60, 62, 59],
         ]
-    elif qualite == 60:
+    elif quality == 60:
         quantif = [
             [13, 9, 8, 13, 19, 32, 41, 49],
             [10, 10, 11, 15, 21, 46, 48, 44],
@@ -589,12 +589,12 @@ def main_prog_complet(qualite, dataset):
     current_path = os.getcwd()
     start_time = time.time()
     if dataset == 0:
-        dir_train_path = current_path + "/Mnist_{}".format(qualite)
-        dir_test_path = current_path + "/Mnist_{}_test".format(qualite)
+        dir_train_path = current_path + "/Mnist_{}".format(quality)
+        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
         renvoie_image_ld_mnist(dir_train_path, dir_test_path)
     else:
-        dir_train_path = current_path + "/Cifar-10_{}".format(qualite)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(qualite)
+        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
+        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
         renvoie_image_ld_cifar(dir_train_path, dir_test_path)
     temps = time.time() - start_time
     print("Time LD creation: ", temps, "secondes")
