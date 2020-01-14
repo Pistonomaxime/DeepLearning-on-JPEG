@@ -274,7 +274,7 @@ def essaies_mnist(
     )
 
     start_time = time.time()
-    model_log = model.fit(
+    model.fit(
         x_train_perso,
         y_train,
         batch_size=batch_size,
@@ -336,7 +336,7 @@ def essaies_cifar(
     )
 
     start_time = time.time()
-    model_log = model.fit(
+    model.fit(
         x_train_perso,
         y_train,
         batch_size=batch_size,
