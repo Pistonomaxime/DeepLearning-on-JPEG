@@ -228,7 +228,6 @@ def sha_images(dir_path):
         with open(Nom_de_photo, 'rb') as f:
             im = f.read()
             m.update(im)
-    print("debeug\n", m.hexdigest()) 
     return(m.hexdigest())
 
 def sha_DC_AC(dir_path):
@@ -237,16 +236,17 @@ def sha_DC_AC(dir_path):
     with open("data_DC_AC_pur.txt", 'rb') as f:
         file = f.read()
         m.update(file)
-    print("debeug\n", m.hexdigest())
     return(m.hexdigest())
 
 def sha_complet(dir_path):
     os.chdir(dir_path)
     m = hashlib.sha256()
     for el in TAB_NAME:
+        print("el", el)
         table = np.load(el + ".npy")
         m.update(table)
-    print("debeug\n", m.hexdigest())
+        print("m\n", m.hexdigest(), "\n\n", end = '')
+    print("debug\n", m.hexdigest(), "\n", end = '')
     return(m.hexdigest())
 
 def display_result(sha_result, sha_expected, name):
