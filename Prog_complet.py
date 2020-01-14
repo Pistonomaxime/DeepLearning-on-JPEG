@@ -4,6 +4,7 @@ import numpy as np
 import os, glob, time
 from PIL import Image
 from tqdm import tqdm
+import hashlib
 
 def image_extend(image, data):
     image.extend((data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]))
@@ -298,24 +299,16 @@ def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
     X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
     X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
     
-#     for i in range(20):
-#         for j in range(32):
-#             for k in range(32):
-#                 print(X_train_perso[i][j][k], end = "")
-#             print()
-#         print("\n\n")
-        
-#     print("\n\n\nFIN\n\n\n")
+    m = hashlib.sha256()
+    m.update(X_train_perso)
+    print("\ndebug 1\n", m.hexdigest(), "\n", end = '')
 
     X_train_perso = de_compression_Centre(X_train_perso, Quantif)
     X_test_perso = de_compression_Centre(X_test_perso, Quantif)
     
-#     for i in range(20):
-#         for j in range(32):
-#             for k in range(32):
-#                 print(X_train_perso[i][j][k], end = "")
-#             print()
-#         print("\n\n")
+    m = hashlib.sha256()
+    m.update(X_train_perso)
+    print("\ndebug 2\n", m.hexdigest(), "\n", end = '')
 
     X_train_perso = standardisation(X_train_perso)
     X_test_perso = standardisation(X_test_perso)
