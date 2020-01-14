@@ -1,4 +1,7 @@
 # DeepLearning-on-JPEG
+
+[![Build Status](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/workflows/Ci/badge.svg)](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/actions)
+
 Necessary code to rebuild DCC article results.
 
 You need at least:
