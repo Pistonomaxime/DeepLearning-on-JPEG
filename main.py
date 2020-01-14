@@ -36,7 +36,7 @@ if not should_create:
         main_Prog_complet(quality, dataset)
         print("Data sets creation verification.")
         error_res = main_test(qualite, dataset)
-        if(error_res = ):
+        if(error_res):
 			print("Data sets were successfully created!")
         else:
         	print("Error during creation!")

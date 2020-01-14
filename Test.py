@@ -371,12 +371,12 @@ def main_test(qualite, dataset, test_case = False):
         dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
         dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
     if (test_case):
-        # from Creation_data_sets import main_Creation_data_sets
-        # from Creation_DC_AC_pur import main_Creation_DC_AC_pur
-        # from Prog_complet import main_Prog_complet
-        # main_Creation_data_sets(quality, dataset, True)
-        # main_Creation_DC_AC_pur(quality, dataset)
-        # main_Prog_complet(quality, dataset)
+        from Creation_data_sets import main_Creation_data_sets
+        from Creation_DC_AC_pur import main_Creation_DC_AC_pur
+        from Prog_complet import main_Prog_complet
+        main_Creation_data_sets(quality, dataset, True)
+        main_Creation_DC_AC_pur(quality, dataset)
+        main_Prog_complet(quality, dataset)
         error_res = partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     else:
         error_res = full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
