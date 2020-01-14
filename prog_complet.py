@@ -1,7 +1,7 @@
 import os
 import glob
 import time
-import hashlib
+# import hashlib
 import scipy
 import numpy as np
 from scipy import fftpack
@@ -382,22 +382,22 @@ def renvoie_image_nb(dir_train_path, dir_test_path, quantif):
     x_train_perso = de_huffman_avec_zigzag(dir_train_path)
     x_test_perso = de_huffman_avec_zigzag(dir_test_path)
 
-    m_hash = hashlib.sha256()
-    m_hash.update(x_train_perso)
-    print("debug 1\n", m_hash.hexdigest(), "\n", end="")
+    # m_hash = hashlib.sha256()
+    # m_hash.update(x_train_perso)
+    # print("debug 1\n", m_hash.hexdigest(), "\n", end="")
 
     x_train_perso = de_compression_centre(x_train_perso, quantif)
     x_test_perso = de_compression_centre(x_test_perso, quantif)
 
-    for i in range(20):
-        for j in range(32):
-            for k in range(32):
-                print(x_train_perso[i][j][k], end="")
-            print()
-        print("\n\n")
-        m_hash = hashlib.sha256()
-        m_hash.update(x_train_perso[i])
-        print("debug 2\n", m_hash.hexdigest(), "\n", end="")
+    # for i in range(20):
+    #     for j in range(32):
+    #         for k in range(32):
+    #             print(x_train_perso[i][j][k], end="")
+    #         print()
+    #     print("\n\n")
+    #     m_hash = hashlib.sha256()
+    #     m_hash.update(x_train_perso[i])
+    #     print("debug 2\n", m_hash.hexdigest(), "\n", end="")
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
