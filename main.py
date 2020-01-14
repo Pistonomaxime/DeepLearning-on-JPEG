@@ -34,8 +34,13 @@ if not should_create:
         main_Creation_DC_AC_pur(quality, dataset)
         print("End DC AC pur creation")
         main_Prog_complet(quality, dataset)
-        # print("Data sets were successfully created!")
-        main_test(qualite, dataset)
+        print("Data sets creation verification.")
+        error_res = main_test(qualite, dataset)
+        if(error_res = ):
+			print("Data sets were successfully created!")
+        else:
+        	print("Error during creation!")
+
 
     steps = [0,1,2,3,4,5,6]
     step = ask_int("You need to choose the JPEG compression step for feeding Machine learning. \n0 for LB\n1 for NB\n2 for centre\n3 for DCT\n4 for Quantif\n5 for Pred\n6 for ZigZag\nStep: ", steps)

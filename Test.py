@@ -249,72 +249,118 @@ def sha_complet(dir_path):
 def display_result(sha_result, sha_expected, name):
     if (sha_result == sha_expected):
         print("Creation of", name, "is Ok !")
+        return(True) #No error
     else:
-        print("Error during Images creation of", name, "!!!")      
+        print("Error during Images creation of", name, "!!!")
+        return(False) #Error    
 
 def image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_images(dir_train_path + '_2') #pour moi rajouter + '_2' pour avoir les datasets avec 20 images
-    display_result(sha_train, SHA_PARTIAL_IMAGES[dataset]["train"][qualite], "train Images")
+    error_res = display_result(sha_train, SHA_PARTIAL_IMAGES[dataset]["train"][qualite], "train Images")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_images(dir_test_path + '_2')
-    display_result(sha_test, SHA_PARTIAL_IMAGES[dataset]["test"][qualite], "test Images")
+    error_res = display_result(sha_test, SHA_PARTIAL_IMAGES[dataset]["test"][qualite], "test Images")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
     
 def image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_images(dir_train_path)
-    display_result(sha_train, SHA_FULL_IMAGES[dataset]["train"][qualite], "train Images")
+    error_res = display_result(sha_train, SHA_FULL_IMAGES[dataset]["train"][qualite], "train Images")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_images(dir_test_path)
-    display_result(sha_test, SHA_FULL_IMAGES[dataset]["test"][qualite], "test Images")
+    error_res = display_result(sha_test, SHA_FULL_IMAGES[dataset]["test"][qualite], "test Images")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
 
 def data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_DC_AC(dir_train_path + '_2')
-    display_result(sha_train, SHA_PARTIAL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+    error_res = display_result(sha_train, SHA_PARTIAL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_DC_AC(dir_test_path + '_2')
-    display_result(sha_test, SHA_PARTIAL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
+    error_res = display_result(sha_test, SHA_PARTIAL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
     
 def data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_DC_AC(dir_train_path)
-    display_result(sha_train, SHA_FULL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+    error_res = display_result(sha_train, SHA_FULL_DC_AC[dataset]["train"][qualite], "train data_DC_AC_pur")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_DC_AC(dir_test_path)
-    display_result(sha_test, SHA_FULL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
+    error_res = display_result(sha_test, SHA_FULL_DC_AC[dataset]["test"][qualite], "test data_DC_AC_pur")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
 
 def complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_complet(dir_train_path + '_2')
-    display_result(sha_train, SHA_PARTIAL_COMPLET[dataset]["train"][qualite], "train complet")
+    error_res = display_result(sha_train, SHA_PARTIAL_COMPLET[dataset]["train"][qualite], "train complet")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_complet(dir_test_path + '_2')
-    display_result(sha_test, SHA_PARTIAL_COMPLET[dataset]["test"][qualite], "test complet")
+    error_res = display_result(sha_test, SHA_PARTIAL_COMPLET[dataset]["test"][qualite], "test complet")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
     
 def complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     sha_train = sha_complet(dir_train_path)
-    display_result(sha_train, SHA_FULL_COMPLET[dataset]["train"][qualite], "train complet")
+    error_res = display_result(sha_train, SHA_FULL_COMPLET[dataset]["train"][qualite], "train complet")
+    if(not error_res):
+        return(False) #Error
 
     sha_test = sha_complet(dir_test_path)
-    display_result(sha_test, SHA_FULL_COMPLET[dataset]["test"][qualite], "test complet")
+    error_res = display_result(sha_test, SHA_FULL_COMPLET[dataset]["test"][qualite], "test complet")
+    if(not error_res):
+        return(False) #Error
 
     os.chdir(current_path)
+    return(True) #No error
     
 def partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
-    data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
-    complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    error_res = image_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    error_res = data_DC_AC_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    error_res = complet_partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    return(True) #No error
 
 def full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
-    image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
-    data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
-    complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    error_res = image_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    error_res = data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    error_res = complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+    if(not error_res):
+        return(False) #Error
+    return(True) #No error
     
 def main_test(qualite, dataset, test_case = False):
     current_path = os.getcwd()
@@ -325,14 +371,14 @@ def main_test(qualite, dataset, test_case = False):
         dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
         dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
     if (test_case):
-    	from Creation_data_sets import main_Creation_data_sets
-		from Creation_DC_AC_pur import main_Creation_DC_AC_pur
-		from Prog_complet import main_Prog_complet
-        main_Creation_data_sets(quality, dataset, True)
-        main_Creation_DC_AC_pur(quality, dataset)
-        main_Prog_complet(quality, dataset)
-        partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
-
+        # from Creation_data_sets import main_Creation_data_sets
+        # from Creation_DC_AC_pur import main_Creation_DC_AC_pur
+        # from Prog_complet import main_Prog_complet
+        # main_Creation_data_sets(quality, dataset, True)
+        # main_Creation_DC_AC_pur(quality, dataset)
+        # main_Prog_complet(quality, dataset)
+        error_res = partial_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     else:
-        full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
+        error_res = full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     os.chdir(current_path)
+    return(error_res)
