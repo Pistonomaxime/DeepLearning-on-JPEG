@@ -297,6 +297,8 @@ def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
     """
     X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
     X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
+    
+    print("sale\n\n\n", X_train_perso, end = "")
 
     X_train_perso = de_compression_Centre(X_train_perso, Quantif)
     X_test_perso = de_compression_Centre(X_test_perso, Quantif)
