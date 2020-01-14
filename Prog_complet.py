@@ -298,17 +298,19 @@ def Renvoie_Image_NB(dir_train_path, dir_test_path, Quantif):
     """
     X_train_perso = De_Huffman_avec_ZigZag(dir_train_path)
     X_test_perso = De_Huffman_avec_ZigZag(dir_test_path)
-    
-    m = hashlib.sha256()
-    m.update(X_train_perso)
-    print("\ndebug 1\n", m.hexdigest(), "\n", end = '')
 
     X_train_perso = de_compression_Centre(X_train_perso, Quantif)
     X_test_perso = de_compression_Centre(X_test_perso, Quantif)
     
-    m = hashlib.sha256()
-    m.update(X_train_perso)
-    print("\ndebug 2\n", m.hexdigest(), "\n", end = '')
+    for i in range(20):
+        for j in range(32):
+            for k in range(32):
+                print(X_train_perso[i][j][k], end = '')
+            print()
+        print("\n\n")
+        m = hashlib.sha256()
+        m.update(X_train_perso[i])
+        print("\ndebug 2\n", m.hexdigest(), "\n", end = '')
 
     X_train_perso = standardisation(X_train_perso)
     X_test_perso = standardisation(X_test_perso)
