@@ -316,7 +316,7 @@ def full_test(qualite, dataset, dir_train_path, dir_test_path, current_path):
     data_DC_AC_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     complet_full_test(qualite, dataset, dir_train_path, dir_test_path, current_path)
     
-def main_test(qualite, dataset, partial = True):
+def main_test(qualite, dataset, test_case = False):
     current_path = os.getcwd()
     if (dataset == 0):
         dir_train_path = current_path + '/Mnist_{}'.format(qualite)
@@ -324,7 +324,10 @@ def main_test(qualite, dataset, partial = True):
     else:
         dir_train_path = current_path + '/Cifar-10_{}'.format(qualite)
         dir_test_path = current_path + '/Cifar-10_{}_test'.format(qualite)
-    if (partial):
+    if (test_case):
+    	from Creation_data_sets import main_Creation_data_sets
+		from Creation_DC_AC_pur import main_Creation_DC_AC_pur
+		from Prog_complet import main_Prog_complet
         main_Creation_data_sets(quality, dataset, True)
         main_Creation_DC_AC_pur(quality, dataset)
         main_Prog_complet(quality, dataset)
