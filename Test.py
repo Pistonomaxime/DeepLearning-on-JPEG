@@ -242,11 +242,12 @@ def sha_complet(dir_path):
     os.chdir(dir_path)
     m = hashlib.sha256()
     for el in TAB_NAME:
-        print("el", el)
+        n = hashlib.sha256()
         table = np.load(el + ".npy")
         m.update(table)
-        print("m\n", m.hexdigest(), "\n\n", end = '')
-    print("debug\n", m.hexdigest(), "\n", end = '')
+        n.update(table)
+        print("n\n", n.hexdigest(), "\n", end = '')
+    print("\ndebug\n", m.hexdigest(), "\n", end = '')
     return(m.hexdigest())
 
 def display_result(sha_result, sha_expected, name):
