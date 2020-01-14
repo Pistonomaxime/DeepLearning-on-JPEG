@@ -3,9 +3,7 @@ import os
 import keras
 import numpy as np
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation
-from keras import layers
 from keras.models import Sequential
-from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 from keras.regularizers import l2
 from keras.layers.normalization import BatchNormalization
 
