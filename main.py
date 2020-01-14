@@ -2,7 +2,7 @@ from test import main_test
 from creation_data_sets import main_creation_data_sets
 from creation_dc_ac_pur import main_creation_dc_ac_pur
 from prog_complet import main_prog_complet
-from deeplearning import main_DeepLearning
+from deeplearning import main_deeplearning
 
 
 # Style Guide for Python Code
@@ -68,4 +68,4 @@ if not should_create:
             "You need to choose the Machine learning algorithm.\n0 for U&D without BN\n1 for U&D with BN\n2 for Keras\nAlgorithm: ",
             [0, 1, 2],
         )
-    main_DeepLearning(quality, dataset, step, algorithm)
+    main_deeplearning(quality, dataset, step, algorithm)
