@@ -8,9 +8,10 @@ Code necessary to reproduce DCC article results.
 
 You need at least:
 
-- Keras 2.2.4
-- Pillow 7.0.0
+- keras 2.2.4
+- pillow 7.0.0
 - tqdm 4.40.2
+- tensorflow 1.14.0 
 
 You can install these dependencies with `pip install -r requirements.txt`.
 
