@@ -2,7 +2,9 @@
 
 [![Build Status](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/workflows/Ci/badge.svg)](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/actions)
 
-Necessary code to rebuild DCC article results.
+Code necessary to reproduce DCC article results.
+
+## Requirements
 
 You need at least:
 
@@ -12,12 +14,14 @@ You need at least:
 
 You can install these dependencies with `pip install -r requirements.txt`.
 
-Creation_data_sets.py file, create train and test directories, in which MNIST or CIFAR-10 JPEG compresed images are stored. This program needs as input the desired JPEG quality. Caution, those direcories will be created in the current directory.
+## Usage
 
-Once images data sets are created, Creation_DC_AC_pur.py partially decompress JPEG algorithm until it finds the entropy encoded DC and AC elements.
+`Creation_data_sets.py` file, create train and test directories, in which MNIST or CIFAR-10 JPEG compresed images are stored. This program needs as input the desired JPEG quality. Caution, those direcories will be created in the current directory.
 
-Next Prog_complet.py allows to create the differents data sets i.e. LD, NB, Center, DCT, Quantif, Pred, ZigZag from entropy decoded coefficient.
+Once images data sets are created, `Creation_DC_AC_pur.py` partially decompress JPEG algorithm until it finds the entropy encoded DC and AC elements.
 
-Finally Deeplearning.py allows to choose on what data set you want to use a choosen Machine learning algorithm.
+`Next Prog_complet.py` allows to create the differents data sets i.e. LD, NB, Center, DCT, Quantif, Pred, ZigZag from entropy decoded coefficient.
 
-Just launch main.py which regroup all thoses programs whith instructions.
+Finally `Deeplearning.py` allows to choose on what data set you want to use a choosen Machine learning algorithm.
+
+Just launch `main.py` which regroup all thoses programs whith instructions.
