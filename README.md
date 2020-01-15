@@ -14,8 +14,6 @@ You need at least:
 - tqdm 4.40.2
 - tensorflow 1.14.0 
 
-You can install these dependencies with `pip install -r requirements.txt`.
-
 ```bash
 # Using virtualenv
 virtualenv dl_jpeg && source dl_jpeg/bin/activate
