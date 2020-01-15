@@ -15,6 +15,16 @@ You need at least:
 
 You can install these dependencies with `pip install -r requirements.txt`.
 
+```bash
+# Using virtualenv
+virtualenv dl_jpeg && source dl_jpeg/bin/activate
+pip install -r requirements.txt
+
+# Using conda
+conda create --name dl_jpeg --file requirements.txt
+conda activate dl_jpeg
+```
+
 ## Usage
 
 `Creation_data_sets.py` file, create train and test directories, in which MNIST or CIFAR-10 JPEG compresed images are stored. This program needs as input the desired JPEG quality. Caution, those direcories will be created in the current directory.
