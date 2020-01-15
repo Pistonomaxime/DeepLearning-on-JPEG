@@ -1,7 +1,14 @@
 import os
 import glob
 import time
+from pathlib import Path
 from tqdm import tqdm
+
+SOS_MARKER = b"\xff\xda"
+FF_00_MARKER = b"\xFF\x00"
+FF_MARKER = b"\xFF"
+MARKER_3F = b"\x3F"
+HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
 
 def generate_guffman_table_dc(image, pos_1):
@@ -15,10 +22,10 @@ def generate_guffman_table_dc(image, pos_1):
     codevalue = 0
     codeword = []
     codelenght = []
-    for k in range(0, 16):
-        for j in range(0, tab[k]):
+    for i in range(0, 16):
+        for _ in range(0, tab[i]):
             tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != k:  # ou while
+            if (len(tmp) - 1) != i:  # ou while
                 tmp = "0" + tmp
             codeword.append(tmp)
             codevalue += 1
@@ -41,10 +48,10 @@ def generate_huffman_table_ac(image, pos_2):
     codevalue = 0
     codeword = []
     codelenght = []
-    for k in range(0, 16):
-        for j in range(0, tab[k]):
+    for i in range(0, 16):
+        for _ in range(0, tab[i]):
             tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != k:  # ou while
+            if (len(tmp) - 1) != i:  # ou while
                 tmp = "0" + tmp
             codeword.append(tmp)
             codevalue += 1
@@ -79,7 +86,8 @@ def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
 def calcul_ac_size(liste_ac_max, huffman_ac):
     """
     Prend en entrée une liste de 16 bit qui commence par la taille d'un AC.
-    Sort dans la première partie le nombre de bits que l'on doit passer pour arriver au prochain bloc AC ou bien 0 si on atteint EOB.
+    Sort dans la première partie le nombre de bits que l'on doit passer,
+    pour arriver au prochain bloc AC ou bien 0 si on atteint EOB.
     Sort dans la deuxième partie le nombre de zeros qui correspond au AC que l'on lit.
     Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zeros).
     Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
@@ -104,7 +112,8 @@ def calcul_ac_size(liste_ac_max, huffman_ac):
 
 def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     """
-    Prend en entrée le flux binaire d'un JPEG ainsi que l'indice du depart de la frame (i.e. comme avec une taille de DC).
+    Prend en entrée le flux binaire d'un JPEG,
+    ainsi que l'indice du depart de la frame (i.e. comme avec une taille de DC).
     Sort dans Tab_EOB tout les indices des EOB et return le nombre de EOB.
     """
     cpt = (pos_3f + 2) * 8  # Début de l'image.
@@ -134,7 +143,9 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
                 val_centrer_reduite += "11111111111 "  #'0 '
             # si ZRL on ajoute un 0
             if taille_ac[0] == 15 and taille_ac[1] == 0:
-                # attention ici je rajoute l'espace je penses que c'est ok car on ne peux pas finir par un ZRL on finiraias plutot par un EOB
+                # attention ici je rajoute l'espace.
+                # je penses que c'est ok car on ne peux pas finir par un ZRL,
+                # on finiraias plutot par un EOB
                 val_centrer_reduite += "11111111111 "  #'0 '
             # c'est le cas si on lit ZRL
             if taille_ac[1] != 0:
@@ -162,10 +173,8 @@ def ecriture_dc_mnist(val):
         fichier.write(val)
 
 
-def a_faire_deux_fois_pour_train_et_test(
-    dir_path, SOS_MARKER, FF_00_MARKER, FF_MARKER, MARKER_3F, huffman_dc, huffman_ac
-):
-    os.chdir(dir_path + "/images")
+def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
+    os.chdir(dir_path.joinpath("images"))
     tab_document = glob.glob("*.jpg")
     val = ""
     for i in tqdm(range(len(tab_document))):
@@ -173,7 +182,9 @@ def a_faire_deux_fois_pour_train_et_test(
         with open(nom_de_photo, "rb") as file:
             # On lit l'image
             image = file.read()
-            # On chercher la position dans le fichier Hexa des deux MARKERS de début de tabble de Huffman, du MARKER SOS et du 3F qui suit le SOS.
+            # On chercher la position dans le fichier Hexa
+            # des deux MARKERS de début de tabble de Huffman,
+            # du MARKER SOS et du 3F qui suit le SOS.
             pos_3f = image.find(MARKER_3F, image.find(SOS_MARKER))
             # On recherche tout les FF00 et on les supprimes.
             image = image[: pos_3f - 1] + image[pos_3f - 1 :].replace(
@@ -191,25 +202,20 @@ def main_creation_dc_ac_pur(quality, dataset):
     """
     Début du programme.
     On definit les différents MARKERS.
-    Ici le but est d'écrire dans le fichier cible l'image compréssée à laquelle on a fait la table de huffman inverse.
+    Ici le but est d'écrire dans le fichier cible l'image compréssée:
+    à laquelle on a fait la table de huffman inverse.
     """
-    current_path = os.getcwd()
+    current_path = Path.cwd()
     if dataset == 0:
-        dir_train_path = current_path + "/Mnist_{}".format(quality)
-        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
+        train_path = current_path.joinpath("Mnist_{}".format(quality))
+        test_path = current_path.joinpath("Mnist_{}_test".format(quality))
     else:
-        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
+        train_path = current_path.joinpath("Cifar-10_{}".format(quality))
+        test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
 
     start_time = time.time()
-    SOS_MARKER = b"\xff\xda"
-    # END_MARKER = b'\xff\xd9'
-    FF_00_MARKER = b"\xFF\x00"
-    FF_MARKER = b"\xFF"
-    MARKER_3F = b"\x3F"
-    HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
-    os.chdir(dir_train_path + "/images")
+    os.chdir(train_path.joinpath("images"))
     tab_document = glob.glob("*.jpg")
     nom_de_photo = tab_document[0]
     with open(nom_de_photo, "rb") as file:
@@ -219,22 +225,10 @@ def main_creation_dc_ac_pur(quality, dataset):
         huffman_dc = generate_guffman_table_dc(image, pos_1)
         huffman_ac = generate_huffman_table_ac(image, pos_2)
     a_faire_deux_fois_pour_train_et_test(
-        dir_train_path,
-        SOS_MARKER,
-        FF_00_MARKER,
-        FF_MARKER,
-        MARKER_3F,
-        huffman_dc,
-        huffman_ac,
+        train_path, huffman_dc, huffman_ac,
     )
     a_faire_deux_fois_pour_train_et_test(
-        dir_test_path,
-        SOS_MARKER,
-        FF_00_MARKER,
-        FF_MARKER,
-        MARKER_3F,
-        huffman_dc,
-        huffman_ac,
+        test_path, huffman_dc, huffman_ac,
     )
     temps_total = time.time() - start_time
     print(

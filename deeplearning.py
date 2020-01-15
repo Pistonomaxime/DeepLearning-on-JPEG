@@ -1,5 +1,6 @@
 import time
 import os
+from pathlib import Path
 import keras
 import numpy as np
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation
@@ -177,63 +178,63 @@ def model_keras(num_category, in_shape):
     return model
 
 
-def lr_scheduler(epoch, lr):
+def lr_scheduler(epoch, learning_rate):
     """
     Définie la façon dont va se comporter le learning rate.
     """
     decay_rate = 5
     if (epoch % 90) == 0 and epoch:
-        return lr / decay_rate
-    return lr
+        return learning_rate / decay_rate
+    return learning_rate
 
 
-def differents_noms(dir_train_path, dir_test_path, possible_steps):
+def differents_noms(train_path, test_path, possible_steps):
     if possible_steps == 0:
         return (
-            dir_train_path + "/LD.npy",
-            dir_test_path + "/LD.npy",
+            train_path.joinpath("LD.npy"),
+            test_path.joinpath("LD.npy"),
             "Sauvegarde_LD.hdf5",
         )
     elif possible_steps == 1:
         return (
-            dir_train_path + "/NB.npy",
-            dir_test_path + "/NB.npy",
+            train_path.joinpath("NB.npy"),
+            test_path.joinpath("NB.npy"),
             "Sauvegarde_NB.hdf5",
         )
     elif possible_steps == 2:
         return (
-            dir_train_path + "/Centre.npy",
-            dir_test_path + "/Centre.npy",
+            train_path.joinpath("Centre.npy"),
+            test_path.joinpath("Centre.npy"),
             "Sauvegarde_Centre.hdf5",
         )
     elif possible_steps == 3:
         return (
-            dir_train_path + "/DCT.npy",
-            dir_test_path + "/DCT.npy",
+            train_path.joinpath("DCT.npy"),
+            test_path.joinpath("DCT.npy"),
             "Sauvegarde_DCT.hdf5",
         )
     elif possible_steps == 4:
         return (
-            dir_train_path + "/Quantif.npy",
-            dir_test_path + "/Quantif.npy",
+            train_path.joinpath("Quantif.npy"),
+            test_path.joinpath("Quantif.npy"),
             "Sauvegarde_Quantif.hdf5",
         )
     elif possible_steps == 5:
         return (
-            dir_train_path + "/Pred.npy",
-            dir_test_path + "/Pred.npy",
+            train_path.joinpath("Pred.npy"),
+            test_path.joinpath("Pred.npy"),
             "Sauvegarde_Pred.hdf5",
         )
     return (
-        dir_train_path + "/ZigZag.npy",
-        dir_test_path + "/ZigZag.npy",
+        train_path.joinpath("ZigZag.npy"),
+        test_path.joinpath("ZigZag.npy"),
         "Sauvegarde_ZigZag.hdf5",
     )
 
 
 def essaies_mnist(
-    dir_train_path,
-    dir_test_path,
+    train_path,
+    test_path,
     possible_steps,
     num_category,
     algorithm,
@@ -243,7 +244,7 @@ def essaies_mnist(
     num_epoch,
 ):
     dir_train_dataset, dir_test_dataset, nom_sauvegarde = differents_noms(
-        dir_train_path, dir_test_path, possible_steps
+        train_path, test_path, possible_steps
     )
     x_train_perso = np.load(dir_train_dataset)
     x_test_perso = np.load(dir_test_dataset)
@@ -290,8 +291,8 @@ def essaies_mnist(
 
 
 def essaies_cifar(
-    dir_train_path,
-    dir_test_path,
+    train_path,
+    test_path,
     possible_steps,
     num_category,
     algorithm,
@@ -301,7 +302,7 @@ def essaies_cifar(
     num_epoch,
 ):
     dir_train_dataset, dir_test_dataset, nom_sauvegarde = differents_noms(
-        dir_train_path, dir_test_path, possible_steps
+        train_path, test_path, possible_steps
     )
     x_train_perso = np.load(dir_train_dataset)
     x_test_perso = np.load(dir_test_dataset)
@@ -355,20 +356,20 @@ def essaies_cifar(
 # Main
 def main_deeplearning(quality, dataset, possible_steps, algorithm):
     num_category = 10
-    current_path = os.getcwd()
+    current_path = Path.cwd()
     if dataset == 0:
         batch_size = 128
         num_epoch = 200
-        dir_train_path = current_path + "/Mnist_{}".format(quality)
-        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
+        train_path = current_path.joinpath("Mnist_{}".format(quality))
+        test_path = current_path.joinpath("Mnist_{}_test".format(quality))
         from keras.datasets import mnist
 
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
     else:
         batch_size = 256
         num_epoch = 300
-        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
+        train_path = current_path.joinpath("Cifar-10_{}".format(quality))
+        test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
         from keras.datasets import cifar10
 
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -379,8 +380,8 @@ def main_deeplearning(quality, dataset, possible_steps, algorithm):
 
     if dataset == 0:
         essaies_mnist(
-            dir_train_path,
-            dir_test_path,
+            train_path,
+            test_path,
             possible_steps,
             num_category,
             algorithm,
@@ -391,8 +392,8 @@ def main_deeplearning(quality, dataset, possible_steps, algorithm):
         )
     else:
         essaies_cifar(
-            dir_train_path,
-            dir_test_path,
+            train_path,
+            test_path,
             possible_steps,
             num_category,
             algorithm,

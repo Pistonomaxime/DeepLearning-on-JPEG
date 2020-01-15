@@ -1,7 +1,7 @@
 import os
 import glob
 import time
-# import hashlib
+from pathlib import Path
 import scipy
 import numpy as np
 from scipy import fftpack
@@ -271,21 +271,21 @@ def de_compression_centre(donnees, quantif):
     A partir des images dé_huffman et en forme ZigZag retourne les pixels de l'image original.
     """
     sortie = []
-    for k in tqdm(range(0, len(donnees))):
-        tmp = donnees[k].reshape(32, 32)
+    for i in tqdm(range(0, len(donnees))):
+        tmp = donnees[i].reshape(32, 32)
         test = []
-        for l in range(0, 4):
-            for m in range(0, 4):
+        for j in range(0, 4):
+            for k in range(0, 4):
                 bloc = []
-                for i in range(0, 8):
-                    bloc.append(tmp[i + 8 * l][8 * m : 8 + 8 * m])
+                for l in range(0, 8):
+                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
                 bloc = np.asarray(bloc)
 
                 bloc = bloc * quantif
 
-                f = np.asarray(idct2(bloc))
+                q_bloc = np.asarray(idct2(bloc))
 
-                bloc_dct = f + 128
+                bloc_dct = q_bloc + 128
 
                 for cpt_1 in range(8):
                     for cpt_2 in range(8):
@@ -308,21 +308,21 @@ def de_compression_dct(donnees, quantif):
     A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
     """
     sortie = []
-    for k in tqdm(range(0, len(donnees))):
-        tmp = donnees[k].reshape(32, 32)
+    for i in tqdm(range(0, len(donnees))):
+        tmp = donnees[i].reshape(32, 32)
         test = []
-        for l in range(0, 4):
-            for m in range(0, 4):
+        for j in range(0, 4):
+            for k in range(0, 4):
                 bloc = []
-                for i in range(0, 8):
-                    bloc.append(tmp[i + 8 * l][8 * m : 8 + 8 * m])
+                for l in range(0, 8):
+                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
                 bloc = np.asarray(bloc)
 
                 bloc = bloc * quantif
 
-                f = np.asarray(idct2(bloc))
+                q_bloc = np.asarray(idct2(bloc))
 
-                test.append(f)
+                test.append(q_bloc)
 
         im_recompose = recompose(test)
         im_recompose = im_recompose.reshape(32, 32, 1)
@@ -336,21 +336,21 @@ def de_compression_quantif(donnees, quantif):
     A partir des images dé_huffman et en forme ZigZag renvoie a l'étape entre DCT et Quantif.
     """
     sortie = []
-    for k in tqdm(range(0, len(donnees))):
-        tmp = donnees[k].reshape(32, 32)
+    for i in tqdm(range(0, len(donnees))):
+        tmp = donnees[i].reshape(32, 32)
         test = []
-        for l in range(0, 4):
-            for m in range(0, 4):
+        for j in range(0, 4):
+            for k in range(0, 4):
                 bloc = []
-                for i in range(0, 8):
-                    bloc.append(tmp[i + 8 * l][8 * m : 8 + 8 * m])
+                for l in range(0, 8):
+                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
                 bloc = np.asarray(bloc)
 
                 bloc = bloc * quantif
 
-                f = np.asarray(bloc)
+                q_bloc = np.asarray(bloc)
 
-                test.append(f)
+                test.append(q_bloc)
 
         im_recompose = recompose(test)
         im_recompose = im_recompose.reshape(32, 32, 1)
@@ -375,12 +375,12 @@ def sauvegarde(dir_path, table, nom):
     np.save(nom, table)
 
 
-def renvoie_image_nb(dir_train_path, dir_test_path, quantif):
+def renvoie_image_nb(train_path, test_path, quantif):
     """
     Se débrouille tout seul pour fournir en sortie l'image décompresser noir et blanc.
     """
-    x_train_perso = de_huffman_avec_zigzag(dir_train_path)
-    x_test_perso = de_huffman_avec_zigzag(dir_test_path)
+    x_train_perso = de_huffman_avec_zigzag(train_path)
+    x_test_perso = de_huffman_avec_zigzag(test_path)
 
     # m_hash = hashlib.sha256()
     # m_hash.update(x_train_perso)
@@ -402,16 +402,16 @@ def renvoie_image_nb(dir_train_path, dir_test_path, quantif):
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "NB")
-    sauvegarde(dir_test_path, x_test_perso, "NB")
+    sauvegarde(train_path, x_train_perso, "NB")
+    sauvegarde(test_path, x_test_perso, "NB")
 
 
-def renvoie_image_centre(dir_train_path, dir_test_path, quantif):
+def renvoie_image_centre(train_path, test_path, quantif):
     """
     Se débrouille tout seul pour fournir en sortie l'image entre centre et DCT.
     """
-    x_train_perso = de_huffman_avec_zigzag(dir_train_path)
-    x_test_perso = de_huffman_avec_zigzag(dir_test_path)
+    x_train_perso = de_huffman_avec_zigzag(train_path)
+    x_test_perso = de_huffman_avec_zigzag(test_path)
 
     x_train_perso = de_compression_dct(x_train_perso, quantif)
     x_test_perso = de_compression_dct(x_test_perso, quantif)
@@ -419,16 +419,16 @@ def renvoie_image_centre(dir_train_path, dir_test_path, quantif):
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "Center")
-    sauvegarde(dir_test_path, x_test_perso, "Center")
+    sauvegarde(train_path, x_train_perso, "Center")
+    sauvegarde(test_path, x_test_perso, "Center")
 
 
-def renvoie_image_dct(dir_train_path, dir_test_path, quantif):
+def renvoie_image_dct(train_path, test_path, quantif):
     """
     Se débrouille tout seul pour fournir en sortie l'image entre DCT et Quantif.
     """
-    x_train_perso = de_huffman_avec_zigzag(dir_train_path)
-    x_test_perso = de_huffman_avec_zigzag(dir_test_path)
+    x_train_perso = de_huffman_avec_zigzag(train_path)
+    x_test_perso = de_huffman_avec_zigzag(test_path)
 
     x_train_perso = de_compression_quantif(x_train_perso, quantif)
     x_test_perso = de_compression_quantif(x_test_perso, quantif)
@@ -436,54 +436,54 @@ def renvoie_image_dct(dir_train_path, dir_test_path, quantif):
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "DCT")
-    sauvegarde(dir_test_path, x_test_perso, "DCT")
+    sauvegarde(train_path, x_train_perso, "DCT")
+    sauvegarde(test_path, x_test_perso, "DCT")
 
 
-def renvoie_image_quantif(dir_train_path, dir_test_path):
+def renvoie_image_quantif(train_path, test_path):
     """
     Se débrouille tout seul pour fournir en sortie l'image entre Quantif et ZigZag.
     """
-    x_train_perso = de_huffman_avec_zigzag(dir_train_path)
-    x_test_perso = de_huffman_avec_zigzag(dir_test_path)
+    x_train_perso = de_huffman_avec_zigzag(train_path)
+    x_test_perso = de_huffman_avec_zigzag(test_path)
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "Quantif")
-    sauvegarde(dir_test_path, x_test_perso, "Quantif")
+    sauvegarde(train_path, x_train_perso, "Quantif")
+    sauvegarde(test_path, x_test_perso, "Quantif")
 
 
-def renvoie_image_pred(dir_train_path, dir_test_path):
+def renvoie_image_pred(train_path, test_path):
     """
     Se débrouille tout seul pour fournir en sortie l'image entre Prediction et ZigZag.
     """
-    x_train_perso = de_huffman_avec_zigzag_sans_prediction(dir_train_path)
-    x_test_perso = de_huffman_avec_zigzag_sans_prediction(dir_test_path)
+    x_train_perso = de_huffman_avec_zigzag_sans_prediction(train_path)
+    x_test_perso = de_huffman_avec_zigzag_sans_prediction(test_path)
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "Pred")
-    sauvegarde(dir_test_path, x_test_perso, "Pred")
+    sauvegarde(train_path, x_train_perso, "Pred")
+    sauvegarde(test_path, x_test_perso, "Pred")
 
 
-def renvoie_image_zigzag(dir_train_path, dir_test_path):
+def renvoie_image_zigzag(train_path, test_path):
     """
     Se débrouille tout seul pour fournir en sortie l'image entre ZigZag et Huffman.
     """
-    x_train_perso = de_huffman_sans_zigzag_sans_prediction(dir_train_path)
-    x_test_perso = de_huffman_sans_zigzag_sans_prediction(dir_test_path)
+    x_train_perso = de_huffman_sans_zigzag_sans_prediction(train_path)
+    x_test_perso = de_huffman_sans_zigzag_sans_prediction(test_path)
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "ZigZag")
-    sauvegarde(dir_test_path, x_test_perso, "ZigZag")
+    sauvegarde(train_path, x_train_perso, "ZigZag")
+    sauvegarde(test_path, x_test_perso, "ZigZag")
 
 
 def sous_fonction_revoie_image_ld(dir_path):
-    os.chdir(dir_path + "/images")
+    os.chdir(dir_path.joinpath("images"))
     tab_document = glob.glob("*.jpg")
     x_perso = []
     for i in tqdm(range(0, len(tab_document))):
@@ -495,9 +495,9 @@ def sous_fonction_revoie_image_ld(dir_path):
     return x_perso
 
 
-def renvoie_image_ld_cifar(dir_train_path, dir_test_path):
-    x_train_perso = sous_fonction_revoie_image_ld(dir_train_path)
-    x_test_perso = sous_fonction_revoie_image_ld(dir_test_path)
+def renvoie_image_ld_cifar(train_path, test_path):
+    x_train_perso = sous_fonction_revoie_image_ld(train_path)
+    x_test_perso = sous_fonction_revoie_image_ld(test_path)
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
@@ -505,8 +505,8 @@ def renvoie_image_ld_cifar(dir_train_path, dir_test_path):
     x_train_perso = x_train_perso.reshape(len(x_train_perso), 32, 32, 1)
     x_test_perso = x_test_perso.reshape(len(x_test_perso), 32, 32, 1)
 
-    sauvegarde(dir_train_path, x_train_perso, "LD")
-    sauvegarde(dir_test_path, x_test_perso, "LD")
+    sauvegarde(train_path, x_train_perso, "LD")
+    sauvegarde(test_path, x_test_perso, "LD")
 
 
 def bonne_taille(table):
@@ -519,21 +519,20 @@ def bonne_taille(table):
     trentedeux = trentedeux.astype(int)
 
     fin = []
-    for i in range(len(table)):
-        tmp = table[i]
+    for i in table:
         for _ in range(4):
-            tmp = np.concatenate((tmp, vingthuit), axis=0)
+            i = np.concatenate((i, vingthuit), axis=0)
         for _ in range(4):
-            tmp = np.concatenate((tmp, trentedeux), axis=1)
+            i = np.concatenate((i, trentedeux), axis=1)
 
-        fin.append(tmp)
+        fin.append(i)
     fin = np.asarray(fin)
     return fin
 
 
-def renvoie_image_ld_mnist(dir_train_path, dir_test_path):
-    x_train_perso = sous_fonction_revoie_image_ld(dir_train_path)
-    x_test_perso = sous_fonction_revoie_image_ld(dir_test_path)
+def renvoie_image_ld_mnist(train_path, test_path):
+    x_train_perso = sous_fonction_revoie_image_ld(train_path)
+    x_test_perso = sous_fonction_revoie_image_ld(test_path)
 
     x_train_perso = bonne_taille(x_train_perso)
     x_test_perso = bonne_taille(x_test_perso)
@@ -544,36 +543,36 @@ def renvoie_image_ld_mnist(dir_train_path, dir_test_path):
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
 
-    sauvegarde(dir_train_path, x_train_perso, "LD")
-    sauvegarde(dir_test_path, x_test_perso, "LD")
+    sauvegarde(train_path, x_train_perso, "LD")
+    sauvegarde(test_path, x_test_perso, "LD")
 
 
-def donne_temps(numero, dir_train_path, dir_test_path, quantif):
+def donne_temps(numero, train_path, test_path, quantif):
     start_time = time.time()
     if numero == 0:
         # Entre_NB_et_Centre
-        renvoie_image_nb(dir_train_path, dir_test_path, quantif)
+        renvoie_image_nb(train_path, test_path, quantif)
         print("Time NB creation: ", end="")
     elif numero == 1:
         # Entre_Centre_et_DCT
-        renvoie_image_centre(dir_train_path, dir_test_path, quantif)
+        renvoie_image_centre(train_path, test_path, quantif)
         print("Time Center creation: ", end="")
     elif numero == 2:
         # Entre_DCT_et_Quantif
         # if (qualite != 100): #on peux l'enlever on le fait deux fois sinon ca Quantif = 1
-        renvoie_image_dct(dir_train_path, dir_test_path, quantif)
+        renvoie_image_dct(train_path, test_path, quantif)
         print("Time DCT creation: ", end="")
     elif numero == 3:
         # Entre_Quantif_et_Prediction
-        renvoie_image_quantif(dir_train_path, dir_test_path)
+        renvoie_image_quantif(train_path, test_path)
         print("Time Quantif creation: ", end="")
     elif numero == 4:
         # Entre_Prediction_et_ZigZag
-        renvoie_image_pred(dir_train_path, dir_test_path)
+        renvoie_image_pred(train_path, test_path)
         print("Time Pred creation: ", end="")
     else:
         # Entre_ZigZag_et_Huffman
-        renvoie_image_zigzag(dir_train_path, dir_test_path)
+        renvoie_image_zigzag(train_path, test_path)
         print("Time ZigZag creation: ", end="")
     temps = time.time() - start_time
     print(temps, "secondes")
@@ -583,19 +582,19 @@ def donne_temps(numero, dir_train_path, dir_test_path, quantif):
 # Main
 def main_prog_complet(quality, dataset):
     quantif = QUANTIF_TAB[quality]
-    current_path = os.getcwd()
+    current_path = Path.cwd()
     start_time = time.time()
     if dataset == 0:
-        dir_train_path = current_path + "/Mnist_{}".format(quality)
-        dir_test_path = current_path + "/Mnist_{}_test".format(quality)
-        renvoie_image_ld_mnist(dir_train_path, dir_test_path)
+        train_path = current_path.joinpath("Mnist_{}".format(quality))
+        test_path = current_path.joinpath("Mnist_{}_test".format(quality))
+        renvoie_image_ld_mnist(train_path, test_path)
     else:
-        dir_train_path = current_path + "/Cifar-10_{}".format(quality)
-        dir_test_path = current_path + "/Cifar-10_{}_test".format(quality)
-        renvoie_image_ld_cifar(dir_train_path, dir_test_path)
+        train_path = current_path.joinpath("Cifar-10_{}".format(quality))
+        test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
+        renvoie_image_ld_cifar(train_path, test_path)
     temps = time.time() - start_time
     print("Time LD creation: ", temps, "secondes")
 
     for i in range(6):
-        donne_temps(i, dir_train_path, dir_test_path, quantif)
+        donne_temps(i, train_path, test_path, quantif)
     os.chdir(current_path)
