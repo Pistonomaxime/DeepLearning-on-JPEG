@@ -188,47 +188,15 @@ def lr_scheduler(epoch, learning_rate):
     return learning_rate
 
 
+TAB_NAME = ["LD", "NB", "Center", "DCT", "Quantif", "Pred", "ZigZag"]
+
+
 def differents_noms(train_path, test_path, possible_steps):
-    if possible_steps == 0:
-        return (
-            train_path.joinpath("LD.npy"),
-            test_path.joinpath("LD.npy"),
-            "Sauvegarde_LD.hdf5",
-        )
-    elif possible_steps == 1:
-        return (
-            train_path.joinpath("NB.npy"),
-            test_path.joinpath("NB.npy"),
-            "Sauvegarde_NB.hdf5",
-        )
-    elif possible_steps == 2:
-        return (
-            train_path.joinpath("Centre.npy"),
-            test_path.joinpath("Centre.npy"),
-            "Sauvegarde_Centre.hdf5",
-        )
-    elif possible_steps == 3:
-        return (
-            train_path.joinpath("DCT.npy"),
-            test_path.joinpath("DCT.npy"),
-            "Sauvegarde_DCT.hdf5",
-        )
-    elif possible_steps == 4:
-        return (
-            train_path.joinpath("Quantif.npy"),
-            test_path.joinpath("Quantif.npy"),
-            "Sauvegarde_Quantif.hdf5",
-        )
-    elif possible_steps == 5:
-        return (
-            train_path.joinpath("Pred.npy"),
-            test_path.joinpath("Pred.npy"),
-            "Sauvegarde_Pred.hdf5",
-        )
+    name = TAB_NAME[possible_steps] + ".npy"
     return (
-        train_path.joinpath("ZigZag.npy"),
-        test_path.joinpath("ZigZag.npy"),
-        "Sauvegarde_ZigZag.hdf5",
+        train_path.joinpath(name),
+        test_path.joinpath(name),
+        "Sauvegarde_{}.hdf5".format(TAB_NAME[possible_steps]),
     )
 
 

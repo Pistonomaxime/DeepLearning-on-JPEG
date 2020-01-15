@@ -5,6 +5,10 @@ from prog_complet import main_prog_complet
 from deeplearning import main_deeplearning
 
 
+# Style Guide for Python Code
+# https://www.python.org/dev/peps/pep-0008/
+# => Voir "Tabs or Spaces"
+# => Voir "Naming Conventions"
 def ask_int(msg, valid):
     while True:
         try:

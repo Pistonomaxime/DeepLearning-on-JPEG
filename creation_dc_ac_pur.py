@@ -131,7 +131,7 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     while retour_dc != -1:
         tmp = str(liste_dc_max[retour_dc[1] : retour_dc[1] + retour_dc[3]])
         if tmp == "":
-            val_centrer_reduite += "111111111111 "  # Remplace la valeur 0 par cette valeur car bianire signé
+            val_centrer_reduite += "111111111111 "  # Remplace la valeur 0 par cette valeur car binaire signé
         else:
             val_centrer_reduite += tmp + " "
 
