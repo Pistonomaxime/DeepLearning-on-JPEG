@@ -11,9 +11,12 @@ MARKER_3F = b"\x3F"
 HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
 
-def generate_guffman_table_dc(image, pos_1):
+def generate_huffman_table_dc(image, pos_1):
     """
-    Génère la table de Huffman DC associé à l'image.
+    Input: An image and the position of the DC Huffman table in the image header.
+    Output: Huffman DC table.
+    En: Generate Huffman DC table associated to the image.
+    Fr: Génère la table de Huffman DC associé à l'image.
     """
     tab = []
     for i in range(0, 16):
@@ -25,7 +28,7 @@ def generate_guffman_table_dc(image, pos_1):
     for i in range(0, 16):
         for _ in range(0, tab[i]):
             tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != i:  # ou while
+            if (len(tmp) - 1) != i:
                 tmp = "0" + tmp
             codeword.append(tmp)
             codevalue += 1
@@ -38,7 +41,10 @@ def generate_guffman_table_dc(image, pos_1):
 
 def generate_huffman_table_ac(image, pos_2):
     """
-    Génère la table de Huffman AC associé à l'image.
+    Input: An image and the position of the AC Huffman table in the image header.
+    Output: Huffman AC table.
+    En: Generate Huffman AC table associated to the image.
+    Fr: Génère la table de Huffman AC associé à l'image.
     """
     tab = []
 
@@ -67,10 +73,14 @@ def generate_huffman_table_ac(image, pos_2):
 
 def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
     """
-    Modification qui permet de renvoyer une visualisation du DC en cours de lecture.
+    Input: Next 20 bits of the stream and Huffman DC table
+    Output:
+    -Next Huffman DC codeword in the Input stream (not used)
+    -His len
+    -
+    Fr: Modification qui permet de renvoyer une visualisation du DC en cours de lecture.
     """
-    # Curseur représentant la position de départ dans Huffman_AC/DC
-    cur = 0
+    cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
     for i in range(2, 10):
         tempo = liste_dc_max[0:i]
         for element_idx in range(cur, len(huffman_dc[0])):
@@ -93,9 +103,7 @@ def calcul_ac_size(liste_ac_max, huffman_ac):
     Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
     Le 3ème élément de sortie est la taille de l'AC.
     """
-
-    # Curseur représentant la position de départ dans Huffman_AC/DC
-    cur = 0
+    cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
     for i in range(2, 17):
         tempo = liste_ac_max[0:i]
         for element_idx in range(cur, len(huffman_ac[0])):
@@ -123,7 +131,7 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     while retour_dc != -1:
         tmp = str(liste_dc_max[retour_dc[1] : retour_dc[1] + retour_dc[3]])
         if tmp == "":
-            val_centrer_reduite += "111111111111 "  #'0 '
+            val_centrer_reduite += "111111111111 "  # Remplace la valeur 0 par cette valeur car bianire signé
         else:
             val_centrer_reduite += tmp + " "
 
@@ -136,35 +144,27 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
             taille_ac = calcul_ac_size(liste_ac_max, huffman_ac)
             res = taille_ac[0] + taille_ac[1]
             tempo = taille_ac[1] + taille_ac[2]
-            # #Si on a pas atteint l'EOB
-            # if(res != 0):
-            # On rajoute un nombre de '0' égale à "run"
             for _ in range(0, taille_ac[0]):
-                val_centrer_reduite += "11111111111 "  #'0 '
-            # si ZRL on ajoute un 0
-            if taille_ac[0] == 15 and taille_ac[1] == 0:
-                # attention ici je rajoute l'espace.
-                # je penses que c'est ok car on ne peux pas finir par un ZRL,
-                # on finiraias plutot par un EOB
-                val_centrer_reduite += "11111111111 "  #'0 '
-            # c'est le cas si on lit ZRL
+                val_centrer_reduite += (
+                    "11111111111 "  # On rajoute un nombre de '0' égale à "run"'
+                )
+            if taille_ac[0] == 15 and taille_ac[1] == 0:  # si ZRL on ajoute un 0
+                val_centrer_reduite += "11111111111 "
             if taille_ac[1] != 0:
                 val_centrer_reduite += (
                     str(image_att[cpt + taille_ac[2] : cpt + tempo]) + " "
                 )
-            cpt += tempo  # Attenton changement de place du cpt!!!!!!!!
+            cpt += tempo
             fail += taille_ac[0] + 1
-        # Si on atteint un EOB on ajoute des 0
         if res == 0:
             fail -= 1
         while fail <= 63:
             fail += 1
-            val_centrer_reduite += "11111111111 "  #'0 '
+            val_centrer_reduite += "11111111111 "
 
         val_centrer_reduite += "\n"
         liste_dc_max = image_att[cpt : cpt + 21]
         retour_dc = calcul_dc_size_modifie(liste_dc_max, huffman_dc)
-    # ecriture_dc_Mnist(val_centrer_reduite)
     return val_centrer_reduite
 
 
@@ -222,7 +222,7 @@ def main_creation_dc_ac_pur(quality, dataset):
         image = file.read()
         pos_1 = image.find(HUFFMAN_TABLE_MARKER) + 5
         pos_2 = image.find(HUFFMAN_TABLE_MARKER, pos_1 + 1) + 5
-        huffman_dc = generate_guffman_table_dc(image, pos_1)
+        huffman_dc = generate_huffman_table_dc(image, pos_1)
         huffman_ac = generate_huffman_table_ac(image, pos_2)
     a_faire_deux_fois_pour_train_et_test(
         train_path, huffman_dc, huffman_ac,

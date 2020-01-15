@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from PIL import Image
 from tqdm import tqdm
+from keras.datasets import mnist, cifar10
 
 
 def convert(dir_path, table, dataset, quality, test_case):
@@ -28,15 +29,11 @@ def create_directories(train_path, test_path):
 def main_creation_data_sets(quality, dataset, test_case=False):
     current_path = Path.cwd()
     if dataset == 0:
-        from keras.datasets import mnist
-
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
         del y_train, y_test
         train_path = current_path.joinpath("Mnist_{}".format(quality))
         test_path = current_path.joinpath("Mnist_{}_test".format(quality))
     else:
-        from keras.datasets import cifar10
-
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
         del y_train, y_test
         train_path = current_path.joinpath("Cifar-10_{}".format(quality))
