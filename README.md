@@ -8,6 +8,7 @@ Code necessary to reproduce DCC article results.
 
 You need at least:
 
+- Python 3.6
 - keras 2.2.4
 - pillow 7.0.0
 - tqdm 4.40.2
