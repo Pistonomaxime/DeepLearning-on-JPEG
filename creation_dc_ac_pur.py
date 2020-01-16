@@ -9,6 +9,23 @@ FF_MARKER = b"\xFF"
 MARKER_3F = b"\x3F"
 HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
+def huffman_table(image, pos):
+    tab = []
+    for i in range(0, 16):
+        tab.append(int(image[pos + i]))
+    pos += 16
+    codevalue = 0
+    codeword = []
+    codelenght = []
+    for i in range(0, 16):
+        for _ in range(0, tab[i]):
+            tmp = "{:b}".format(int(codevalue))
+            if (len(tmp) - 1) != i:
+                tmp = "0" + tmp
+            codeword.append(tmp)
+            codevalue += 1
+        codevalue = codevalue * 2
+    return(codeword, codelenght)
 
 def generate_huffman_table_dc(image, pos):
     """
@@ -32,7 +49,6 @@ def generate_huffman_table_dc(image, pos):
             codeword.append(tmp)
             codevalue += 1
         codevalue = codevalue * 2
-
     for i in range(0, len(codeword)):
         codelenght.append(int(image[pos + i]))
     return (codeword, codelenght)
@@ -46,7 +62,7 @@ def generate_huffman_table_ac(image, pos):
     Fr: Génère la table de Huffman AC associé à l'image.
     """
     tab = []
-    for i in range(0, 17):
+    for i in range(0, 16):
         tab.append(int(image[pos + i]))
     pos += 16
     codevalue = 0
