@@ -166,11 +166,6 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     return val_centrer_reduite
 
 
-def ecriture_dc_mnist(val, dir_path):
-    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "w") as fichier:
-        fichier.write(val)
-
-
 def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
     final_path = dir_path.joinpath("images")
     images_dir = final_path.joinpath("*.jpg")
@@ -193,7 +188,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
             image_att = "{:08b}".format(int(image.hex(), 16))
             # On crée le tableau vide qui contiendra les indices des EOB.
             val += trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac) + "\n"
-    ecriture_dc_mnist(val, dir_path)
+    dir_path.joinpath("data_DC_AC_pur.txt").write_text(val)
 
 
 def creation_dc_ac_pur(quality, dataset):
