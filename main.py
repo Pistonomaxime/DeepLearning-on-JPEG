@@ -55,7 +55,7 @@ def main():
 
         steps = [0, 1, 2, 3, 4, 5, 6]
         step = ask_int(
-            "You need to choose the JPEG compression step for feeding Machine learning. \n0 for LB\n1 for NB\n2 for centre\n3 for DCT\n4 for Quantif\n5 for Pred\n6 for ZigZag\nStep: ",
+            "You need to choose the JPEG compression step for feeding Machine learning. \n0 for LB\n1 for NB\n2 for center\n3 for DCT\n4 for Quantif\n5 for Pred\n6 for ZigZag\nStep: ",
             steps,
         )
 

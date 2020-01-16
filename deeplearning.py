@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import keras
 import numpy as np
+from keras.datasets import mnist, cifar10
 from keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense, Activation
 from keras.models import Sequential
 from keras.regularizers import l2
@@ -330,16 +331,12 @@ def main_deeplearning(quality, dataset, possible_steps, algorithm):
         num_epoch = 200
         train_path = current_path.joinpath("Mnist_{}".format(quality))
         test_path = current_path.joinpath("Mnist_{}_test".format(quality))
-        from keras.datasets import mnist
-
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
     else:
         batch_size = 256
         num_epoch = 300
         train_path = current_path.joinpath("Cifar-10_{}".format(quality))
         test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
-        from keras.datasets import cifar10
-
         (x_train, y_train), (x_test, y_test) = cifar10.load_data()
     del x_train
     del x_test
