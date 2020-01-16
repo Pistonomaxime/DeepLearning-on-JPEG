@@ -165,7 +165,6 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
         retour_dc = calcul_dc_size_modifie(liste_dc_max, huffman_dc)
     return val_centrer_reduite
 
-
 def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
     final_path = dir_path.joinpath("images")
     images_dir = final_path.joinpath("*.jpg")
@@ -207,9 +206,8 @@ def creation_dc_ac_pur(quality, dataset):
         test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
 
     start_time = time.time()
-    images_dir = train_path.joinpath("images").joinpath("*.jpg")
-    tab_document = glob.glob(str(images_dir))
-    with open(tab_document[0], "rb") as file:
+    image_seule = train_path.joinpath("images").joinpath("0.jpg")
+    with open(image_seule, "rb") as file:
         image = file.read()
         pos_1 = image.find(HUFFMAN_TABLE_MARKER) + 5
         pos_2 = image.find(HUFFMAN_TABLE_MARKER, pos_1 + 1) + 5
