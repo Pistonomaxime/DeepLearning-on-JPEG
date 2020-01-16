@@ -213,11 +213,9 @@ def creation_dc_ac_pur(quality, dataset):
         test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
 
     start_time = time.time()
-
     images_dir = train_path.joinpath("images").joinpath("*.jpg")
     tab_document = glob.glob(str(images_dir))
-    nom_de_photo = tab_document[0]
-    with open(nom_de_photo, "rb") as file:
+    with open(tab_document[0], "rb") as file:
         image = file.read()
         pos_1 = image.find(HUFFMAN_TABLE_MARKER) + 5
         pos_2 = image.find(HUFFMAN_TABLE_MARKER, pos_1 + 1) + 5

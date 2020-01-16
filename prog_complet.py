@@ -156,11 +156,12 @@ def binary_signed_return(line):
                 image.append(int(data[i], 2))
     return image
 
+
 def numpy_cast_reshape_and_append(image, test):
-        image = np.asarray(image)
-        image = image.reshape(8, 8, 1)
-        test.append(image)
-        return(test)
+    image = np.asarray(image)
+    image = image.reshape(8, 8, 1)
+    test.append(image)
+    return test
 
 
 def de_huffman_avec_zigzag(dir_path):
@@ -195,7 +196,7 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag sans prediction.
     """
-    #Le meme que le précédent sans save
+    # Le meme que le précédent sans save
     x_perso = []
     test = []
     im_recompose = []
@@ -220,7 +221,7 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, dé-prédire et les mettre en forme non ZigZag sans prediction.
     """
-    #Le meme que le précédent sans image = reorganisation_zigzag(image)
+    # Le meme que le précédent sans image = reorganisation_zigzag(image)
     x_perso = []
     test = []
     im_recompose = []
