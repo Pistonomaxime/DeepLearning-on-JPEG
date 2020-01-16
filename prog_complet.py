@@ -61,7 +61,7 @@ QUANTIF_TAB = {
 }
 
 
-def image_extend(data):
+def reorganisation_zigzag(data):
     tab = [
         [data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]],
         [data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]],
@@ -128,7 +128,14 @@ def recompose(test):
     return im_recompose
 
 
-def binary_signed_return(data):
+def binary_signed_return(line):
+    """
+    Prend le binaire signé et retourne sa vrai valeur.
+    Attention les "11111111111" et "111111111111" représentent les 0 du dé-huffman
+    de AC et DC respectivement. En effet il faut bien trouver une valeur non utilisée,
+    en binaire signé pour représenter le 0. Car en binaire signé 0 = -1 en décimal normal.
+    """
+    data = list(line.split(" "))
     image = []
     for i in range(64):
         sequence = ""
@@ -149,6 +156,12 @@ def binary_signed_return(data):
                 image.append(int(data[i], 2))
     return image
 
+def numpy_cast_reshape_and_append(image, test):
+        image = np.asarray(image)
+        image = image.reshape(8, 8, 1)
+        test.append(image)
+        return(test)
+
 
 def de_huffman_avec_zigzag(dir_path):
     """
@@ -162,17 +175,11 @@ def de_huffman_avec_zigzag(dir_path):
         save = 0
         for line in tqdm(fichier):
             if line != "\n":
-                data = list(line.split(" "))
-                image = binary_signed_return(data)
-                # prédiction elle se fait la normalement
+                image = binary_signed_return(line)
                 image[0] = image[0] + save
                 save = image[0]
-                image = image_extend(image)
-                #########################################################################################
-
-                image = np.asarray(image)
-                image = image.reshape(8, 8, 1)
-                test.append(image)
+                image = reorganisation_zigzag(image)
+                test = numpy_cast_reshape_and_append(image, test)
                 cpt += 1
                 if cpt == 16:
                     cpt = 0
@@ -188,6 +195,7 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag sans prediction.
     """
+    #Le meme que le précédent sans save
     x_perso = []
     test = []
     im_recompose = []
@@ -195,15 +203,9 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
         cpt = 0
         for line in tqdm(fichier):
             if line != "\n":
-                data = list(line.split(" "))
-                image = binary_signed_return(data)
-                # prédiction elle se fait la normalement
-                image = image_extend(image)
-                #########################################################################################
-
-                image = np.asarray(image)
-                image = image.reshape(8, 8, 1)
-                test.append(image)
+                image = binary_signed_return(line)
+                image = reorganisation_zigzag(image)
+                test = numpy_cast_reshape_and_append(image, test)
                 cpt += 1
                 if cpt == 16:
                     cpt = 0
@@ -218,6 +220,7 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, dé-prédire et les mettre en forme non ZigZag sans prediction.
     """
+    #Le meme que le précédent sans image = reorganisation_zigzag(image)
     x_perso = []
     test = []
     im_recompose = []
@@ -225,12 +228,8 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
         cpt = 0
         for line in tqdm(fichier):
             if line != "\n":
-                data = list(line.split(" "))
-                image = binary_signed_return(data)
-                image = np.asarray(image)
-                image = image.reshape(8, 8, 1)
-                # prédiction elle se fait la normalement
-                test.append(image)
+                image = binary_signed_return(line)
+                test = numpy_cast_reshape_and_append(image, test)
                 cpt += 1
                 if cpt == 16:
                     cpt = 0
@@ -238,7 +237,6 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
                     x_perso.append(im_recompose)
                     test = []
     x_perso = np.asarray(x_perso)
-    # x_perso = x_perso.astype(int)
     return x_perso
 
 
