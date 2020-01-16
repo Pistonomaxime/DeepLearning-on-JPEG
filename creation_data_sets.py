@@ -19,8 +19,8 @@ def convert(dir_path, table, dataset, quality, test_case):
 
 
 def create_directories(train_path, test_path):
-    Path.mkdir(train_path.joinpath("images"), parents=True)
-    Path.mkdir(test_path.joinpath("images"), parents=True)
+    train_path.joinpath("images").mkdir(parents=True)
+    test_path.joinpath("images").mkdir(parents=True)
 
 
 def creation_data_sets(quality, dataset, test_case=False):
