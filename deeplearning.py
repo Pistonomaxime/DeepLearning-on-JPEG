@@ -322,7 +322,7 @@ def essaies_cifar(
 
 ################################################################################################
 # Main
-def main_deeplearning(quality, dataset, possible_steps, algorithm):
+def deeplearning(quality, dataset, possible_steps, algorithm):
     num_category = 10
     current_path = Path.cwd()
     if dataset == 0:

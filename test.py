@@ -2,9 +2,9 @@ import glob
 import hashlib
 from pathlib import Path
 import numpy as np
-from creation_data_sets import main_creation_data_sets
-from creation_dc_ac_pur import main_creation_dc_ac_pur
-from prog_complet import main_prog_complet
+from creation_data_sets import creation_data_sets
+from creation_dc_ac_pur import creation_dc_ac_pur
+from prog_complet import prog_complet
 
 
 TAB_NAME = ["LD", "NB", "Center", "DCT", "Quantif", "Pred", "ZigZag"]
@@ -345,7 +345,7 @@ def full_test(quality, dataset, train_path, test_path):
     complet_full_test(quality, dataset, train_path, test_path)
 
 
-def main_test(quality, dataset, test_case=False):
+def test(quality, dataset, test_case=False):
     current_path = Path.cwd()
     if dataset == 0:
         train_path = current_path.joinpath("Mnist_{}".format(quality))
@@ -354,9 +354,9 @@ def main_test(quality, dataset, test_case=False):
         train_path = current_path.joinpath("Cifar-10_{}".format(quality))
         test_path = current_path.joinpath("Cifar-10_{}_test".format(quality))
     if test_case:
-        main_creation_data_sets(quality, dataset, True)
-        main_creation_dc_ac_pur(quality, dataset)
-        main_prog_complet(quality, dataset)
+        creation_data_sets(quality, dataset, True)
+        creation_dc_ac_pur(quality, dataset)
+        prog_complet(quality, dataset)
         partial_test(quality, dataset, train_path, test_path)
     else:
         full_test(quality, dataset, train_path, test_path)

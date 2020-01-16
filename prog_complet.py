@@ -582,7 +582,7 @@ def donne_temps(numero, train_path, test_path, quantif):
 
 ################################################################################################
 # Main
-def main_prog_complet(quality, dataset):
+def prog_complet(quality, dataset):
     quantif = QUANTIF_TAB[quality]
     current_path = Path.cwd()
     start_time = time.time()

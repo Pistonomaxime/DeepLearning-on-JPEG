@@ -1,8 +1,8 @@
-from test import main_test
-from creation_data_sets import main_creation_data_sets
-from creation_dc_ac_pur import main_creation_dc_ac_pur
-from prog_complet import main_prog_complet
-from deeplearning import main_deeplearning
+from test import test
+from creation_data_sets import creation_data_sets
+from creation_dc_ac_pur import creation_dc_ac_pur
+from prog_complet import prog_complet
+from deeplearning import deeplearning
 
 
 # Style Guide for Python Code
@@ -44,13 +44,13 @@ def main():
         )
 
         if not already_created:
-            main_creation_data_sets(quality, dataset)
+            creation_data_sets(quality, dataset)
             print("End data sets creation")
-            main_creation_dc_ac_pur(quality, dataset)
+            creation_dc_ac_pur(quality, dataset)
             print("End DC AC pur creation")
-            main_prog_complet(quality, dataset)
+            prog_complet(quality, dataset)
             print("Data sets creation verification.")
-            main_test(quality, dataset)
+            test(quality, dataset)
             print("Data sets were successfully created!")
 
         steps = [0, 1, 2, 3, 4, 5, 6]
@@ -69,7 +69,7 @@ def main():
                 "You need to choose the Machine learning algorithm.\n0 for U&D without BN\n1 for U&D with BN\n2 for Keras\nAlgorithm: ",
                 [0, 1, 2],
             )
-        main_deeplearning(quality, dataset, step, algorithm)
+        deeplearning(quality, dataset, step, algorithm)
 
 
 if __name__ == "__main__":

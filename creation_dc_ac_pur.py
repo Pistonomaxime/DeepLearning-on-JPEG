@@ -197,7 +197,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
     ecriture_dc_mnist(val, dir_path)
 
 
-def main_creation_dc_ac_pur(quality, dataset):
+def creation_dc_ac_pur(quality, dataset):
     """
     Début du programme.
     On definit les différents MARKERS.

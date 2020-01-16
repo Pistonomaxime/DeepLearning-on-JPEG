@@ -23,7 +23,7 @@ def create_directories(train_path, test_path):
     Path.mkdir(test_path.joinpath("images"), parents=True)
 
 
-def main_creation_data_sets(quality, dataset, test_case=False):
+def creation_data_sets(quality, dataset, test_case=False):
     current_path = Path.cwd()
     if dataset == 0:
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
