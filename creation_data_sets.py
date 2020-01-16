@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from PIL import Image
 from tqdm import tqdm
@@ -6,7 +5,7 @@ from keras.datasets import mnist, cifar10
 
 
 def convert(dir_path, table, dataset, quality, test_case):
-    os.chdir(dir_path.joinpath("images"))
+    final_path = dir_path.joinpath("images")
     if test_case:
         size = 20
     else:
@@ -15,15 +14,13 @@ def convert(dir_path, table, dataset, quality, test_case):
         img = Image.fromarray(table[i])
         if dataset == 1:
             img = img.convert("L")
-        nom = str(i) + ".jpg"
+        nom = final_path.joinpath(str(i) + ".jpg")
         img.save(nom, quality=quality)
 
 
 def create_directories(train_path, test_path):
-    os.mkdir(train_path)
-    os.mkdir(train_path.joinpath("images"))
-    os.mkdir(test_path)
-    os.mkdir(test_path.joinpath("images"))
+    Path.mkdir(train_path.joinpath("images"), parents=True)
+    Path.mkdir(test_path.joinpath("images"), parents=True)
 
 
 def main_creation_data_sets(quality, dataset, test_case=False):
@@ -42,4 +39,3 @@ def main_creation_data_sets(quality, dataset, test_case=False):
     create_directories(train_path, test_path)
     convert(train_path, x_train, dataset, quality, test_case)
     convert(test_path, x_test, dataset, quality, test_case)
-    os.chdir(current_path)

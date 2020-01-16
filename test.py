@@ -1,4 +1,3 @@
-import os
 import glob
 import hashlib
 from pathlib import Path
@@ -228,10 +227,12 @@ SHA_FULL_COMPLET = {0: SHA_MNIST_FULL_COMPLET, 1: SHA_CIFAR_FULL_COMPLET}
 
 def sha_images(dir_path):
     m_hash = hashlib.sha256()
-    os.chdir(dir_path.joinpath("images"))
-    tab_document = glob.glob("*.jpg")
+
+    final_path = dir_path.joinpath("images")
+    images_dir = final_path.joinpath("*.jpg")
+    tab_document = glob.glob(str(images_dir))
     for i in range(len(tab_document)):
-        nom_de_photo = str(i) + ".jpg"
+        nom_de_photo = final_path.joinpath(str(i) + ".jpg")
         with open(nom_de_photo, "rb") as file:
             image = file.read()
             m_hash.update(image)
@@ -240,8 +241,7 @@ def sha_images(dir_path):
 
 def sha_dc_ac(dir_path):
     m_hash = hashlib.sha256()
-    os.chdir(dir_path)
-    with open("data_DC_AC_pur.txt", "rb") as file:
+    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "rb") as file:
         image = file.read()
         m_hash.update(image)
     return m_hash.hexdigest()
@@ -249,9 +249,8 @@ def sha_dc_ac(dir_path):
 
 def sha_complet(dir_path):
     m_hash = hashlib.sha256()
-    os.chdir(dir_path)
     for element in TAB_NAME:
-        table = np.load(element + ".npy")
+        table = np.load(dir_path.joinpath(element + ".npy"))
         m_hash.update(table)
     return m_hash.hexdigest()
 
@@ -264,7 +263,7 @@ def display_result(sha_result, sha_expected, name):
         assert False  # Error
 
 
-def image_partial_test(quality, dataset, train_path, test_path, current_path):
+def image_partial_test(quality, dataset, train_path, test_path):
     sha_train = sha_images(
         train_path
     )  # pour moi rajouter + '_2' pour avoir les datasets avec 20 images
@@ -277,10 +276,8 @@ def image_partial_test(quality, dataset, train_path, test_path, current_path):
         sha_test, SHA_PARTIAL_IMAGES[dataset]["test"][quality], "test Images"
     )
 
-    os.chdir(current_path)
 
-
-def image_full_test(quality, dataset, train_path, test_path, current_path):
+def image_full_test(quality, dataset, train_path, test_path):
     sha_train = sha_images(train_path)
     display_result(
         sha_train, SHA_FULL_IMAGES[dataset]["train"][quality], "train Images"
@@ -289,10 +286,8 @@ def image_full_test(quality, dataset, train_path, test_path, current_path):
     sha_test = sha_images(test_path)
     display_result(sha_test, SHA_FULL_IMAGES[dataset]["test"][quality], "test Images")
 
-    os.chdir(current_path)
 
-
-def data_dc_ac_partial_test(quality, dataset, train_path, test_path, current_path):
+def data_dc_ac_partial_test(quality, dataset, train_path, test_path):
     sha_train = sha_dc_ac(train_path)
     display_result(
         sha_train, SHA_PARTIAL_DC_AC[dataset]["train"][quality], "train data_DC_AC_pur"
@@ -303,10 +298,8 @@ def data_dc_ac_partial_test(quality, dataset, train_path, test_path, current_pat
         sha_test, SHA_PARTIAL_DC_AC[dataset]["test"][quality], "test data_DC_AC_pur"
     )
 
-    os.chdir(current_path)
 
-
-def data_dc_ac_full_test(quality, dataset, train_path, test_path, current_path):
+def data_dc_ac_full_test(quality, dataset, train_path, test_path):
     sha_train = sha_dc_ac(train_path)
     display_result(
         sha_train, SHA_FULL_DC_AC[dataset]["train"][quality], "train data_DC_AC_pur"
@@ -317,10 +310,8 @@ def data_dc_ac_full_test(quality, dataset, train_path, test_path, current_path):
         sha_test, SHA_FULL_DC_AC[dataset]["test"][quality], "test data_DC_AC_pur"
     )
 
-    os.chdir(current_path)
 
-
-def complet_partial_test(quality, dataset, train_path, test_path, current_path):
+def complet_partial_test(quality, dataset, train_path, test_path):
     sha_train = sha_complet(train_path)
     display_result(
         sha_train, SHA_PARTIAL_COMPLET[dataset]["train"][quality], "train complet"
@@ -331,10 +322,8 @@ def complet_partial_test(quality, dataset, train_path, test_path, current_path):
         sha_test, SHA_PARTIAL_COMPLET[dataset]["test"][quality], "test complet"
     )
 
-    os.chdir(current_path)
 
-
-def complet_full_test(quality, dataset, train_path, test_path, current_path):
+def complet_full_test(quality, dataset, train_path, test_path):
     sha_train = sha_complet(train_path)
     display_result(
         sha_train, SHA_FULL_COMPLET[dataset]["train"][quality], "train complet"
@@ -343,19 +332,17 @@ def complet_full_test(quality, dataset, train_path, test_path, current_path):
     sha_test = sha_complet(test_path)
     display_result(sha_test, SHA_FULL_COMPLET[dataset]["test"][quality], "test complet")
 
-    os.chdir(current_path)
+
+def partial_test(quality, dataset, train_path, test_path):
+    image_partial_test(quality, dataset, train_path, test_path)
+    data_dc_ac_partial_test(quality, dataset, train_path, test_path)
+    complet_partial_test(quality, dataset, train_path, test_path)
 
 
-def partial_test(quality, dataset, train_path, test_path, current_path):
-    image_partial_test(quality, dataset, train_path, test_path, current_path)
-    data_dc_ac_partial_test(quality, dataset, train_path, test_path, current_path)
-    complet_partial_test(quality, dataset, train_path, test_path, current_path)
-
-
-def full_test(quality, dataset, train_path, test_path, current_path):
-    image_full_test(quality, dataset, train_path, test_path, current_path)
-    data_dc_ac_full_test(quality, dataset, train_path, test_path, current_path)
-    complet_full_test(quality, dataset, train_path, test_path, current_path)
+def full_test(quality, dataset, train_path, test_path):
+    image_full_test(quality, dataset, train_path, test_path)
+    data_dc_ac_full_test(quality, dataset, train_path, test_path)
+    complet_full_test(quality, dataset, train_path, test_path)
 
 
 def main_test(quality, dataset, test_case=False):
@@ -370,7 +357,6 @@ def main_test(quality, dataset, test_case=False):
         main_creation_data_sets(quality, dataset, True)
         main_creation_dc_ac_pur(quality, dataset)
         main_prog_complet(quality, dataset)
-        partial_test(quality, dataset, train_path, test_path, current_path)
+        partial_test(quality, dataset, train_path, test_path)
     else:
-        full_test(quality, dataset, train_path, test_path, current_path)
-    os.chdir(current_path)
+        full_test(quality, dataset, train_path, test_path)

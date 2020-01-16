@@ -1,5 +1,4 @@
 import time
-import os
 from pathlib import Path
 import keras
 import numpy as np
@@ -256,7 +255,7 @@ def essaies_mnist(
     model.load_weights(nom_sauvegarde)
     score = model.evaluate(x_test_perso, y_test, verbose=0)
     print("Score: ", str(score))
-    os.remove(nom_sauvegarde)
+    Path.unlink(nom_sauvegarde)
 
 
 def essaies_cifar(
@@ -318,7 +317,7 @@ def essaies_cifar(
     model.load_weights(nom_sauvegarde)
     score = model.evaluate(x_test_perso, y_test, verbose=0)
     print("Score: ", str(score))
-    os.remove(nom_sauvegarde)
+    Path.unlink(nom_sauvegarde)
 
 
 ################################################################################################
@@ -367,4 +366,3 @@ def main_deeplearning(quality, dataset, possible_steps, algorithm):
             batch_size,
             num_epoch,
         )
-    os.chdir(current_path)

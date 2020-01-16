@@ -1,4 +1,3 @@
-import os
 import glob
 import time
 from pathlib import Path
@@ -168,17 +167,18 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     return val_centrer_reduite
 
 
-def ecriture_dc_mnist(val):
-    with open("data_DC_AC_pur.txt", "w") as fichier:
+def ecriture_dc_mnist(val, dir_path):
+    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "w") as fichier:
         fichier.write(val)
 
 
 def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
-    os.chdir(dir_path.joinpath("images"))
-    tab_document = glob.glob("*.jpg")
+    final_path = dir_path.joinpath("images")
+    images_dir = final_path.joinpath("*.jpg")
+    tab_document = glob.glob(str(images_dir))
     val = ""
     for i in tqdm(range(len(tab_document))):
-        nom_de_photo = str(i) + ".jpg"
+        nom_de_photo = final_path.joinpath(str(i) + ".jpg")
         with open(nom_de_photo, "rb") as file:
             # On lit l'image
             image = file.read()
@@ -194,8 +194,7 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
             image_att = "{:08b}".format(int(image.hex(), 16))
             # On crée le tableau vide qui contiendra les indices des EOB.
             val += trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac) + "\n"
-    os.chdir(dir_path)
-    ecriture_dc_mnist(val)
+    ecriture_dc_mnist(val, dir_path)
 
 
 def main_creation_dc_ac_pur(quality, dataset):
@@ -215,8 +214,8 @@ def main_creation_dc_ac_pur(quality, dataset):
 
     start_time = time.time()
 
-    os.chdir(train_path.joinpath("images"))
-    tab_document = glob.glob("*.jpg")
+    images_dir = train_path.joinpath("images").joinpath("*.jpg")
+    tab_document = glob.glob(str(images_dir))
     nom_de_photo = tab_document[0]
     with open(nom_de_photo, "rb") as file:
         image = file.read()
@@ -236,4 +235,3 @@ def main_creation_dc_ac_pur(quality, dataset):
         temps_total,
         "secondes to create DC_AC_pur file, this time is commum for all JPEG decompression steps.",
     )
-    os.chdir(current_path)

@@ -1,4 +1,3 @@
-import os
 import glob
 import time
 from pathlib import Path
@@ -68,11 +67,47 @@ def image_extend(data):
         [data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]],
         [data[3], data[8], data[12], data[17], data[25], data[30], data[41], data[43]],
         [data[9], data[11], data[18], data[24], data[31], data[40], data[44], data[53]],
-        [data[10], data[19], data[23], data[32], data[39], data[45], data[52], data[54]],
-        [data[20], data[22], data[33], data[38], data[46], data[51], data[55], data[60]],
-        [data[21], data[34], data[37], data[47], data[50], data[56], data[59], data[61]],
-        [data[35], data[36], data[48], data[49], data[57], data[58], data[62], data[63]]
-        ]
+        [
+            data[10],
+            data[19],
+            data[23],
+            data[32],
+            data[39],
+            data[45],
+            data[52],
+            data[54],
+        ],
+        [
+            data[20],
+            data[22],
+            data[33],
+            data[38],
+            data[46],
+            data[51],
+            data[55],
+            data[60],
+        ],
+        [
+            data[21],
+            data[34],
+            data[37],
+            data[47],
+            data[50],
+            data[56],
+            data[59],
+            data[61],
+        ],
+        [
+            data[35],
+            data[36],
+            data[48],
+            data[49],
+            data[57],
+            data[58],
+            data[62],
+            data[63],
+        ],
+    ]
     tab = np.asarray(tab)
     return tab
 
@@ -97,11 +132,10 @@ def de_huffman_avec_zigzag(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag.
     """
-    os.chdir(dir_path)
     x_perso = []
     test = []
     im_recompose = []
-    with open("data_DC_AC_pur.txt", "r") as fichier:
+    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "r") as fichier:
         cpt = 0
         save = 0
         for line in tqdm(fichier):
@@ -149,11 +183,10 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag sans prediction.
     """
-    os.chdir(dir_path)
     x_perso = []
     test = []
     im_recompose = []
-    with open("data_DC_AC_pur.txt", "r") as fichier:
+    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "r") as fichier:
         cpt = 0
         for line in tqdm(fichier):
             if line != "\n":
@@ -198,11 +231,10 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, dé-prédire et les mettre en forme non ZigZag sans prediction.
     """
-    os.chdir(dir_path)
     x_perso = []
     test = []
     im_recompose = []
-    with open("data_DC_AC_pur.txt", "r") as fichier:
+    with open(dir_path.joinpath("data_DC_AC_pur.txt"), "r") as fichier:
         cpt = 0
         for line in tqdm(fichier):
             if line != "\n":
@@ -355,8 +387,7 @@ def standardisation(x_perso):
 
 
 def sauvegarde(dir_path, table, nom):
-    os.chdir(dir_path)
-    np.save(nom, table)
+    np.save(dir_path.joinpath(nom), table)
 
 
 def renvoie_image_nb(train_path, test_path, quantif):
@@ -366,22 +397,8 @@ def renvoie_image_nb(train_path, test_path, quantif):
     x_train_perso = de_huffman_avec_zigzag(train_path)
     x_test_perso = de_huffman_avec_zigzag(test_path)
 
-    # m_hash = hashlib.sha256()
-    # m_hash.update(x_train_perso)
-    # print("debug 1\n", m_hash.hexdigest(), "\n", end="")
-
     x_train_perso = de_compression_centre(x_train_perso, quantif)
     x_test_perso = de_compression_centre(x_test_perso, quantif)
-
-    # for i in range(20):
-    #     for j in range(32):
-    #         for k in range(32):
-    #             print(x_train_perso[i][j][k], end="")
-    #         print()
-    #     print("\n\n")
-    #     m_hash = hashlib.sha256()
-    #     m_hash.update(x_train_perso[i])
-    #     print("debug 2\n", m_hash.hexdigest(), "\n", end="")
 
     x_train_perso = standardisation(x_train_perso)
     x_test_perso = standardisation(x_test_perso)
@@ -467,11 +484,12 @@ def renvoie_image_zigzag(train_path, test_path):
 
 
 def sous_fonction_revoie_image_ld(dir_path):
-    os.chdir(dir_path.joinpath("images"))
-    tab_document = glob.glob("*.jpg")
+    final_path = dir_path.joinpath("images")
+    images_dir = final_path.joinpath("*.jpg")
+    tab_document = glob.glob(str(images_dir))
     x_perso = []
     for i in tqdm(range(0, len(tab_document))):
-        nom_de_photo = str(i) + ".jpg"
+        nom_de_photo = final_path.joinpath(str(i) + ".jpg")
         image = Image.open(nom_de_photo)
         x_perso.append(np.array(image))
     x_perso = np.array(x_perso)
@@ -581,4 +599,3 @@ def main_prog_complet(quality, dataset):
 
     for i in range(6):
         donne_temps(i, train_path, test_path, quantif)
-    os.chdir(current_path)
