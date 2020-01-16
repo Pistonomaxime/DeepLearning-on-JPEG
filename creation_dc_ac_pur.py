@@ -165,6 +165,7 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
         retour_dc = calcul_dc_size_modifie(liste_dc_max, huffman_dc)
     return val_centrer_reduite
 
+
 def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
     final_path = dir_path.joinpath("images")
     images_dir = final_path.joinpath("*.jpg")
