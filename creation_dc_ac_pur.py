@@ -10,7 +10,7 @@ MARKER_3F = b"\x3F"
 HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
 
-def generate_huffman_table_dc(image, pos_1):
+def generate_huffman_table_dc(image, pos):
     """
     Input: An image and the position of the DC Huffman table in the image header.
     Output: Huffman DC table.
@@ -19,8 +19,8 @@ def generate_huffman_table_dc(image, pos_1):
     """
     tab = []
     for i in range(0, 16):
-        tab.append(int(image[pos_1 + i]))
-    pos_1 += 16
+        tab.append(int(image[pos + i]))
+    pos += 16
     codevalue = 0
     codeword = []
     codelenght = []
@@ -34,11 +34,11 @@ def generate_huffman_table_dc(image, pos_1):
         codevalue = codevalue * 2
 
     for i in range(0, len(codeword)):
-        codelenght.append(int(image[pos_1 + i]))
+        codelenght.append(int(image[pos + i]))
     return (codeword, codelenght)
 
 
-def generate_huffman_table_ac(image, pos_2):
+def generate_huffman_table_ac(image, pos):
     """
     Input: An image and the position of the AC Huffman table in the image header.
     Output: Huffman AC table.
@@ -46,23 +46,22 @@ def generate_huffman_table_ac(image, pos_2):
     Fr: Génère la table de Huffman AC associé à l'image.
     """
     tab = []
-
     for i in range(0, 17):
-        tab.append(int(image[pos_2 + i]))
-    pos_2 += 16
+        tab.append(int(image[pos + i]))
+    pos += 16
     codevalue = 0
     codeword = []
     codelenght = []
     for i in range(0, 16):
         for _ in range(0, tab[i]):
             tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != i:  # ou while
+            if (len(tmp) - 1) != i:
                 tmp = "0" + tmp
             codeword.append(tmp)
             codevalue += 1
         codevalue = codevalue * 2
     for i in range(0, len(codeword)):
-        tmp_a = image[pos_2 + i]
+        tmp_a = image[pos + i]
         tmp_b = tmp_a & 240
         tmp_b = tmp_b >> 4
         tmp_c = tmp_a & 15

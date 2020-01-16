@@ -125,6 +125,7 @@ def recompose(test):
     im_recompose = np.concatenate(
         (im_recompose_l1, im_recompose_l2, im_recompose_l3, im_recompose_l4)
     )
+    im_recompose = im_recompose.reshape(32, 32, 1)
     return im_recompose
 
 
@@ -247,38 +248,42 @@ def idct2(image):
     )
 
 
+def centrage_valeur_seuil(q_bloc):
+    bloc_dct = q_bloc + 128
+    for i in range(8):
+        for j in range(8):
+            if bloc_dct[i][j] < 0:
+                bloc_dct[i][j] = 0
+            elif bloc_dct[i][j] > 255:
+                bloc_dct[i][j] = 255
+    return bloc_dct
+
+
+def extract_and_quantif(i, j, tmp, quantif):
+    bloc = []
+    for k in range(0, 8):
+        bloc.append(tmp[k + 8 * i][8 * j : 8 + 8 * j])
+    bloc = np.asarray(bloc)
+    bloc = bloc * quantif
+    return bloc
+
+
 def de_compression_centre(donnees, quantif):
     """
     A partir des images dé_huffman et en forme ZigZag retourne les pixels de l'image original.
     """
     sortie = []
-    for i in tqdm(range(0, len(donnees))):
-        tmp = donnees[i].reshape(32, 32)
+    for element in tqdm(donnees):
+        tmp = element.reshape(32, 32)
         test = []
-        for j in range(0, 4):
-            for k in range(0, 4):
-                bloc = []
-                for l in range(0, 8):
-                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
-                bloc = np.asarray(bloc)
-
-                bloc = bloc * quantif
-
+        for i in range(0, 4):
+            for j in range(0, 4):
+                bloc = extract_and_quantif(i, j, tmp, quantif)
                 q_bloc = np.asarray(idct2(bloc))
-
-                bloc_dct = q_bloc + 128
-
-                for cpt_1 in range(8):
-                    for cpt_2 in range(8):
-                        if bloc_dct[cpt_1][cpt_2] < 0:
-                            bloc_dct[cpt_1][cpt_2] = 0
-                        elif bloc_dct[cpt_1][cpt_2] > 255:
-                            bloc_dct[cpt_1][cpt_2] = 255
-
-                test.append(bloc_dct)
+                q_bloc = centrage_valeur_seuil(q_bloc)
+                test.append(q_bloc)
 
         im_recompose = recompose(test)
-        im_recompose = im_recompose.reshape(32, 32, 1)
         sortie.append(im_recompose)
     sortie = np.asarray(sortie)
     return sortie
@@ -288,25 +293,18 @@ def de_compression_dct(donnees, quantif):
     """
     A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
     """
+    # Le même que le précédent avec q_bloc = centrage_valeur_seuil(q_bloc) en moins.
     sortie = []
-    for i in tqdm(range(0, len(donnees))):
-        tmp = donnees[i].reshape(32, 32)
+    for element in tqdm(donnees):
+        tmp = element.reshape(32, 32)
         test = []
-        for j in range(0, 4):
-            for k in range(0, 4):
-                bloc = []
-                for l in range(0, 8):
-                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
-                bloc = np.asarray(bloc)
-
-                bloc = bloc * quantif
-
+        for i in range(0, 4):
+            for j in range(0, 4):
+                bloc = extract_and_quantif(i, j, tmp, quantif)
                 q_bloc = np.asarray(idct2(bloc))
-
                 test.append(q_bloc)
 
         im_recompose = recompose(test)
-        im_recompose = im_recompose.reshape(32, 32, 1)
         sortie.append(im_recompose)
     sortie = np.asarray(sortie)
     return sortie
@@ -316,25 +314,18 @@ def de_compression_quantif(donnees, quantif):
     """
     A partir des images dé_huffman et en forme ZigZag renvoie a l'étape entre DCT et Quantif.
     """
+    # Le même que le précedent avec idct2(bloc)->bloc
     sortie = []
-    for i in tqdm(range(0, len(donnees))):
-        tmp = donnees[i].reshape(32, 32)
+    for element in tqdm(donnees):
+        tmp = element.reshape(32, 32)
         test = []
-        for j in range(0, 4):
-            for k in range(0, 4):
-                bloc = []
-                for l in range(0, 8):
-                    bloc.append(tmp[l + 8 * j][8 * k : 8 + 8 * k])
-                bloc = np.asarray(bloc)
-
-                bloc = bloc * quantif
-
+        for i in range(0, 4):
+            for j in range(0, 4):
+                bloc = extract_and_quantif(i, j, tmp, quantif)
                 q_bloc = np.asarray(bloc)
-
                 test.append(q_bloc)
 
         im_recompose = recompose(test)
-        im_recompose = im_recompose.reshape(32, 32, 1)
         sortie.append(im_recompose)
     sortie = np.asarray(sortie)
     return sortie
