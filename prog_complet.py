@@ -128,6 +128,28 @@ def recompose(test):
     return im_recompose
 
 
+def binary_signed_return(data):
+    image = []
+    for i in range(64):
+        sequence = ""
+        if data[i][0] == "0":
+            for j in range(len(data[i])):
+                if data[i][j] == "0":
+                    sequence += "1"
+                else:
+                    sequence += "0"
+            image.append(-1 * int(sequence, 2))
+        else:
+            if data[i] == "111111111111" or data[i] == "11111111111":
+                if i == 0 and data[0] == "11111111111":
+                    image.append(int(data[0], 2))
+                else:
+                    image.append(0)
+            else:
+                image.append(int(data[i], 2))
+    return image
+
+
 def de_huffman_avec_zigzag(dir_path):
     """
     Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag.
@@ -141,24 +163,7 @@ def de_huffman_avec_zigzag(dir_path):
         for line in tqdm(fichier):
             if line != "\n":
                 data = list(line.split(" "))
-                image = []
-                for i in range(64):
-                    sequence = ""
-                    if data[i][0] == "0":
-                        for j in range(len(data[i])):
-                            if data[i][j] == "0":
-                                sequence += "1"
-                            else:
-                                sequence += "0"
-                        image.append(-1 * int(sequence, 2))
-                    else:
-                        if data[i] == "111111111111" or data[i] == "11111111111":
-                            if i == 0 and data[0] == "11111111111":
-                                image.append(int(data[0], 2))
-                            else:
-                                image.append(0)
-                        else:
-                            image.append(int(data[i], 2))
+                image = binary_signed_return(data)
                 # prédiction elle se fait la normalement
                 image[0] = image[0] + save
                 save = image[0]
@@ -191,25 +196,7 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
         for line in tqdm(fichier):
             if line != "\n":
                 data = list(line.split(" "))
-                image = []
-
-                for i in range(64):
-                    sequence = ""
-                    if data[i][0] == "0":
-                        for j in range(len(data[i])):
-                            if data[i][j] == "0":
-                                sequence += "1"
-                            else:
-                                sequence += "0"
-                        image.append(-1 * int(sequence, 2))
-                    else:
-                        if data[i] == "111111111111" or data[i] == "11111111111":
-                            if i == 0 and data[0] == "11111111111":
-                                image.append(int(data[0], 2))
-                            else:
-                                image.append(0)
-                        else:
-                            image.append(int(data[i], 2))
+                image = binary_signed_return(data)
                 # prédiction elle se fait la normalement
                 image = image_extend(image)
                 #########################################################################################
@@ -239,28 +226,7 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
         for line in tqdm(fichier):
             if line != "\n":
                 data = list(line.split(" "))
-                image = []
-
-                #########################################################################################
-                # Dé_huffman
-                for i in range(64):
-                    sequence = ""
-                    if data[i][0] == "0":
-                        for j in range(len(data[i])):
-                            if data[i][j] == "0":
-                                sequence += "1"
-                            else:
-                                sequence += "0"
-                        image.append(-1 * int(sequence, 2))
-                    else:
-                        if data[i] == "111111111111" or data[i] == "11111111111":
-                            if i == 0 and data[0] == "11111111111":
-                                image.append(int(data[0], 2))
-                            else:
-                                image.append(0)
-                        else:
-                            image.append(int(data[i], 2))
-
+                image = binary_signed_return(data)
                 image = np.asarray(image)
                 image = image.reshape(8, 8, 1)
                 # prédiction elle se fait la normalement
