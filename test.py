@@ -6,6 +6,15 @@ from creation_data_sets import creation_data_sets
 from creation_dc_ac_pur import creation_dc_ac_pur
 from prog_complet import prog_complet
 
+"""
+Attention:
+_6 pour pillow = 6.0.0
+_7 pour pillow = 7.0.0
+SHA_CIFAR_PARTIAL_IMAGES
+SHA_CIFAR_PARTIAL_DC_AC
+SHA_CIFAR_PARTIAL_COMPLET
+Sont enfait _7.
+"""
 
 TAB_NAME = ["LD", "NB", "Center", "DCT", "Quantif", "Pred", "ZigZag"]
 
@@ -62,7 +71,7 @@ SHA_MNIST_FULL_IMAGES = {
     },
 }
 
-SHA_CIFAR_FULL_IMAGES = {
+SHA_CIFAR_FULL_IMAGES_6 = {
     "train": {
         100: "8ce9c1c5df2dba2fc40fa8f029fb041ae12f9672ef080652ec8fa26e2e109174",
         90: "7b0fe54957aaa1b0c8c54671aea7191dc5201a959ed4e94f7027bb101e7e7290",
@@ -79,7 +88,24 @@ SHA_CIFAR_FULL_IMAGES = {
     },
 }
 
-SHA_FULL_IMAGES = {0: SHA_MNIST_FULL_IMAGES, 1: SHA_CIFAR_FULL_IMAGES}
+SHA_CIFAR_FULL_IMAGES_7 = {
+    "train": {
+        100: "09a9857aa51152846ad639c95a811fa7d69a6ec206bcb1a04c9fe05483b6d034",
+        90: "1d8448d58e603485a19974afb977294a3791cdb95f5d060f3779e3ea4390b552",
+        80: "e005de06d126161967b1b6065ecb940c286937a14f42db185e9ff051c0d6982e",
+        70: "d4889767b7aa97d2c025317e477a9a7e5a50a869055866032577d5574a8d047b",
+        60: "701eb057ec27185af044bbba9d5abf6bf5679a0f393f317f0a0a319b30a1e359",
+    },
+    "test": {
+        100: "52c1e8ef3a0c9f77eec7e1b134d22a24bd0f60aadcd853f7d11a118634f3f988",
+        90: "0bd5a763386d5b52c9b282811c5903e2ccf37cec350bee79e478a8e028a8e599",
+        80: "14b254f567a89b194bddf07460227ed03d0efacdf0f359fb572abb2b290c18f7",
+        70: "f6410f19eb2d46722b988cb976cc37bf60a839aa9f0cb4d4255fa654eb12d144",
+        60: "6bb9c500c1d467a2a857754b34802994a458fd37262bf2b706e870a382d27d4f",
+    },
+}
+
+SHA_FULL_IMAGES = {0: SHA_MNIST_FULL_IMAGES, 1: SHA_CIFAR_FULL_IMAGES_7}
 
 SHA_MNIST_PARTIAL_DC_AC = {
     "train": {
@@ -134,7 +160,7 @@ SHA_MNIST_FULL_DC_AC = {
     },
 }
 
-SHA_CIFAR_FULL_DC_AC = {
+SHA_CIFAR_FULL_DC_AC_6 = {
     "train": {
         100: "ecdbfe68c4f5a8e38e9bf4249c95e91afbdf78ae2b82c7b66f334737f0f7fe65",
         90: "60a3c64390e8d7ae8c72c21e408c1ce1bbee513e95eef983ebec8b096722bda3",
@@ -151,7 +177,24 @@ SHA_CIFAR_FULL_DC_AC = {
     },
 }
 
-SHA_FULL_DC_AC = {0: SHA_MNIST_FULL_DC_AC, 1: SHA_CIFAR_FULL_DC_AC}
+SHA_CIFAR_FULL_DC_AC_7 = {
+    "train": {
+        100: "27294ec371c6f0f941edd32363a9f1e9762d04ff9117bcff367ff5d5a328ca15",
+        90: "a642c0ffd5213de077f3be5ed8358571b0e4054db656aec08cb745d92c32ab4f",
+        80: "2f9b8a54468d16e4953dad58f362d9159a8984c53d2293295881d6df49a8e776",
+        70: "57591a9e09d6d900f2b38e9bd03264029684fd9d2c09d6ef5fb0f1478e808d68",
+        60: "44237530981a6cf3c6f2079ff37676205e4d71bbd9af61e9439818f4a78f8832",
+    },
+    "test": {
+        100: "507eb065d38238e7523fc08a01339262e315fd73b5329c4c21047fd850ca62bc",
+        90: "89d6122c93cc38128bf4cdde5b9aa102326f5c4576fd6315f1684ff29ba0223f",
+        80: "fadb1872c9ecdbdd731bd3fc2de1e7244532167dd8da00c0e4511d8403d68562",
+        70: "8e398ecd5508edb80fdbd0cdb6adb90ca1c580cbac7c0a4e168db31eff2436c8",
+        60: "81601cc687a103608d0dbd6884b60a3efe8c773fb9c09e6c6e511487dbbcc34f",
+    },
+}
+
+SHA_FULL_DC_AC = {0: SHA_MNIST_FULL_DC_AC, 1: SHA_CIFAR_FULL_DC_AC_7}
 
 SHA_MNIST_PARTIAL_COMPLET = {
     "train": {
@@ -188,6 +231,7 @@ SHA_CIFAR_PARTIAL_COMPLET = {
 }
 
 SHA_PARTIAL_COMPLET = {0: SHA_MNIST_PARTIAL_COMPLET, 1: SHA_CIFAR_PARTIAL_COMPLET}
+
 SHA_MNIST_FULL_COMPLET = {
     "train": {
         100: "6c1d203e0bbc4e2130d250103180812c0569b74d9b35baccf0dbfec24e2eaa4a",
@@ -205,7 +249,7 @@ SHA_MNIST_FULL_COMPLET = {
     },
 }
 
-SHA_CIFAR_FULL_COMPLET = {
+SHA_CIFAR_FULL_COMPLET_6 = {
     "train": {
         100: "33a726a8126e9cd0a01fd2158ca670f81b06458dce85fe04d85c232d0de0b1d0",
         90: "98a5cafd0f65354ff9919a6aeb18b89a39bfcd79c2ec8b7b515ace462953b969",
@@ -222,7 +266,24 @@ SHA_CIFAR_FULL_COMPLET = {
     },
 }
 
-SHA_FULL_COMPLET = {0: SHA_MNIST_FULL_COMPLET, 1: SHA_CIFAR_FULL_COMPLET}
+SHA_CIFAR_FULL_COMPLET_7 = {
+    "train": {
+        100: "38622a28504f5f8fe430a46f4adc4cdce788f5092e320f6b60b6f29497f99556",
+        90: "6a0b3ed70e7cf5b2b5be9506cd8295b5e1e3e89de0d2b2f2384af31cc4d9fd9e",
+        80: "103ba7c4a88793ecbd45041561f25107f5c76aea40d92e9f4ad5d717aab04534",
+        70: "ee314bb4cd7cc319a746842b64d936057979fc6d4a806de994d0e2361dbd49ab",
+        60: "d6ccbfaac047932eea036a074fe4a231e254c3cb2a31e084ff9b99df0432f142",
+    },
+    "test": {
+        100: "0900b37589d378fffd6eeaa7a1dc38573729374d95eda105ce031fb5c0da5233",
+        90: "aed7c8dce77ef621ec510b80d34188e5d252907d4a5807069464d5b29c7722fe",
+        80: "891a2aa1bef107a9f6e8cc91dca08685071a50018391e643c4634c7447279692",
+        70: "d601946da70405c7da11589b615550bb7a247127a2fdc88e1126a6044119d2a3",
+        60: "39953c71a2a13438eaa03a1e3274ee9184f08d49ea0e42570e22cd4f4fcc32f7",
+    },
+}
+
+SHA_FULL_COMPLET = {0: SHA_MNIST_FULL_COMPLET, 1: SHA_CIFAR_FULL_COMPLET_7}
 
 
 def sha_images(dir_path):
