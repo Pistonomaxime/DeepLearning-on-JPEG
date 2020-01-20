@@ -15,8 +15,8 @@ def huffman_table(image, pos):
     In association with generate_huffman_table_dc and generate_huffman_table_ac,
     generate Huffman table.
 
-    :param param1: An image.
-    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :param image: An image.
+    :param pos: A position of a HUFFMAN_TABLE_MARKER in the image.
     :returns: Huffman table
     """
     tab = []
@@ -41,8 +41,8 @@ def generate_huffman_table_dc(image, pos):
     """
     Generate the Huffman DC table associated to the image.
 
-    :param param1: An image.
-    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :param image: An image.
+    :param pos: A position of a HUFFMAN_TABLE_MARKER in the image.
     :returns: Huffman DC table
     """
     codeword, codelenght = huffman_table(image, pos)
@@ -55,8 +55,8 @@ def generate_huffman_table_ac(image, pos):
     """
     Generate the Huffman AC table associated to the image.
 
-    :param param1: An image.
-    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :param image: An image.
+    :param pos: A position of a HUFFMAN_TABLE_MARKER in the image.
     :returns: Huffman AC table
     """
     codeword, codelenght = huffman_table(image, pos)
@@ -73,8 +73,8 @@ def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
     """
     Identify the next DC in the stream and return some informations about it.
 
-    :param param1: Next 20 bits of the stream.
-    :param param2: Image Huffman DC table.
+    :param liste_dc_max: Next 20 bits of the stream.
+    :param huffman_dc: Image Huffman DC table.
     :returns: Next DC, his len, the size of the next DC value and the index of the element on the Huffman DC table. Note the two last output are equals.
     """
     cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
@@ -97,8 +97,8 @@ def calcul_ac_size(liste_ac_max, huffman_ac):
     Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
     Le 3ème élément de sortie est la taille de l'AC.
 
-    :param param1: Next 16 bits of the stream.
-    :param param2: Image Huffman AC table.
+    :param liste_ac_max: Next 16 bits of the stream.
+    :param huffman_ac: Image Huffman AC table.
     :returns: next AC run or 0 if EOB, len of next AC value and len of current AC
     """
     cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
@@ -124,10 +124,10 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     Replace the value 0 by 111111111111 if it's a DC and 11111111111 if it's a AC.
     We have to do that because the binary signed value 0 already exist and is equal to -1.
 
-    :param param1: An image.
-    :param param2: The 3F position which significate the SOS.
-    :param param3: Huffman DC table associated to the image.
-    :param param4: Huffman AC table associated to the image.
+    :param image_att: An image.
+    :param pos_3f: The 3F position which significate the SOS.
+    :param huffman_dc: Huffman DC table associated to the image.
+    :param huffman_ac: Huffman AC table associated to the image.
     :returns: The parsed image.
     """
     cpt = (pos_3f + 2) * 8  # Début de l'image.
@@ -178,9 +178,9 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
     """
     Read all images in dir_path then parse then and finally store the in a file.
 
-    :param param1: Directory in which images are taken then parsed.
-    :param param2: Huffman DC table associated to images.
-    :param param3: Huffman AC table associated to images.
+    :param dir_path: Directory in which images are taken then parsed.
+    :param huffman_dc: Huffman DC table associated to images.
+    :param huffman_ac: Huffman AC table associated to images.
     :returns: Nothing
     """
     final_path = dir_path.joinpath("images")
@@ -214,8 +214,8 @@ def creation_dc_ac_pur(quality, dataset):
     Parse all images and store the result in train and test directories respectivelly.
     Display the time taken to do this.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
     :returns: Nothing
     """
     current_path = Path.cwd()
