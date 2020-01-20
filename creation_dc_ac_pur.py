@@ -19,13 +19,13 @@ def huffman_table(image, pos):
     codeword = []
     codelenght = []
     for i in range(0, 16):
-        for _ in range(0, tab[i]):
+        for _ in range(tab[i]):
             tmp = "{:b}".format(int(codevalue))
             if (len(tmp) - 1) != i:
                 tmp = "0" + tmp
             codeword.append(tmp)
             codevalue += 1
-        codevalue = codevalue * 2
+        codevalue *= 2
     return (codeword, codelenght)
 
 
@@ -36,23 +36,9 @@ def generate_huffman_table_dc(image, pos):
     En: Generate Huffman DC table associated to the image.
     Fr: Génère la table de Huffman DC associé à l'image.
     """
-    tab = []
-    for i in range(0, 16):
-        tab.append(int(image[pos + i]))
-    pos += 16
-    codevalue = 0
-    codeword = []
-    codelenght = []
-    for i in range(0, 16):
-        for _ in range(0, tab[i]):
-            tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != i:
-                tmp = "0" + tmp
-            codeword.append(tmp)
-            codevalue += 1
-        codevalue = codevalue * 2
-    for i in range(0, len(codeword)):
-        codelenght.append(int(image[pos + i]))
+    codeword, codelenght = huffman_table(image, pos)
+    for i in range(len(codeword)):
+        codelenght.append(int(image[pos + 16 + i]))
     return (codeword, codelenght)
 
 
@@ -63,23 +49,9 @@ def generate_huffman_table_ac(image, pos):
     En: Generate Huffman AC table associated to the image.
     Fr: Génère la table de Huffman AC associé à l'image.
     """
-    tab = []
-    for i in range(0, 16):
-        tab.append(int(image[pos + i]))
-    pos += 16
-    codevalue = 0
-    codeword = []
-    codelenght = []
-    for i in range(0, 16):
-        for _ in range(0, tab[i]):
-            tmp = "{:b}".format(int(codevalue))
-            if (len(tmp) - 1) != i:
-                tmp = "0" + tmp
-            codeword.append(tmp)
-            codevalue += 1
-        codevalue = codevalue * 2
-    for i in range(0, len(codeword)):
-        tmp_a = image[pos + i]
+    codeword, codelenght = huffman_table(image, pos)
+    for i in range(len(codeword)):
+        tmp_a = image[pos + 16 + i]
         tmp_b = tmp_a & 240
         tmp_b = tmp_b >> 4
         tmp_c = tmp_a & 15
