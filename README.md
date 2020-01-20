@@ -35,3 +35,16 @@ Once images data sets are created, `Creation_DC_AC_pur.py` partially decompress 
 Finally `Deeplearning.py` allows to choose on what data set you want to use a choosen Machine learning algorithm.
 
 Just launch `main.py` which regroup all thoses programs with instructions.
+
+## Development
+
+```bash
+# Install black, pylint, and sphinx
+pip install -r requirements-dev.txt
+```
+
+```bash
+cd docs/
+make html
+# Documentation will be found at docs/_build/html/index.html
+```
