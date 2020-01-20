@@ -39,7 +39,7 @@ def give_quality(table_possible):
     """
     Ask to the user to choose a quality from the possible qualities.
 
-    :param param1: Table of possible quality we can choose.
+    :param table_possible: Table of possible quality we can choose.
     :returns: Choosen quality.
     """
     print("You need to choose a JPEG quality factor between:", table_possible)
@@ -75,9 +75,9 @@ def give_remaining_qualities(dataset, mnist_qualities, cifar_qualities):
     """
     From the input output a table of qualities the user can choose.
 
-    :param param1: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param2: Mnist directories qualities which already exist.
-    :param param3: Cifar-10 directories qualities which already exist.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param mnist_qualities: Mnist directories qualities which already exist.
+    :param cifar_qualities: Cifar-10 directories qualities which already exist.
     :raises keyError: For the choosen dataset all qualities were already created.
     :returns: Possible qualities the user can choose
     """
@@ -98,8 +98,8 @@ def ask_int(msg, valid):
     """
     Ask to the user to choose a valid value and output the result.
 
-    :param param1: Displayed message.
-    :param param2: All the values that the user can choose.
+    :param msg: Displayed message.
+    :param valid: All the values that the user can choose.
     :returns: User selected value.
     """
     while True:
