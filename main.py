@@ -1,9 +1,9 @@
 from test import test
+from pathlib import Path
 from creation_data_sets import creation_data_sets
 from creation_dc_ac_pur import creation_dc_ac_pur
 from prog_complet import prog_complet
 from deeplearning import deeplearning
-from pathlib import Path
 
 # Style Guide for Python Code
 # https://www.python.org/dev/peps/pep-0008/
@@ -60,7 +60,7 @@ def give_remaining_qualities(dataset, mnist_qualities, cifar_qualities):
             tmp.remove(i)
     if tmp == []:
         print("Everything was already created")
-        assert false
+        assert False
     return tmp
 
 

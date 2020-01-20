@@ -505,35 +505,11 @@ def renvoie_image_ld_mnist(train_path, test_path):
     sauvegarde(test_path, x_test_perso, "LD")
 
 
-def donne_temps(numero, train_path, test_path, quantif):
+def timefunc(function, desc):
     start_time = time.time()
-    if numero == 0:
-        # Entre_NB_et_Centre
-        renvoie_image_nb(train_path, test_path, quantif)
-        print("Time NB creation: ", end="")
-    elif numero == 1:
-        # Entre_Centre_et_DCT
-        renvoie_image_centre(train_path, test_path, quantif)
-        print("Time Center creation: ", end="")
-    elif numero == 2:
-        # Entre_DCT_et_Quantif
-        # if (qualite != 100): #on peux l'enlever on le fait deux fois sinon ca Quantif = 1
-        renvoie_image_dct(train_path, test_path, quantif)
-        print("Time DCT creation: ", end="")
-    elif numero == 3:
-        # Entre_Quantif_et_Prediction
-        renvoie_image_quantif(train_path, test_path)
-        print("Time Quantif creation: ", end="")
-    elif numero == 4:
-        # Entre_Prediction_et_ZigZag
-        renvoie_image_pred(train_path, test_path)
-        print("Time Pred creation: ", end="")
-    else:
-        # Entre_ZigZag_et_Huffman
-        renvoie_image_zigzag(train_path, test_path)
-        print("Time ZigZag creation: ", end="")
+    function()
     temps = time.time() - start_time
-    print(temps, "secondes")
+    print("Time {} creation:".format(desc), temps, "secondes")
 
 
 ################################################################################################
@@ -553,5 +529,9 @@ def prog_complet(quality, dataset):
     temps = time.time() - start_time
     print("Time LD creation: ", temps, "secondes")
 
-    for i in range(6):
-        donne_temps(i, train_path, test_path, quantif)
+    timefunc(lambda: renvoie_image_nb(train_path, test_path, quantif), "NB")
+    timefunc(lambda: renvoie_image_centre(train_path, test_path, quantif), "Center")
+    timefunc(lambda: renvoie_image_dct(train_path, test_path, quantif), "DCT")
+    timefunc(lambda: renvoie_image_quantif(train_path, test_path), "Quantif")
+    timefunc(lambda: renvoie_image_pred(train_path, test_path), "Pred")
+    timefunc(lambda: renvoie_image_zigzag(train_path, test_path), "ZigZag")
