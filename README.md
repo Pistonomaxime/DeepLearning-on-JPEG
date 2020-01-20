@@ -34,4 +34,4 @@ Once images data sets are created, `Creation_DC_AC_pur.py` partially decompress 
 
 Finally `Deeplearning.py` allows to choose on what data set you want to use a choosen Machine learning algorithm.
 
-Just launch `main.py` which regroup all thoses programs whith instructions.
+Just launch `main.py` which regroup all thoses programs with instructions.
