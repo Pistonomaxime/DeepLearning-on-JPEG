@@ -11,6 +11,14 @@ HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 
 
 def huffman_table(image, pos):
+    """
+    In association with generate_huffman_table_dc and generate_huffman_table_ac,
+    generate Huffman table.
+
+    :param param1: An image.
+    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :returns: Huffman table
+    """
     tab = []
     for i in range(0, 16):
         tab.append(int(image[pos + i]))
@@ -31,10 +39,11 @@ def huffman_table(image, pos):
 
 def generate_huffman_table_dc(image, pos):
     """
-    Input: An image and the position of the DC Huffman table in the image header.
-    Output: Huffman DC table.
-    En: Generate Huffman DC table associated to the image.
-    Fr: Génère la table de Huffman DC associé à l'image.
+    Generate the Huffman DC table associated to the image.
+
+    :param param1: An image.
+    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :returns: Huffman DC table
     """
     codeword, codelenght = huffman_table(image, pos)
     for i in range(len(codeword)):
@@ -44,10 +53,11 @@ def generate_huffman_table_dc(image, pos):
 
 def generate_huffman_table_ac(image, pos):
     """
-    Input: An image and the position of the AC Huffman table in the image header.
-    Output: Huffman AC table.
-    En: Generate Huffman AC table associated to the image.
-    Fr: Génère la table de Huffman AC associé à l'image.
+    Generate the Huffman AC table associated to the image.
+
+    :param param1: An image.
+    :param param2: A position of a HUFFMAN_TABLE_MARKER in the image.
+    :returns: Huffman AC table
     """
     codeword, codelenght = huffman_table(image, pos)
     for i in range(len(codeword)):
@@ -61,12 +71,11 @@ def generate_huffman_table_ac(image, pos):
 
 def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
     """
-    Input: Next 20 bits of the stream and Huffman DC table
-    Output:
-    -Next Huffman DC codeword in the Input stream (not used)
-    -His len
-    -
-    Fr: Modification qui permet de renvoyer une visualisation du DC en cours de lecture.
+    Identify the next DC in the stream and return some informations about it.
+
+    :param param1: Next 20 bits of the stream.
+    :param param2: Image Huffman DC table.
+    :returns: Next DC, his len, the size of the next DC value and the index of the element on the Huffman DC table. Note the two last output are equals.
     """
     cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
     for i in range(2, 10):
@@ -83,13 +92,14 @@ def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
 
 def calcul_ac_size(liste_ac_max, huffman_ac):
     """
-    Prend en entrée une liste de 16 bit qui commence par la taille d'un AC.
-    Sort dans la première partie le nombre de bits que l'on doit passer,
-    pour arriver au prochain bloc AC ou bien 0 si on atteint EOB.
-    Sort dans la deuxième partie le nombre de zeros qui correspond au AC que l'on lit.
+    Identify the next AC in the stream and return some informations about it.
     Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zeros).
     Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
     Le 3ème élément de sortie est la taille de l'AC.
+
+    :param param1: Next 16 bits of the stream.
+    :param param2: Image Huffman AC table.
+    :returns: next AC run or 0 if EOB, len of next AC value and len of current AC
     """
     cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
     for i in range(2, 17):
@@ -101,6 +111,8 @@ def calcul_ac_size(liste_ac_max, huffman_ac):
                 break
             if tempo == element:
                 tmp = huffman_ac[1][element_idx]
+                print("laaaaaa")
+                print(huffman_ac, "\n", tempo, "\n", tmp[0], "\n", tmp[1], "\n", i)
                 return (tmp[0], tmp[1], i)
     print("error")
     return (0, 0, 0)
@@ -108,9 +120,15 @@ def calcul_ac_size(liste_ac_max, huffman_ac):
 
 def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     """
-    Prend en entrée le flux binaire d'un JPEG,
-    ainsi que l'indice du depart de la frame (i.e. comme avec une taille de DC).
-    Sort dans Tab_EOB tout les indices des EOB et return le nombre de EOB.
+    Parse the image in DC, DC-VAL, AC, AC-VAL,...
+    Replace the value 0 by 111111111111 if it's a DC and 11111111111 if it's a AC.
+    We have to do that because the binary signed value 0 already exist and is equal to -1.
+
+    :param param1: An image.
+    :param param2: The 3F position which significate the SOS.
+    :param param3: Huffman DC table associated to the image.
+    :param param4: Huffman AC table associated to the image.
+    :returns: The parsed image.
     """
     cpt = (pos_3f + 2) * 8  # Début de l'image.
     val_centrer_reduite = ""
@@ -119,7 +137,7 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
     while retour_dc != -1:
         tmp = str(liste_dc_max[retour_dc[1] : retour_dc[1] + retour_dc[3]])
         if tmp == "":
-            val_centrer_reduite += "111111111111 "  # Remplace la valeur 0 par cette valeur car binaire signé
+            val_centrer_reduite += "111111111111 "
         else:
             val_centrer_reduite += tmp + " "
 
@@ -157,6 +175,14 @@ def trouve_eob(image_att, pos_3f, huffman_dc, huffman_ac):
 
 
 def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
+    """
+    Read all images in dir_path then parse then and finally store the in a file.
+
+    :param param1: Directory in which images are taken then parsed.
+    :param param2: Huffman DC table associated to images.
+    :param param3: Huffman AC table associated to images.
+    :returns: Nothing
+    """
     final_path = dir_path.joinpath("images")
     images_dir = final_path.joinpath("*.jpg")
     tab_document = glob.glob(str(images_dir))
@@ -183,10 +209,14 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
 
 def creation_dc_ac_pur(quality, dataset):
     """
-    Début du programme.
-    On definit les différents MARKERS.
-    Ici le but est d'écrire dans le fichier cible l'image compréssée:
-    à laquelle on a fait la table de huffman inverse.
+    Read images in the selected dataset with the selected quality.
+    Create the associated DC and AC huffman table.
+    Parse all images and store the result in train and test directories respectivelly.
+    Display the time taken to do this.
+
+    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :returns: Nothing
     """
     current_path = Path.cwd()
     if dataset == 0:

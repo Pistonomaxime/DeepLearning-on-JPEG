@@ -14,6 +14,11 @@ QUALITIES = [100, 90, 80, 70, 60]
 
 
 def directory_exists():
+    """
+    Search if the Mnist and Cifar-10 directories already exists.
+
+    :returns: The directories qualities which already exist.
+    """
     mnist_qualities = []
     cifar_qualities = []
     for i in range(100, 50, -10):
@@ -31,12 +36,23 @@ def directory_exists():
 
 
 def give_quality(table_possible):
+    """
+    Ask to the user to choose a quality from the possible qualities.
+
+    :param param1: Table of possible quality we can choose.
+    :returns: Choosen quality.
+    """
     print("You need to choose a JPEG quality factor between:", table_possible)
     quality = ask_int("Quality: ", table_possible)
     return quality
 
 
 def give_should_create():
+    """
+    Ask to the user if he/she want to create the directories.
+
+    :returns: Yes or No.
+    """
     print(
         "Caution data sets will be created in your current directory. 0 for ok 1 for no"
     )
@@ -45,12 +61,26 @@ def give_should_create():
 
 
 def give_dataset():
+    """
+    Ask to the user to choose between Mnist and Cifar-10 datasets.
+
+    :returns: Choosen dataset.
+    """
     print("You need to choose 0 for MNIST and 1 for Cifar-10")
     dataset = ask_int("Data set: ", [0, 1])
     return dataset
 
 
 def give_remaining_qualities(dataset, mnist_qualities, cifar_qualities):
+    """
+    From the input output a table of qualities the user can choose.
+
+    :param param1: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param param2: Mnist directories qualities which already exist.
+    :param param3: Cifar-10 directories qualities which already exist.
+    :raises keyError: For the choosen dataset all qualities were already created.
+    :returns: Possible qualities the user can choose
+    """
     tmp = QUALITIES.copy()
     if dataset == 0:
         for i in mnist_qualities:
@@ -65,6 +95,13 @@ def give_remaining_qualities(dataset, mnist_qualities, cifar_qualities):
 
 
 def ask_int(msg, valid):
+    """
+    Ask to the user to choose a valid value and output the result.
+
+    :param param1: Displayed message.
+    :param param2: All the values that the user can choose.
+    :returns: User selected value.
+    """
     while True:
         try:
             val = int(input(msg))
@@ -76,6 +113,14 @@ def ask_int(msg, valid):
 
 
 def main():
+    """
+    Ask the user differents informtion.
+    Can create dataset if nescessary.
+    Select and load dataset which feed ML algorithm.
+    Compute ML algorithm.
+
+    :returns: Nothing
+    """
     mnist_qualities, cifar_qualities = directory_exists()
     if mnist_qualities == [] and cifar_qualities == []:
         # Si aucun dataset est crée on en crée on demande si il veut créer

@@ -8,10 +8,15 @@ from keras.models import Sequential
 from keras.regularizers import l2
 from keras.layers.normalization import BatchNormalization
 
+TAB_NAME = ["LD", "NB", "Center", "DCT", "Quantif", "Pred", "ZigZag"]
+
 
 def model_perso(num_category):
     """
-    Definie le model Keras.
+    Define two NN layers model.
+
+    :param param1: Number of category.
+    :returns: Two NN layers model.
     """
     model = Sequential()
     model.add(Flatten())
@@ -29,7 +34,10 @@ def model_perso(num_category):
 
 def model_fu_guimaraes(num_category):
     """
-    Definie le model Keras.
+    Define Fu and Guimaraes model.
+
+    :param param1: Number of category.
+    :returns: Fu and Guimaraes model.
     """
     model = Sequential()
     model.add(Flatten())
@@ -44,7 +52,11 @@ def model_fu_guimaraes(num_category):
 
 def model_sans_bn(num_category, in_shape):
     """
-    Definie le model lorsqu'on n'utilise pas le batch normalisation.
+    Define Ulicny and Dahyot model, without batch normalisation steps.
+
+    :param param1: Number of category.
+    :param param2: Input shape.
+    :returns: Ulicny and Dahyot model without batch normalisation.
     """
     model = Sequential()
     model.add(
@@ -95,7 +107,11 @@ def model_sans_bn(num_category, in_shape):
 
 def model_avec_bn(num_category, in_shape):
     """
-    Definie le model lorsqu'on utilise le batch normalisation.
+    Define Ulicny and Dahyot model, with batch normalisation steps.
+
+    :param param1: Number of category.
+    :param param2: Input shape.
+    :returns: Ulicny and Dahyot model with batch normalisation.
     """
     model = Sequential()
     model.add(
@@ -151,7 +167,11 @@ def model_avec_bn(num_category, in_shape):
 
 def model_keras(num_category, in_shape):
     """
-    Definie le model Keras.
+    Define Keras model.
+
+    :param param1: Number of category.
+    :param param2: Input shape.
+    :returns:keras model.
     """
     model = Sequential()
     model.add(Conv2D(32, (3, 3), padding="same", input_shape=in_shape))
@@ -180,7 +200,12 @@ def model_keras(num_category, in_shape):
 
 def lr_scheduler(epoch, learning_rate):
     """
+    Change the learning rate in fuction on the epoch.
     Définie la façon dont va se comporter le learning rate.
+
+    :param param1: Epoch number.
+    :param param2: Learning rate.
+    :returns: Learning rate.
     """
     decay_rate = 5
     if (epoch % 90) == 0 and epoch:
@@ -188,10 +213,15 @@ def lr_scheduler(epoch, learning_rate):
     return learning_rate
 
 
-TAB_NAME = ["LD", "NB", "Center", "DCT", "Quantif", "Pred", "ZigZag"]
-
-
 def differents_noms(train_path, test_path, possible_steps):
+    """
+    Thanks to input output usefull information for computed ML algorithm.
+
+    :param param1: Train directory path.
+    :param param2: Test directory path.
+    :param param3: Decompression step.
+    :returns: Path to train and test file associated to decompression steps and ML save file name.
+    """
     name = TAB_NAME[possible_steps] + ".npy"
     return (
         train_path.joinpath(name),
@@ -211,6 +241,20 @@ def essaies_mnist(
     batch_size,
     num_epoch,
 ):
+    """
+    Thanks to input Compute the desired ML algorithm on desired Mnist decompression dataset.
+
+    :param param1: Train directory path.
+    :param param2: Test directory path.
+    :param param3: Decompression step.
+    :param param4: Number of category.
+    :param param5: Choosen ML algorithm.
+    :param param6: Train labels.
+    :param param7: Test labels.
+    :param param8: Batch size.
+    :param param9: Number of epoch.
+    :returns: Nothing
+    """
     dir_train_dataset, dir_test_dataset, nom_sauvegarde = differents_noms(
         train_path, test_path, possible_steps
     )
@@ -269,6 +313,20 @@ def essaies_cifar(
     batch_size,
     num_epoch,
 ):
+    """
+    Thanks to input Compute the desired ML algorithm on desired Cifar-10 decompression dataset.
+
+    :param param1: Train directory path.
+    :param param2: Test directory path.
+    :param param3: Decompression step.
+    :param param4: Number of category.
+    :param param5: Choosen ML algorithm.
+    :param param6: Train labels.
+    :param param7: Test labels.
+    :param param8: Batch size.
+    :param param9: Number of epoch.
+    :returns: Nothing
+    """
     dir_train_dataset, dir_test_dataset, nom_sauvegarde = differents_noms(
         train_path, test_path, possible_steps
     )
@@ -320,9 +378,16 @@ def essaies_cifar(
     Path.unlink(nom_sauvegarde)
 
 
-################################################################################################
-# Main
 def deeplearning(quality, dataset, possible_steps, algorithm):
+    """
+    Load the selected dataset then compute the selection ML algorithm on this dataset.
+
+    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param param3: Decompression step.
+    :param param5: Choosen ML algorithm.
+    :returns: Nothing
+    """
     num_category = 10
     current_path = Path.cwd()
     if dataset == 0:

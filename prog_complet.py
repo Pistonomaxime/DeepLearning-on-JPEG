@@ -62,6 +62,12 @@ QUANTIF_TAB = {
 
 
 def reorganisation_zigzag(data):
+    """
+    Rearange data coefficients in ZigZag form.
+
+    :param param1: A 32*32 table.
+    :returns: The input table in ZigZag Form.
+    """
     tab = [
         [data[0], data[1], data[5], data[6], data[14], data[15], data[27], data[28]],
         [data[2], data[4], data[7], data[13], data[16], data[26], data[29], data[42]],
@@ -113,6 +119,12 @@ def reorganisation_zigzag(data):
 
 
 def recompose(test):
+    """
+    Reorganise image blocs.
+
+    :param param1: A 16*8*8*1 table.
+    :returns: The input table reshpae into a 32*32*1 table.
+    """
     im_recompose_l1 = []
     im_recompose_l2 = []
     im_recompose_l3 = []
@@ -131,10 +143,14 @@ def recompose(test):
 
 def binary_signed_return(line):
     """
+    Take a line of the parsed image the convert binary signed value to integer value.
     Prend le binaire signé et retourne sa vrai valeur.
     Attention les "11111111111" et "111111111111" représentent les 0 du dé-huffman
     de AC et DC respectivement. En effet il faut bien trouver une valeur non utilisée,
     en binaire signé pour représenter le 0. Car en binaire signé 0 = -1 en décimal normal.
+
+    :param param1: A line of the parsed image.
+    :returns: A table of 64 integer.
     """
     data = list(line.split(" "))
     image = []
@@ -159,6 +175,13 @@ def binary_signed_return(line):
 
 
 def numpy_cast_reshape_and_append(image, test):
+    """
+    Take a 8*8 block as input, reshape it in a 8*8*1 form then append it at the table of block.
+
+    :param param1: A 8*8 bloc.
+    :param param2: A table of blocks
+    :returns: The same table of block with one more reshaped block
+    """
     image = np.asarray(image)
     image = image.reshape(8, 8, 1)
     test.append(image)
@@ -167,7 +190,15 @@ def numpy_cast_reshape_and_append(image, test):
 
 def de_huffman_avec_zigzag(dir_path):
     """
-    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag.
+    Load the images of the directory.
+    Convert binary signed valur to integer value.
+    Compute the Prediction.
+    Put the coefficient in ZigZag form.
+    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman,
+    les dé-prédire et les mettre en forme ZigZag.
+
+    :param param1: The directory where images are stored.
+    :returns: De-predicted ZigZag form decompressed images.
     """
     x_perso = []
     test = []
@@ -195,7 +226,14 @@ def de_huffman_avec_zigzag(dir_path):
 
 def de_huffman_avec_zigzag_sans_prediction(dir_path):
     """
-    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, les dé-prédire et les mettre en forme ZigZag sans prediction.
+    Load the images of the directory.
+    Convert binary signed valur to integer value.
+    Put the coefficient in ZigZag form
+    Charge les images qui se trouvent dans 'dir_path',
+    viens les dé_Huffman et les met en forme ZigZag.
+
+    :param param1: The directory where images are stored.
+    :returns: ZigZag form decompressed images.
     """
     # Le meme que le précédent sans save
     x_perso = []
@@ -220,7 +258,12 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
 
 def de_huffman_sans_zigzag_sans_prediction(dir_path):
     """
-    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman, dé-prédire et les mettre en forme non ZigZag sans prediction.
+    Load the images of the directory.
+    Convert binary signed valur to integer value.
+    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman.
+
+    :param param1: The directory where images are stored.
+    :returns: De_Huffman decompressed images.
     """
     # Le meme que le précédent sans image = reorganisation_zigzag(image)
     x_perso = []
@@ -243,12 +286,26 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
 
 
 def idct2(image):
+    """
+    Compute the IDCT of the 8*8 input block.
+
+    :param param1: a 8*8 block.
+    :returns: IDCT of the block.
+    """
     return scipy.fftpack.idct(
         scipy.fftpack.idct(image, axis=0, norm="ortho"), axis=1, norm="ortho"
     )
 
 
 def centrage_valeur_seuil(q_bloc):
+    """
+    Center the values.
+    Then if value are under 0 they are set to 0.
+    Else if they are above 255 they are set to 255.
+
+    :param param1: a 8*8 block.
+    :returns: centered block. Note we pay attention to overrun values.
+    """
     bloc_dct = q_bloc + 128
     for i in range(8):
         for j in range(8):
@@ -260,6 +317,15 @@ def centrage_valeur_seuil(q_bloc):
 
 
 def extract_and_quantif(i, j, tmp, quantif):
+    """
+    Extract from tmp a block then de-quantify this block.
+
+    :param param1: An indice.
+    :param param2: An indice.
+    :param param3: The current image.
+    :param param4: The quantification table.
+    :returns: De-quantifier block.
+    """
     bloc = []
     for k in range(0, 8):
         bloc.append(tmp[k + 8 * i][8 * j : 8 + 8 * j])
@@ -270,7 +336,12 @@ def extract_and_quantif(i, j, tmp, quantif):
 
 def de_compression_centre(donnees, quantif):
     """
+    From De-predicted ZigZag form decompressed images return image pixels.
     A partir des images dé_huffman et en forme ZigZag retourne les pixels de l'image original.
+
+    :param param1: De-predicted ZigZag form decompressed images.
+    :param param2: Quantification table
+    :returns: Image pixels value.
     """
     sortie = []
     for element in tqdm(donnees):
@@ -291,7 +362,12 @@ def de_compression_centre(donnees, quantif):
 
 def de_compression_dct(donnees, quantif):
     """
+    From De-predicted ZigZag form decompressed images output image between Center and DCT step.
     A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
+
+    :param param1: De-predicted ZigZag form decompressed images.
+    :param param2: Quantification table
+    :returns:Image between Center and DCT step.
     """
     # Le même que le précédent avec q_bloc = centrage_valeur_seuil(q_bloc) en moins.
     sortie = []
@@ -312,7 +388,12 @@ def de_compression_dct(donnees, quantif):
 
 def de_compression_quantif(donnees, quantif):
     """
+    From De-predicted ZigZag form decompressed images output image between DCT and Quantif step.
     A partir des images dé_huffman et en forme ZigZag renvoie a l'étape entre DCT et Quantif.
+
+    :param param1: De-predicted ZigZag form decompressed images.
+    :param param2: Quantification table
+    :returns: Image between DCT and Quantif step.
     """
     # Le même que le précedent avec idct2(bloc)->bloc
     sortie = []
@@ -333,7 +414,10 @@ def de_compression_quantif(donnees, quantif):
 
 def standardisation(x_perso):
     """
-    Standardise les entrées du réseau de neuronne.
+    Compute the data standardisation.
+
+    :param param1: Data.
+    :returns: Standardised data.
     """
     mean = np.mean(x_perso)
     std = np.std(x_perso)
@@ -343,13 +427,27 @@ def standardisation(x_perso):
 
 
 def sauvegarde(dir_path, table, nom):
+    """
+    Save in the given directory the given table at the given name.
+
+    :param param1: Directory in which data will be stored.
+    :param param2: Data to store.
+    :param param3: Name of the save file.
+    """
     np.save(dir_path.joinpath(nom), table)
 
 
 def renvoie_image_nb(train_path, test_path, quantif):
     """
+    Compute the full decompression of the image and store the result in NB file.
     Se débrouille tout seul pour fournir en sortie l'image décompresser noir et blanc.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
+
     x_train_perso = de_huffman_avec_zigzag(train_path)
     x_test_perso = de_huffman_avec_zigzag(test_path)
 
@@ -365,7 +463,13 @@ def renvoie_image_nb(train_path, test_path, quantif):
 
 def renvoie_image_centre(train_path, test_path, quantif):
     """
+    Compute the image decompression since the centering step and store the result in Center file.
     Se débrouille tout seul pour fournir en sortie l'image entre centre et DCT.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
     x_train_perso = de_huffman_avec_zigzag(train_path)
     x_test_perso = de_huffman_avec_zigzag(test_path)
@@ -382,7 +486,13 @@ def renvoie_image_centre(train_path, test_path, quantif):
 
 def renvoie_image_dct(train_path, test_path, quantif):
     """
+    Compute the image decompression since the DCT step and store the result in DCT file.
     Se débrouille tout seul pour fournir en sortie l'image entre DCT et Quantif.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
     x_train_perso = de_huffman_avec_zigzag(train_path)
     x_test_perso = de_huffman_avec_zigzag(test_path)
@@ -399,7 +509,13 @@ def renvoie_image_dct(train_path, test_path, quantif):
 
 def renvoie_image_quantif(train_path, test_path):
     """
+    Compute the image decompression since the Quantif step and store the result in Quantif file.
     Se débrouille tout seul pour fournir en sortie l'image entre Quantif et ZigZag.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
     x_train_perso = de_huffman_avec_zigzag(train_path)
     x_test_perso = de_huffman_avec_zigzag(test_path)
@@ -413,7 +529,13 @@ def renvoie_image_quantif(train_path, test_path):
 
 def renvoie_image_pred(train_path, test_path):
     """
+    Compute the image decompression since the Prediction step and store the result in Pred file.
     Se débrouille tout seul pour fournir en sortie l'image entre Prediction et ZigZag.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
     x_train_perso = de_huffman_avec_zigzag_sans_prediction(train_path)
     x_test_perso = de_huffman_avec_zigzag_sans_prediction(test_path)
@@ -427,7 +549,14 @@ def renvoie_image_pred(train_path, test_path):
 
 def renvoie_image_zigzag(train_path, test_path):
     """
+    Compute the image decompression since the ZigZag reorganisation step.
+    Then store the result in ZigZag file.
     Se débrouille tout seul pour fournir en sortie l'image entre ZigZag et Huffman.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :param param3: Quantification table.
+    :returns: Nothing.
     """
     x_train_perso = de_huffman_sans_zigzag_sans_prediction(train_path)
     x_test_perso = de_huffman_sans_zigzag_sans_prediction(test_path)
@@ -440,6 +569,12 @@ def renvoie_image_zigzag(train_path, test_path):
 
 
 def sous_fonction_revoie_image_ld(dir_path):
+    """
+    Load and return all dir_path images.
+
+    :param param1: A directory where images are stored.
+    :returns: Loaded images.
+    """
     final_path = dir_path.joinpath("images")
     images_dir = final_path.joinpath("*.jpg")
     tab_document = glob.glob(str(images_dir))
@@ -454,6 +589,14 @@ def sous_fonction_revoie_image_ld(dir_path):
 
 
 def renvoie_image_ld_cifar(train_path, test_path):
+    """
+    Compute the full decompression of the Cifar-10 image,
+    thanks to python fuctions and store the result in LD file.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :returns: Nothing.
+    """
     x_train_perso = sous_fonction_revoie_image_ld(train_path)
     x_test_perso = sous_fonction_revoie_image_ld(test_path)
 
@@ -469,7 +612,11 @@ def renvoie_image_ld_cifar(train_path, test_path):
 
 def bonne_taille(table):
     """
-    Remet l'image en 32*32.
+    Mnist images are 28*28 images but JPEG work with 8*8 block.
+    So images avec to be "upscale" to 32*32 pixels.
+
+    :param param1: A 28*28 image.
+    :returns: 32*32 image completed by dummy data.
     """
     vingthuit = np.zeros((1, 28))
     vingthuit = vingthuit.astype(int)
@@ -489,6 +636,14 @@ def bonne_taille(table):
 
 
 def renvoie_image_ld_mnist(train_path, test_path):
+    """
+    Compute the full decompression of the Mnist image,
+    thanks to python fuctions and store the result in LD file.
+
+    :param param1: Image train path to decompress.
+    :param param2: Image test path to decompress.
+    :returns: Nothing.
+    """
     x_train_perso = sous_fonction_revoie_image_ld(train_path)
     x_test_perso = sous_fonction_revoie_image_ld(test_path)
 
@@ -506,15 +661,30 @@ def renvoie_image_ld_mnist(train_path, test_path):
 
 
 def timefunc(function, desc):
+    """
+    Display the time for a given function to be executed.
+    The displayed sentence is personalised thanks to the desc parameter.
+
+    :param param1: A function to compute.
+    :param param2: A text to display.
+    :returns: Nothing.
+    """
     start_time = time.time()
     function()
     temps = time.time() - start_time
     print("Time {} creation:".format(desc), temps, "secondes")
 
 
-################################################################################################
-# Main
 def prog_complet(quality, dataset):
+    """
+    Uncompressed the chossen dataset.
+    Then store all intermediary decompression steps result in differents files.
+    Display the time taken for each decompression steps.
+
+    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :returns: Nothing.
+    """
     quantif = QUANTIF_TAB[quality]
     current_path = Path.cwd()
     start_time = time.time()

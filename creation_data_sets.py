@@ -5,6 +5,17 @@ from keras.datasets import mnist, cifar10
 
 
 def convert(dir_path, table, dataset, quality, test_case):
+    """
+    Create the images dataset with the given parameters.
+    Note: Cifar dataset is converted to grey scale images.
+
+    :param param1: The directory in which the dataset will be created.
+    :param param2: The images pixel dataset.
+    :param param3: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param param4: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param param5: Can be set to true in order to create only the 20 first images of the datasets.
+    :returns: Nothing
+    """
     final_path = dir_path.joinpath("images")
     if test_case:
         size = 20
@@ -19,11 +30,26 @@ def convert(dir_path, table, dataset, quality, test_case):
 
 
 def create_directories(train_path, test_path):
+    """
+    Create the directories in which train and test datasets will be stored.
+
+    :param param1: The directory in which the train dataset will be stored.
+    :param param2: The directory in which the test dataset will be stored.
+    :returns: Nothing
+    """
     train_path.joinpath("images").mkdir(parents=True)
     test_path.joinpath("images").mkdir(parents=True)
 
 
 def creation_data_sets(quality, dataset, test_case=False):
+    """
+    Thanks to parameters create the associated JPEG compressed dataset.
+
+    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param param3: Can be set to true in order to create only the 20 first images of the datasets.
+    :returns: Nothing
+    """
     current_path = Path.cwd()
     if dataset == 0:
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
