@@ -290,7 +290,7 @@ def sha_images(dir_path):
     """
     Hash the dir_path pixel image and output the result.
 
-    :param param1: The pixel image directory.
+    :param dir_path: The pixel image directory.
     :returns: A hash value.
     """
     m_hash = hashlib.sha256()
@@ -310,7 +310,7 @@ def sha_dc_ac(dir_path):
     """
     Hash the dir_path parsed images and output the result.
 
-    :param param1: The parsed image directory.
+    :param dir_path: The parsed image directory.
     :returns: A hash value.
     """
     m_hash = hashlib.sha256()
@@ -324,7 +324,7 @@ def sha_complet(dir_path):
     """
     For all JPEG decompression steps compute the hash of the differents outputs.
 
-    :param param1: The JPEG decompression steps directory.
+    :param dir_path: The JPEG decompression steps directory.
     :returns: A hash value.
     """
     m_hash = hashlib.sha256()
@@ -338,9 +338,9 @@ def display_result(sha_result, sha_expected, name):
     """
     Check in input are are the same or not.
 
-    :param param1: A given hash value.
-    :param param2: A hash value expected.
-    :param param3: A display parameter
+    :param sha_result: A given hash value.
+    :param sha_expected: A hash value expected.
+    :param name: A display parameter
     :returns: Nothing.
     :raises keyError: Hash values are differnts.
     """
@@ -355,10 +355,10 @@ def image_partial_test(quality, dataset, train_path, test_path):
     """
     Check if the pixel image created during the partial test are well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_images(
@@ -378,10 +378,10 @@ def image_full_test(quality, dataset, train_path, test_path):
     """
     Check if the pixel image created during the full test are well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_images(train_path)
@@ -397,10 +397,10 @@ def data_dc_ac_partial_test(quality, dataset, train_path, test_path):
     """
     Check if the DC_AC_pur file, created during the partial test is well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_dc_ac(train_path)
@@ -418,10 +418,10 @@ def data_dc_ac_full_test(quality, dataset, train_path, test_path):
     """
     Check if the DC_AC_pur file, created during the full test is well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_dc_ac(train_path)
@@ -439,10 +439,10 @@ def complet_partial_test(quality, dataset, train_path, test_path):
     """
     Check if the JPEG decompressions steps file, created during the partial test are well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_complet(train_path)
@@ -460,10 +460,10 @@ def complet_full_test(quality, dataset, train_path, test_path):
     """
     Check if the JPEG decompressions steps file, created during the full test are well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     sha_train = sha_complet(train_path)
@@ -479,10 +479,10 @@ def partial_test(quality, dataset, train_path, test_path):
     """
     Check all files created during partiel test.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     image_partial_test(quality, dataset, train_path, test_path)
@@ -494,10 +494,10 @@ def full_test(quality, dataset, train_path, test_path):
     """
     Check all files created during full test.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Train directory path.
-    :param param4: Test directory path.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param train_path: Train directory path.
+    :param test_path: Test directory path.
     :returns: Nothing.
     """
     image_full_test(quality, dataset, train_path, test_path)
@@ -510,9 +510,9 @@ def test(quality, dataset, test_case=False):
     If test_case=True. Create the partial dataset and check if the files are were well created.
     Else check if the full files are were well created.
 
-    :param param1: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param param2: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param param3: Set to false for full test and True for partial tests.
+    :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
+    :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
+    :param test_case: Set to false for full test and True for partial tests.
     :returns: Nothing.
     """
     current_path = Path.cwd()
