@@ -367,7 +367,7 @@ def de_compression_dct(donnees, quantif):
 
     :param donnees: De-predicted ZigZag form decompressed images.
     :param quantif: Quantification table
-    :returns:Image between Center and DCT step.
+    :returns: Image between Center and DCT step.
     """
     # Le même que le précédent avec q_bloc = centrage_valeur_seuil(q_bloc) en moins.
     sortie = []
