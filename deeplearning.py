@@ -171,7 +171,7 @@ def model_keras(num_category, in_shape):
 
     :param num_category: Number of category.
     :param in_shape: Input shape.
-    :returns:keras model.
+    :returns: keras model.
     """
     model = Sequential()
     model.add(Conv2D(32, (3, 3), padding="same", input_shape=in_shape))
