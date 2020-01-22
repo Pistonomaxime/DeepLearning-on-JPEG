@@ -322,7 +322,7 @@ def sha_dc_ac(dir_path):
 
 def sha_complet(dir_path):
     """
-    For all JPEG decompression steps compute the hash of the differents outputs.
+    For all JPEG decompression steps compute the hash of different outputs.
 
     :param dir_path: The JPEG decompression steps directory.
     :returns: A hash value.
@@ -336,7 +336,7 @@ def sha_complet(dir_path):
 
 def display_result(sha_result, sha_expected, name):
     """
-    Check in input are are the same or not.
+    Check if inputs are the same or not.
 
     :param sha_result: A given hash value.
     :param sha_expected: A hash value expected.
@@ -437,7 +437,7 @@ def data_dc_ac_full_test(quality, dataset, train_path, test_path):
 
 def complet_partial_test(quality, dataset, train_path, test_path):
     """
-    Check if the JPEG decompressions steps file, created during the partial test are well created.
+    Check if the JPEG decompression steps files created during the partial test are well created.
 
     :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
     :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
@@ -458,7 +458,7 @@ def complet_partial_test(quality, dataset, train_path, test_path):
 
 def complet_full_test(quality, dataset, train_path, test_path):
     """
-    Check if the JPEG decompressions steps file, created during the full test are well created.
+    Check if the JPEG decompressions steps files created during the full test are well created.
 
     :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
     :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
@@ -507,8 +507,8 @@ def full_test(quality, dataset, train_path, test_path):
 
 def test(quality, dataset, test_case=False):
     """
-    If test_case=True. Create the partial dataset and check if the files are were well created.
-    Else check if the full files are were well created.
+    If test_case=True. Create the partial dataset and check if the files are well created.
+    Else check if the full files are well created.
 
     :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
     :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
