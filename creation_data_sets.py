@@ -13,7 +13,7 @@ def convert(dir_path, table, dataset, quality, test_case):
     :param table: The images pixel dataset.
     :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
     :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
-    :param test_case: Can be set to true in order to create only the 20 first images of the datasets.
+    :param test_case: Can be set to true in order to create only the 20 first images of the dataset.
     :returns: Nothing
     """
     final_path = dir_path.joinpath("images")
@@ -43,11 +43,11 @@ def create_directories(train_path, test_path):
 
 def creation_data_sets(quality, dataset, test_case=False):
     """
-    Thanks to parameters create the associated JPEG compressed dataset.
+    Thanks to parameters creates the associated JPEG compressed dataset.
 
     :param quality: Choosent JPEG quality between 100, 90, 80, 70 and 60.
     :param dataset: Choosen dataset 0 for Mnist and 1 for Cifar-10.
-    :param test_case: Can be set to true in order to create only the 20 first images of the datasets.
+    :param test_case: Can be set to true in order to create only the 20 first images of the dataset.
     :returns: Nothing
     """
     current_path = Path.cwd()
