@@ -132,7 +132,7 @@ def main():
         quality = give_quality(QUALITIES)
         dataset = give_dataset()
     elif mnist_qualities != QUALITIES or cifar_qualities != QUALITIES:
-        # Les on a pas créer tous les datasets possibles.
+        # Là, on a pas créer tous les datasets possibles.
         # On demande si on veut en créer de nouveaux.
         print("You already have some dataset created but you can create new one")
         should_create = give_should_create()
