@@ -144,10 +144,10 @@ def recompose(test):
 def binary_signed_return(line):
     """
     Take a line of the parsed image the convert binary signed value to integer value.
-    Prend le binaire signé et retourne sa vrai valeur.
+    Prend le binaire signé et retourne sa vraie valeur.
     Attention les "11111111111" et "111111111111" représentent les 0 du dé-huffman
-    de AC et DC respectivement. En effet il faut bien trouver une valeur non utilisée,
-    en binaire signé pour représenter le 0. Car en binaire signé 0 = -1 en décimal normal.
+    de AC et DC respectivement. En effet, il faut bien trouver une valeur non utilisée
+    en binaire signé pour représenter le 0. En binaire signé 0 = -1 en décimal normal.
 
     :param line: A line of the parsed image.
     :returns: A table of 64 integer.
@@ -194,7 +194,7 @@ def de_huffman_avec_zigzag(dir_path):
     Convert binary signed valur to integer value.
     Compute the Prediction.
     Put the coefficient in ZigZag form.
-    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman,
+    Charge les images qui se trouvent dans 'dir_path' et vient les dé_Huffman,
     les dé-prédire et les mettre en forme ZigZag.
 
     :param dir_path: The directory where images are stored.
@@ -230,7 +230,7 @@ def de_huffman_avec_zigzag_sans_prediction(dir_path):
     Convert binary signed valur to integer value.
     Put the coefficient in ZigZag form
     Charge les images qui se trouvent dans 'dir_path',
-    viens les dé_Huffman et les met en forme ZigZag.
+    vient les dé_Huffman et les met en forme ZigZag.
 
     :param dir_path: The directory where images are stored.
     :returns: ZigZag form decompressed images.
@@ -260,12 +260,12 @@ def de_huffman_sans_zigzag_sans_prediction(dir_path):
     """
     Load the images of the directory.
     Convert binary signed valur to integer value.
-    Charge les images qui se trouvent dans 'dir_path' et viens les dé_Huffman.
+    Charge les images qui se trouvent dans 'dir_path' et vient les dé_Huffman.
 
     :param dir_path: The directory where images are stored.
     :returns: De_Huffman decompressed images.
     """
-    # Le meme que le précédent sans image = reorganisation_zigzag(image)
+    # Le même que le précédent sans image = reorganisation_zigzag(image)
     x_perso = []
     test = []
     im_recompose = []
@@ -300,7 +300,7 @@ def idct2(image):
 def centrage_valeur_seuil(q_bloc):
     """
     Center the values.
-    Then if value are under 0 they are set to 0.
+    Then if values are under 0 they are set to 0.
     Else if they are above 255 they are set to 255.
 
     :param q_bloc: a 8*8 block.
@@ -363,7 +363,7 @@ def de_compression_centre(donnees, quantif):
 def de_compression_dct(donnees, quantif):
     """
     From De-predicted ZigZag form decompressed images output image between Center and DCT step.
-    A partir des images dé_huffman et en forme ZigZag a l'étape entre Centre et DCT.
+    A partir des images dé_huffman et en forme ZigZag à l'étape entre Centre et DCT.
 
     :param donnees: De-predicted ZigZag form decompressed images.
     :param quantif: Quantification table
@@ -674,7 +674,7 @@ def timefunc(function, desc):
 
 def prog_complet(quality, dataset):
     """
-    Uncompressed the chossen dataset.
+    Uncompressed the chosen dataset.
     Then store all intermediary decompression steps result in differents files.
     Display the time taken for each decompression steps.
 
