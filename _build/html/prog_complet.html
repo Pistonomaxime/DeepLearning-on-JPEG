@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Prog complet file &mdash; test 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Test file" href="test.html" />
+    <link rel="prev" title="Main file" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> test
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="creation_data_sets.html">Creation data sets file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creation_dc_ac_pur.html">Creation DC AC file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main file</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prog complet file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test file</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">test</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Prog complet file</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/prog_complet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-prog_complet">
+<span id="prog-complet-file"></span><h1>Prog complet file<a class="headerlink" href="#module-prog_complet" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="prog_complet.binary_signed_return">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">binary_signed_return</code><span class="sig-paren">(</span><em class="sig-param">line</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.binary_signed_return" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a line of the parsed image the convert binary signed value to integer value.
+Prend le binaire signé et retourne sa vraie valeur.
+Attention les “11111111111” et “111111111111” représentent les 0 du dé-huffman
+de AC et DC respectivement. En effet, il faut bien trouver une valeur non utilisée
+en binaire signé pour représenter le 0. En binaire signé 0 = -1 en décimal normal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>line</strong> – A line of the parsed image.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A table of 64 integer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.bonne_taille">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">bonne_taille</code><span class="sig-paren">(</span><em class="sig-param">table</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.bonne_taille" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mnist images are 28*28 images but JPEG work with 8*8 block.
+So images avec to be “upscale” to 32*32 pixels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table</strong> – A 28*28 image.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>32*32 image completed by dummy data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.centrage_valeur_seuil">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">centrage_valeur_seuil</code><span class="sig-paren">(</span><em class="sig-param">q_bloc</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.centrage_valeur_seuil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Center the values.
+Then if values are under 0 they are set to 0.
+Else if they are above 255 they are set to 255.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q_bloc</strong> – a 8*8 block.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>centered block. Note we pay attention to overrun values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_compression_centre">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_compression_centre</code><span class="sig-paren">(</span><em class="sig-param">donnees</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_compression_centre" title="Permalink to this definition">¶</a></dt>
+<dd><p>From De-predicted ZigZag form decompressed images return image pixels.
+A partir des images dé_huffman et en forme ZigZag retourne les pixels de l’image original.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>donnees</strong> – De-predicted ZigZag form decompressed images.</p></li>
+<li><p><strong>quantif</strong> – Quantification table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image pixels value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_compression_dct">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_compression_dct</code><span class="sig-paren">(</span><em class="sig-param">donnees</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_compression_dct" title="Permalink to this definition">¶</a></dt>
+<dd><p>From De-predicted ZigZag form decompressed images output image between Center and DCT step.
+A partir des images dé_huffman et en forme ZigZag à l’étape entre Centre et DCT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>donnees</strong> – De-predicted ZigZag form decompressed images.</p></li>
+<li><p><strong>quantif</strong> – Quantification table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image between Center and DCT step.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_compression_quantif">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_compression_quantif</code><span class="sig-paren">(</span><em class="sig-param">donnees</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_compression_quantif" title="Permalink to this definition">¶</a></dt>
+<dd><p>From De-predicted ZigZag form decompressed images output image between DCT and Quantif step.
+A partir des images dé_huffman et en forme ZigZag renvoie a l’étape entre DCT et Quantif.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>donnees</strong> – De-predicted ZigZag form decompressed images.</p></li>
+<li><p><strong>quantif</strong> – Quantification table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Image between DCT and Quantif step.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_huffman_avec_zigzag">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_huffman_avec_zigzag</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_huffman_avec_zigzag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the images of the directory.
+Convert binary signed valur to integer value.
+Compute the Prediction.
+Put the coefficient in ZigZag form.
+Charge les images qui se trouvent dans ‘dir_path’ et vient les dé_Huffman,
+les dé-prédire et les mettre en forme ZigZag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_path</strong> – The directory where images are stored.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>De-predicted ZigZag form decompressed images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_huffman_avec_zigzag_sans_prediction">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_huffman_avec_zigzag_sans_prediction</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_huffman_avec_zigzag_sans_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the images of the directory.
+Convert binary signed valur to integer value.
+Put the coefficient in ZigZag form
+Charge les images qui se trouvent dans ‘dir_path’,
+vient les dé_Huffman et les met en forme ZigZag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_path</strong> – The directory where images are stored.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ZigZag form decompressed images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.de_huffman_sans_zigzag_sans_prediction">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">de_huffman_sans_zigzag_sans_prediction</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.de_huffman_sans_zigzag_sans_prediction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the images of the directory.
+Convert binary signed valur to integer value.
+Charge les images qui se trouvent dans ‘dir_path’ et vient les dé_Huffman.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_path</strong> – The directory where images are stored.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>De_Huffman decompressed images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.extract_and_quantif">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">extract_and_quantif</code><span class="sig-paren">(</span><em class="sig-param">i</em>, <em class="sig-param">j</em>, <em class="sig-param">tmp</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.extract_and_quantif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract from tmp a block then de-quantify this block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – An indice.</p></li>
+<li><p><strong>j</strong> – An indice.</p></li>
+<li><p><strong>tmp</strong> – The current image.</p></li>
+<li><p><strong>quantif</strong> – The quantification table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>De-quantifier block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.idct2">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">idct2</code><span class="sig-paren">(</span><em class="sig-param">image</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.idct2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the IDCT of the 8*8 input block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>image</strong> – a 8*8 block.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>IDCT of the block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.numpy_cast_reshape_and_append">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">numpy_cast_reshape_and_append</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">test</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.numpy_cast_reshape_and_append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take a 8*8 block as input, reshape it in a 8*8*1 form then append it at the table of block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – A 8*8 bloc.</p></li>
+<li><p><strong>test</strong> – A table of blocks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The same table of block with one more reshaped block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.prog_complet">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">prog_complet</code><span class="sig-paren">(</span><em class="sig-param">quality</em>, <em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.prog_complet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uncompressed the chosen dataset.
+Then store all intermediary decompression steps result in differents files.
+Display the time taken for each decompression steps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quality</strong> – Choosent JPEG quality between 100, 90, 80, 70 and 60.</p></li>
+<li><p><strong>dataset</strong> – Choosen dataset 0 for Mnist and 1 for Cifar-10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.recompose">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">recompose</code><span class="sig-paren">(</span><em class="sig-param">test</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.recompose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reorganise image blocs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test</strong> – A 16*8*8*1 table.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The input table reshpae into a 32*32*1 table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_centre">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_centre</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_centre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the image decompression since the centering step and store the result in Center file.
+Se débrouille tout seul pour fournir en sortie l’image entre centre et DCT.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+<li><p><strong>quantif</strong> – Quantification table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_dct">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_dct</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_dct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the image decompression since the DCT step and store the result in DCT file.
+Se débrouille tout seul pour fournir en sortie l’image entre DCT et Quantif.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+<li><p><strong>quantif</strong> – Quantification table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_ld_cifar">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_ld_cifar</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_ld_cifar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the full decompression of the Cifar-10 image,
+thanks to python fuctions and store the result in LD file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_ld_mnist">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_ld_mnist</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_ld_mnist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the full decompression of the Mnist image,
+thanks to python fuctions and store the result in LD file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_nb">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_nb</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em>, <em class="sig-param">quantif</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_nb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the full decompression of the image and store the result in NB file.
+Se débrouille tout seul pour fournir en sortie l’image décompresser noir et blanc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+<li><p><strong>quantif</strong> – Quantification table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_pred">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_pred</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_pred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the image decompression since the Prediction step and store the result in Pred file.
+Se débrouille tout seul pour fournir en sortie l’image entre Prediction et ZigZag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_quantif">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_quantif</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_quantif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the image decompression since the Quantif step and store the result in Quantif file.
+Se débrouille tout seul pour fournir en sortie l’image entre Quantif et ZigZag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.renvoie_image_zigzag">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">renvoie_image_zigzag</code><span class="sig-paren">(</span><em class="sig-param">train_path</em>, <em class="sig-param">test_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.renvoie_image_zigzag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the image decompression since the ZigZag reorganisation step.
+Then store the result in ZigZag file.
+Se débrouille tout seul pour fournir en sortie l’image entre ZigZag et Huffman.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_path</strong> – Image train path to decompress.</p></li>
+<li><p><strong>test_path</strong> – Image test path to decompress.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.reorganisation_zigzag">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">reorganisation_zigzag</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.reorganisation_zigzag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rearange data coefficients in ZigZag form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – A 32*32 table.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The input table in ZigZag Form.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.sauvegarde">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">sauvegarde</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">table</em>, <em class="sig-param">nom</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.sauvegarde" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save in the given directory the given table at the given name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Directory in which data will be stored.</p></li>
+<li><p><strong>table</strong> – Data to store.</p></li>
+<li><p><strong>nom</strong> – Name of the save file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.sous_fonction_revoie_image_ld">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">sous_fonction_revoie_image_ld</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.sous_fonction_revoie_image_ld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and return all dir_path images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dir_path</strong> – A directory where images are stored.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Loaded images.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.standardisation">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">standardisation</code><span class="sig-paren">(</span><em class="sig-param">x_perso</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.standardisation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the data standardisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x_perso</strong> – Data.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Standardised data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="prog_complet.timefunc">
+<code class="sig-prename descclassname">prog_complet.</code><code class="sig-name descname">timefunc</code><span class="sig-paren">(</span><em class="sig-param">function</em>, <em class="sig-param">desc</em><span class="sig-paren">)</span><a class="headerlink" href="#prog_complet.timefunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the time for a given function to be executed.
+The displayed sentence is personalised thanks to the desc parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>function</strong> – A function to compute.</p></li>
+<li><p><strong>desc</strong> – A text to display.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test.html" class="btn btn-neutral float-right" title="Test file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="main.html" class="btn btn-neutral float-left" title="Main file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, pistono
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
