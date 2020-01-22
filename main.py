@@ -123,7 +123,7 @@ def main():
     """
     mnist_qualities, cifar_qualities = directory_exists()
     if mnist_qualities == [] and cifar_qualities == []:
-        # Si aucun dataset est crée on en crée on demande si il veut créer
+        # Si aucun dataset est créé on en crée on demande si il veut créer
         should_create = give_should_create()
         if should_create == 1:
             # Si il veut pas créer fin.
@@ -132,17 +132,17 @@ def main():
         quality = give_quality(QUALITIES)
         dataset = give_dataset()
     elif mnist_qualities != QUALITIES or cifar_qualities != QUALITIES:
-        # Les on a pas créer tout les dtasets possible.
-        # On demande si on veut en crée de nouveaux.
+        # Les on a pas créer tous les datasets possibles.
+        # On demande si on veut en créer de nouveaux.
         print("You already have some dataset created but you can create new one")
         should_create = give_should_create()
         if should_create == 0:
             # Si oui on demande quel dataset on veut créer
             dataset = give_dataset()
-            # On vérifie que toutes les qualitées pour ce dataset on pas deja été crées.
+            # On vérifie que toutes les qualités pour ce dataset on pas déjà été créé.
             # On retourne les qualitées qu'il reste a créer
             tmp = give_remaining_qualities(dataset, mnist_qualities, cifar_qualities)
-            # On demande parmies les qualitées restantes les quels il souhaite créer
+            # On demande parmi les qualités restantes les quelles il souhaite créer
             quality = give_quality(tmp)
     if should_create == 0:
         # Si il faut créer les datasets on le fait.
@@ -155,7 +155,7 @@ def main():
         test(quality, dataset)
         print("Data sets were successfully created!")
     else:
-        # Sinon on doit demander le dataset et le qualitée.
+        # Sinon on doit demander le dataset et la qualité.
         if mnist_qualities == []:
             dataset = 1
             print("You work on Cifar-10.")
