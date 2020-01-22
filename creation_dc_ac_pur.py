@@ -13,7 +13,7 @@ HUFFMAN_TABLE_MARKER = b"\xff\xc4"
 def huffman_table(image, pos):
     """
     In association with generate_huffman_table_dc and generate_huffman_table_ac,
-    generate Huffman table.
+    generates Huffman table.
 
     :param image: An image.
     :param pos: A position of a HUFFMAN_TABLE_MARKER in the image.
@@ -53,7 +53,7 @@ def generate_huffman_table_dc(image, pos):
 
 def generate_huffman_table_ac(image, pos):
     """
-    Generate the Huffman AC table associated to the image.
+    Generates the Huffman AC table associated to the image.
 
     :param image: An image.
     :param pos: A position of a HUFFMAN_TABLE_MARKER in the image.
@@ -71,11 +71,11 @@ def generate_huffman_table_ac(image, pos):
 
 def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
     """
-    Identify the next DC in the stream and return some informations about it.
+    Identifies the next DC in the stream and returns some information about it.
 
     :param liste_dc_max: Next 20 bits of the stream.
     :param huffman_dc: Image Huffman DC table.
-    :returns: Next DC, his len, the size of the next DC value and the index of the element on the Huffman DC table. Note the two last output are equals.
+    :returns: Next DC, his len, the size of the next DC value and the index of the element on the Huffman DC table. Note the two last outputs are equals.
     """
     cur = 0  # Curseur représentant la position de départ dans Huffman_AC/DC
     for i in range(2, 10):
@@ -92,9 +92,9 @@ def calcul_dc_size_modifie(liste_dc_max, huffman_dc):
 
 def calcul_ac_size(liste_ac_max, huffman_ac):
     """
-    Identify the next AC in the stream and return some informations about it.
-    Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zeros).
-    Le 2ème élément de sortie est le 2eme nibble de la catégorie (i.e. taille de la valeur de l'AC).
+    Identifies the next AC in the stream and returns some information about it.
+    Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zéro).
+    Le 2ème élément de sortie est le 2ème nibble de la catégorie (i.e. taille de la valeur de l'AC).
     Le 3ème élément de sortie est la taille de l'AC.
 
     :param liste_ac_max: Next 16 bits of the stream.
@@ -192,8 +192,8 @@ def a_faire_deux_fois_pour_train_et_test(dir_path, huffman_dc, huffman_ac):
         with open(nom_de_photo, "rb") as file:
             # On lit l'image
             image = file.read()
-            # On chercher la position dans le fichier Hexa
-            # des deux MARKERS de début de tabble de Huffman,
+            # On cherche la position dans le fichier Hexa
+            # des deux MARKERS de début de table de Huffman,
             # du MARKER SOS et du 3F qui suit le SOS.
             pos_3f = image.find(MARKER_3F, image.find(SOS_MARKER))
             # On recherche tout les FF00 et on les supprimes.
