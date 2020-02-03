@@ -27,6 +27,17 @@ conda create --name dl_jpeg --file requirements.txt
 conda activate dl_jpeg
 ```
 
+## Development
+
+```bash
+# Build docs (manually)
+pip install -r requirements-dev.txt
+make -C docs html
+
+# Open index.html in browser
+xdg-open docs/_build/html/index.html
+```
+
 ## Usage
 
 `Creation_data_sets.py` file, create train and test directories, in which MNIST or CIFAR-10 JPEG compresed images are stored. This program needs as input the desired JPEG quality. Caution, those direcories will be created in the current directory.
