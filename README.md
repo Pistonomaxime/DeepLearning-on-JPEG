@@ -1,8 +1,11 @@
 # DeepLearning-on-JPEG
 
 [![Build Status](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/workflows/ci/badge.svg)](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/actions)
+[![Docs Status](https://github.com/Pistonomaxime/DeepLearning-on-JPEG/workflows/Documentation/badge.svg)](
+https://pistonomaxime.github.io/DeepLearning-on-JPEG/)
 
 Code necessary to reproduce DCC article results.
+
 
 ## Requirements
 
