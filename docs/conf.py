@@ -13,7 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("."))
+sys.path.insert(0, os.path.abspath(".."))
 
 
 # -- Project information -----------------------------------------------------
@@ -33,6 +33,7 @@ release = "0.0.1"
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
+    "sphinx.ext.githubpages" # Add .nojekyll file in _build/html
 ]
 
 # Add any paths that contain templates here, relative to this directory.
