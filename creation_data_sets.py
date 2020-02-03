@@ -7,7 +7,7 @@ from keras.datasets import mnist, cifar10
 def convert(dir_path, table, dataset, quality, test_case):
     """
     Create the images dataset with the given parameters.
-    Note: Cifar dataset is converted to grey scale images.
+    Note: CIFAR dataset is converted to grey scale images.
 
     :param dir_path: The directory in which the dataset will be created.
     :param table: The images pixel dataset.
