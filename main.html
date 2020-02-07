@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Main file &mdash; DeepLearning on partially JPEG compressed images. 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Prog complet file" href="prog_complet.html" />
+    <link rel="prev" title="Deeplearning file" href="deeplearning.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> DeepLearning on partially JPEG compressed images.
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="creation_data_sets.html">Creation data sets file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="creation_dc_ac_pur.html">Creation DC AC file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning file</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Main file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_complet.html">Prog complet file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test file</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DeepLearning on partially JPEG compressed images.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Main file</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/main.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-main">
+<span id="main-file"></span><h1>Main file<a class="headerlink" href="#module-main" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="main.ask_int">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">ask_int</code><span class="sig-paren">(</span><em class="sig-param">msg</em>, <em class="sig-param">valid</em><span class="sig-paren">)</span><a class="headerlink" href="#main.ask_int" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask to the user to choose a valid value and output the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> – Displayed message.</p></li>
+<li><p><strong>valid</strong> – All the values that the user can choose.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>User selected value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.directory_exists">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">directory_exists</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.directory_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search if the Mnist and Cifar-10 directories already exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The directories qualities which already exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.give_dataset">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">give_dataset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.give_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask to the user to choose between Mnist and Cifar-10 datasets.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Choosen dataset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.give_quality">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">give_quality</code><span class="sig-paren">(</span><em class="sig-param">table_possible</em><span class="sig-paren">)</span><a class="headerlink" href="#main.give_quality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask to the user to choose a quality from the possible qualities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table_possible</strong> – Table of possible quality we can choose.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Choosen quality.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.give_remaining_qualities">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">give_remaining_qualities</code><span class="sig-paren">(</span><em class="sig-param">dataset</em>, <em class="sig-param">mnist_qualities</em>, <em class="sig-param">cifar_qualities</em><span class="sig-paren">)</span><a class="headerlink" href="#main.give_remaining_qualities" title="Permalink to this definition">¶</a></dt>
+<dd><p>From the input output a table of qualities the user can choose.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Choosen dataset 0 for Mnist and 1 for Cifar-10.</p></li>
+<li><p><strong>mnist_qualities</strong> – Mnist directories qualities which already exist.</p></li>
+<li><p><strong>cifar_qualities</strong> – Cifar-10 directories qualities which already exist.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>keyError</strong> – For the choosen dataset all qualities were already created.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Possible qualities the user can choose</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.give_should_create">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">give_should_create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.give_should_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask to the user if he/she want to create the directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Yes or No.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="main.main">
+<code class="sig-prename descclassname">main.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#main.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask the user differents informtion.
+Can create dataset if nescessary.
+Select and load dataset which feed ML algorithm.
+Compute ML algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="prog_complet.html" class="btn btn-neutral float-right" title="Prog complet file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deeplearning.html" class="btn btn-neutral float-left" title="Deeplearning file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pistono Maxime, Mouchet Maxime, Brouilhet Laura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

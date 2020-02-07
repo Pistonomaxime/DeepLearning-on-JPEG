@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creation DC AC file &mdash; DeepLearning on partially JPEG compressed images. 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Deeplearning file" href="deeplearning.html" />
+    <link rel="prev" title="Creation data sets file" href="creation_data_sets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> DeepLearning on partially JPEG compressed images.
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="creation_data_sets.html">Creation data sets file</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creation DC AC file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deeplearning.html">Deeplearning file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Main file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prog_complet.html">Prog complet file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test.html">Test file</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DeepLearning on partially JPEG compressed images.</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Creation DC AC file</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/creation_dc_ac_pur.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-creation_dc_ac_pur">
+<span id="creation-dc-ac-file"></span><h1>Creation DC AC file<a class="headerlink" href="#module-creation_dc_ac_pur" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="creation_dc_ac_pur.a_faire_deux_fois_pour_train_et_test">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">a_faire_deux_fois_pour_train_et_test</code><span class="sig-paren">(</span><em class="sig-param">dir_path</em>, <em class="sig-param">huffman_dc</em>, <em class="sig-param">huffman_ac</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.a_faire_deux_fois_pour_train_et_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read all images in dir_path then parse then and finally store the in a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dir_path</strong> – Directory in which images are taken then parsed.</p></li>
+<li><p><strong>huffman_dc</strong> – Huffman DC table associated to images.</p></li>
+<li><p><strong>huffman_ac</strong> – Huffman AC table associated to images.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.calcul_ac_size">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">calcul_ac_size</code><span class="sig-paren">(</span><em class="sig-param">liste_ac_max</em>, <em class="sig-param">huffman_ac</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.calcul_ac_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifies the next AC in the stream and returns some information about it.
+Le 1er élément de sortie est le 1er nibble de la catégorie (i.e. nombre de zéro).
+Le 2ème élément de sortie est le 2ème nibble de la catégorie (i.e. taille de la valeur de l’AC).
+Le 3ème élément de sortie est la taille de l’AC.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>liste_ac_max</strong> – Next 16 bits of the stream.</p></li>
+<li><p><strong>huffman_ac</strong> – Image Huffman AC table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>next AC run or 0 if EOB, len of next AC value and len of current AC</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.calcul_dc_size_modifie">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">calcul_dc_size_modifie</code><span class="sig-paren">(</span><em class="sig-param">liste_dc_max</em>, <em class="sig-param">huffman_dc</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.calcul_dc_size_modifie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifies the next DC in the stream and returns some information about it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>liste_dc_max</strong> – Next 20 bits of the stream.</p></li>
+<li><p><strong>huffman_dc</strong> – Image Huffman DC table.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Next DC, his len, the size of the next DC value and the index of the element on the Huffman DC table. Note the two last outputs are equals.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.creation_dc_ac_pur">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">creation_dc_ac_pur</code><span class="sig-paren">(</span><em class="sig-param">quality</em>, <em class="sig-param">dataset</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.creation_dc_ac_pur" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read images in the selected dataset with the selected quality.
+Create the associated DC and AC huffman table.
+Parse all images and store the result in train and test directories respectivelly.
+Display the time taken to do this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>quality</strong> – Choosent JPEG quality between 100, 90, 80, 70 and 60.</p></li>
+<li><p><strong>dataset</strong> – Choosen dataset 0 for Mnist and 1 for Cifar-10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.generate_huffman_table_ac">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">generate_huffman_table_ac</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">pos</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.generate_huffman_table_ac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the Huffman AC table associated to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – An image.</p></li>
+<li><p><strong>pos</strong> – A position of a HUFFMAN_TABLE_MARKER in the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Huffman AC table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.generate_huffman_table_dc">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">generate_huffman_table_dc</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">pos</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.generate_huffman_table_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the Huffman DC table associated to the image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – An image.</p></li>
+<li><p><strong>pos</strong> – A position of a HUFFMAN_TABLE_MARKER in the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Huffman DC table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.huffman_table">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">huffman_table</code><span class="sig-paren">(</span><em class="sig-param">image</em>, <em class="sig-param">pos</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.huffman_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>In association with generate_huffman_table_dc and generate_huffman_table_ac,
+generates Huffman table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image</strong> – An image.</p></li>
+<li><p><strong>pos</strong> – A position of a HUFFMAN_TABLE_MARKER in the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Huffman table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="creation_dc_ac_pur.trouve_eob">
+<code class="sig-prename descclassname">creation_dc_ac_pur.</code><code class="sig-name descname">trouve_eob</code><span class="sig-paren">(</span><em class="sig-param">image_att</em>, <em class="sig-param">pos_3f</em>, <em class="sig-param">huffman_dc</em>, <em class="sig-param">huffman_ac</em><span class="sig-paren">)</span><a class="headerlink" href="#creation_dc_ac_pur.trouve_eob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the image in DC, DC-VAL, AC, AC-VAL,…
+Replace the value 0 by 111111111111 if it’s a DC and 11111111111 if it’s a AC.
+We have to do that because the binary signed value 0 already exist and is equal to -1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>image_att</strong> – An image.</p></li>
+<li><p><strong>pos_3f</strong> – The 3F position which significate the SOS.</p></li>
+<li><p><strong>huffman_dc</strong> – Huffman DC table associated to the image.</p></li>
+<li><p><strong>huffman_ac</strong> – Huffman AC table associated to the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The parsed image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="deeplearning.html" class="btn btn-neutral float-right" title="Deeplearning file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="creation_data_sets.html" class="btn btn-neutral float-left" title="Creation data sets file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Pistono Maxime, Mouchet Maxime, Brouilhet Laura
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
