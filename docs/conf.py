@@ -18,9 +18,9 @@ sys.path.insert(0, os.path.abspath(".."))
 
 # -- Project information -----------------------------------------------------
 
-project = "test"
-copyright = "2020, pistono"
-author = "pistono"
+project = "DeepLearning on partially JPEG compressed images."
+copyright = "2020, Pistono Maxime, Mouchet Maxime, Brouilhet Laura"
+author = "Pistono Maxime, Mouchet Maxime, Brouilhet Laura"
 
 # The full version, including alpha/beta/rc tags
 release = "0.0.1"
